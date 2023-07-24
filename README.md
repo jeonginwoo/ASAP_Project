@@ -1,5 +1,4 @@
-<p  align="center"><img src="
-https://dataonair.or.kr/bigjob/bigjob/wp-content/themes/db_academy/assets/images/logo.png" height=100>
+<p  align="center"><img src="https://www.kdata.or.kr/upload/editor/20230508164557602181.jpg" height=100>
 
 <div align="center">
 
