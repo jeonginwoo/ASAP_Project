@@ -21,3 +21,9 @@
 
 
 ## GPT
+
+
+
+## References
+- kospeech: https://github.com/sooftware/kospeech
+- Korean_STT: https://github.com/letgodchan0/Korean_STT
