@@ -9,6 +9,7 @@ https://dataonair.or.kr/bigjob/bigjob/wp-content/themes/db_academy/assets/images
 **김득호 • 차상민 • 남동균 • 이승재 • 정진환 • 박찬영 • 정인우**
 
 </div>
+
 ---
 
 
