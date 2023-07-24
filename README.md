@@ -1,4 +1,4 @@
-<p  align="center"><img src="https://www.kdata.or.kr/upload/editor/20230508164557602181.jpg" height=100>
+<p  align="center"><img src="https://www.suwon.ac.kr/usr/upload/dext5editor/2023/04/20230426_144719952_95106.jpeg" height=100>
 
 <div align="center">
 
