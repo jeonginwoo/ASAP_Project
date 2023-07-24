@@ -1,4 +1,4 @@
-<p  align="center"><img src="https://www.suwon.ac.kr/usr/upload/dext5editor/2023/04/20230426_144719952_95106.jpeg" height=100>
+<p  align="center"><img src="https://www.igunsul.net/resource/document_files/23/05/31/230531144602462-00-00-01/conv_441280011.hwp.files/BIN0001.png" height=100>
 
 <div align="center">
 
