@@ -2,7 +2,7 @@
 <p  align="center"><img src="https://i.namu.wiki/i/MUUMBhXZwCEPUo2eO33tf62y835qkmxeAWmrlcDPp-NqacY8CnAqZA21_z_bUNoBqpp7ePY2XvgSeeIfyVizrtpYjrhux77k-iJSZMda3q1xJycD3ksUaNP7vmK3ZLBzY6FrCr4s7w2iyYKekDv9dg.svg" height=180>
 <div align="center">
 
-# Cokio Project (칠공주파)
+## Cokio Project (칠공주파)
 
 
 **김득호 • 차상민 • 남동균 • 이승재 • 정진환 • 박찬영 • 정인우**
