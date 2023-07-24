@@ -25,5 +25,6 @@
 
 
 ## References
-- kospeech: https://github.com/sooftware/kospeech
-- Korean_STT: https://github.com/letgodchan0/Korean_STT
+- [kospeech](https://github.com/sooftware/kospeech)
+- [Korean_STT](https://github.com/letgodchan0/Korean_STT)
+- [Korean_STT 블로그](https://velog.io/@letgodchan0/%EC%9D%8C%EC%84%B1%EC%9D%B8%EC%8B%9D-%ED%95%9C%EA%B5%AD%EC%96%B4-STT-1)
