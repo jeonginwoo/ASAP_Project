@@ -1,2 +1,6 @@
 *.log
 mains/__pycache__
+.idea
+db.sqlite3
+*.pyc
+__pycache__
