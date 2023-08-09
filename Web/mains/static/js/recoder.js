@@ -1,5 +1,6 @@
 const record = document.getElementById('record_button');
 const audio = document.getElementById('audioPlayer');
+const csrfToken = document.getElementById('csrfToken').value;   //Django CSRF 토큰 값
 let isRecording = false;
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -23,6 +24,22 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     // });
 
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
+
+                    fetch('http://127.0.0.1:8000/speechrecognize/', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "audio/mpeg",
+                            "X-CSRFToken": csrfToken,   //CSRF 토큰 값을 같이 헤더에 추가해 403 Fobbiden 에러 방지
+                        },
+                        body: recordData,   //녹음된 음성 데이터
+                    })
+                    .then((response) => response.json())    //response를 json으로 파싱
+                    .then((data) => {
+                        console.log(data.message);
+                    })
+                    .catch((err) => {
+                        location.href = err;
+                    });
 
                     chunks.splice(0);
 
