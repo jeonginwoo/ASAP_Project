@@ -17,13 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from main.views import index
-from main.views import purchase
-from main.views import speechRecognition
+from mains.views import index,MenuDetailView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name ='index'),
-    path('purchase/', purchase, name = 'purchase'),
-    path('speechrecognize/', speechRecognition, name = 'speechRecognition'),
+    path('Menu/<str:menu_key>/',MenuDetailView.as_view(),name='menu-detail'),
 ]
