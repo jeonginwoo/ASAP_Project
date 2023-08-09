@@ -34,7 +34,6 @@ function add_item_html(object) {
     order_result.innerText = result_price.toLocaleString('ko-KR') + '원';
 };
 
-
 /**
  * object 정보에 해당하는 주문 item을 html 문서에서 삭제
  * 
@@ -91,6 +90,16 @@ for (let i = 0; i < 10; i++) {
     let menu_img = "static/img/pubao_1.webp";
     let menu_price = Math.floor(Math.random() * 50000);
     let menu_etc = '테스트 테스트 테스트';
+
+    // // 현재 스크립트 파일의 경로 가져오기
+    // const scriptElement = document.currentScript;
+    // const scriptSrc = scriptElement.src;
+
+    // // 스크립트 파일의 경로에서 이미지 폴더의 경로 계산
+    // const scriptFolderPath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
+
+
+    // console.log("Image Folder Path:", scriptFolderPath);
 
 
 

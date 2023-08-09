@@ -22,7 +22,25 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     //     console.log(temp);
                     // });
 
+                    // const formData = new FormData();
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
+
+                    // formData.append('voiceData', recordData);
+
+                    // fetch('', {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "audio/mpeg",
+                    //     },
+                    //     body: formData,
+                    // })
+                    // .then((response) => response.json())
+                    // .then((data) => {
+
+                    // })
+                    // .catch((err) => {
+                    //     console.log(err, " 에러 발생!");
+                    // });
 
                     chunks.splice(0);
 
