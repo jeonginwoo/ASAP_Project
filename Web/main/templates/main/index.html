@@ -26,6 +26,7 @@
     <button type="button" class="btn btn-primary btn-sm" id="menu_baverage">음료 메뉴</button>
     <button type="button" class="btn btn-primary btn-sm" id="menu_recommend">추천 메뉴</button>
     <button type="button" class="btn btn-primary btn-sm" id="scribe">설명</button>
+    <button type="button" class="btn btn-primary btn-sm" id="purchase">결제</button>
   </p>
   <hr>
   <div id="answer" class="form-floating mb-3" style="border: 1px solid #000000; height: 100px; margin: 10px;"></div>
@@ -90,6 +91,13 @@
       <div class="content"></div>
     </div>
   </div>
+  <script type="text/javascript">
+    const purchase_button = document.getElementById("purchase");
+
+    purchase_button.onclick = () => {
+      location.href = 'http://127.0.0.1:8000/purchase';
+    };
+  </script>
   <script src="{% static 'js/modal-popup.js' %}?ver=1"></script>
   <script src="{% static 'js/conversation-box.js' %}?ver=1"></script>
   <script src="{% static 'js/adjust-table.js' %}?ver=1"></script>
