@@ -18,4 +18,6 @@ def speechRecognition(request):
         data = {"message": "Response OK!"}
 
         return JsonResponse(data)
+    
+    return JsonResponse({"message": "This request is GET method"})
         

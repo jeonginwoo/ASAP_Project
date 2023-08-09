@@ -82,6 +82,10 @@ function delete_item(object) {
     item_list.splice(index_of_item, 1);
 };
 
+export function send_order_list() {
+
+};
+
 //----- add_item 테스트 -----//
 
 
@@ -98,10 +102,7 @@ for (let i = 0; i < 10; i++) {
     // // 스크립트 파일의 경로에서 이미지 폴더의 경로 계산
     // const scriptFolderPath = scriptSrc.substring(0, scriptSrc.lastIndexOf('/'));
 
-
     // console.log("Image Folder Path:", scriptFolderPath);
-
-
 
     let object = { name: menu_name, img: menu_img, price: menu_price, etc: menu_etc };
 
