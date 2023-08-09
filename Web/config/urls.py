@@ -19,9 +19,11 @@ from django.urls import path
 
 from main.views import index
 from main.views import purchase
+from main.views import speechRecognition
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name ='index'),
     path('purchase/', purchase, name = 'purchase'),
+    path('speechrecognize/', speechRecognition, name = 'speechRecognition'),
 ]

@@ -1,5 +1,6 @@
 const record = document.getElementById('record_button');
 const audio = document.getElementById('audioPlayer');
+const csrfToken = document.getElementById('csrfToken').value;
 let isRecording = false;
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -16,31 +17,23 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 };
 
                 mediaRecorder.onstop = (event) => {
-                    // chunks.forEach(async (data) => {
-                    //     // console.log(data);
-                    //     let temp = await data.text();
-                    //     console.log(temp);
-                    // });
-
-                    // const formData = new FormData();
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
 
-                    // formData.append('voiceData', recordData);
-
-                    // fetch('', {
-                    //     method: "POST",
-                    //     headers: {
-                    //         "Content-Type": "audio/mpeg",
-                    //     },
-                    //     body: formData,
-                    // })
-                    // .then((response) => response.json())
-                    // .then((data) => {
-
-                    // })
-                    // .catch((err) => {
-                    //     console.log(err, " 에러 발생!");
-                    // });
+                    fetch('http://127.0.0.1:8000/speechrecognize/', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "audio/mpeg",
+                            "X-CSRFToken": csrfToken,
+                        },
+                        body: recordData,
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data.message);
+                    })
+                    .catch((err) => {
+                        location.href = err;
+                    });
 
                     chunks.splice(0);
 
