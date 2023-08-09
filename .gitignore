@@ -1,16 +1,5 @@
 *.log
-mains/__pycache__
 .idea
 db.sqlite3
 *.pyc
 __pycache__
-Web/config/__pycache__/__init__.cpython-311.pyc
-Web/config/__pycache__/settings.cpython-311.pyc
-Web/config/__pycache__/urls.cpython-311.pyc
-Web/config/__pycache__/wsgi.cpython-311.pyc
-Web/main/__pycache__/__init__.cpython-311.pyc
-Web/main/__pycache__/admin.cpython-311.pyc
-Web/main/__pycache__/apps.cpython-311.pyc
-Web/main/__pycache__/models.cpython-311.pyc
-Web/main/__pycache__/views.cpython-311.pyc
-Web/main/migrations/__pycache__/__init__.cpython-311.pyc
