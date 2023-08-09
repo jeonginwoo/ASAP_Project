@@ -23,6 +23,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     //     console.log(temp);
                     // });
 
+                    const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
+
                     fetch('http://127.0.0.1:8000/speechrecognize/', {
                         method: "POST",
                         headers: {
