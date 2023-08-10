@@ -1,8 +1,9 @@
 <div align="center">
-    <img src="./readme_img/2019 Kdata CI Signature-05.png" width=150 style="margin: 30px 30px 0px 0px; vertical-align:middle;">
-    <img src="./readme_img/X_white.png" height=30 style="margin-top: 30px; vertical-align:middle;">
-    <img src="./readme_img/HUFS_logo.png" width=150 style="margin: 30px 0px 0px 30px; padding: 0 30px; vertical-align:middle;">
+    <img src="./readme_img/2019 Kdata CI Signature-05.png" height=80 style="margin: 30px 30px 20px 0px; justify-content: center; align-items: center;">
+    <img src="./readme_img/X_white.png" height=50 style="margin-bottom: 30px; justify-content: center; align-items: center;">
+    <img src="./readme_img/HUFS_logo.png" height=130 style="margin: 30px 0px 0px 30px; padding: 0 30px; justify-content: center; align-items: center;">
 </div>
+
 
 <div align="center">
 
