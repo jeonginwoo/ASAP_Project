@@ -1,5 +1,6 @@
 *.log
-/config/__pycache__
+config/__pycache__
+*/__pycache__
 # Created by https://www.toptal.com/developers/gitignore/api/macos,python,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,python,django
 
