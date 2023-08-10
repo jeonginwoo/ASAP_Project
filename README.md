@@ -1,8 +1,8 @@
-<p  align="center"><img src="https://www.igunsul.net/resource/document_files/23/05/31/230531144602462-00-00-01/conv_441280011.hwp.files/BIN0001.png" height=65>
-<p  align="center"><img src="https://i.namu.wiki/i/MUUMBhXZwCEPUo2eO33tf62y835qkmxeAWmrlcDPp-NqacY8CnAqZA21_z_bUNoBqpp7ePY2XvgSeeIfyVizrtpYjrhux77k-iJSZMda3q1xJycD3ksUaNP7vmK3ZLBzY6FrCr4s7w2iyYKekDv9dg.svg" height=180>
+<p  align="center"><img src="./readme_img/Kdata_logo.png" height=65>
+<p  align="center"><img src="./readme_img/HUFS_logo.png" height=180>
 <div align="center">
 
-### Cokio Project (칠공주파)
+### ASAP Project (칠공주파)
 
 
 **김득호 • 남동균 • 박찬영 • 이승재 • 정인우 • 정진환 • 차상민**
@@ -13,24 +13,34 @@
 
 </br></br>
 
-## Introduction
+# Introduction
+ASAP(AI Selection Assistant Program)은 ...
 
 
 </br></br>
 
-## STT
+# 실행 방법
 
 
 </br></br>
 
-## GPT
+# 기술 설명
+## - STT
+
+
+</br></br>
+
+## - Modeling
+
+
+</br></br>
+
+## - Web
 
 
 </br></br>
 
 ## References
-- [kospeech - github](https://github.com/sooftware/kospeech)
-- [Korean_STT - github](https://github.com/letgodchan0/Korean_STT)
-- [Korean_STT - blog](https://velog.io/@letgodchan0/%EC%9D%8C%EC%84%B1%EC%9D%B8%EC%8B%9D-%ED%95%9C%EA%B5%AD%EC%96%B4-STT-1)
+- [Django REST Framework 강의](https://www.youtube.com/watch?v=1qiQkKshMUs&list=PLQFurmxCuZ2Qmcl0TJame_N79kP2o7VzG&index=1)
 - [OpenAI Documentation](https://platform.openai.com/docs)
 - [fine-tuning 사용법](https://domdom.tistory.com/604)
