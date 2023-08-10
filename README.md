@@ -1,6 +1,6 @@
 <div align="center">
     <img src="./readme_img/2019 Kdata CI Signature-05.png" height=90>
-    <img src="./readme_img/X_white.png" height=85>
+    <img src="./readme_img/X_gray.png" height=85>
     <img src="./readme_img/HUFS_logo.png" height=120>
 </div>
 
