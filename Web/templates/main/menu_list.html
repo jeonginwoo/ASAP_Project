@@ -1,0 +1,9 @@
+{% if menu_list %}
+    <ul>
+    {% for menu in menu_list %}
+        <li><a href="{% url 'mains:testTable' menu.id %}">{{ menu.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>메뉴가 없습니다.</p>
+{% endif %}

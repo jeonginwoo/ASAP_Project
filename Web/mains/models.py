@@ -15,14 +15,14 @@ class TestMenuTable(models.Model):
     info = models.TextField(verbose_name='정보')
 
     ### 재료
-    Bulgogi = models.BooleanField(default=False, verbose_name='불고기')
-    Chicken = models.BooleanField(default=False, verbose_name='치킨')
-    Shrimp = models.BooleanField(default=False, verbose_name='새우')
-    Beef = models.BooleanField(default=False, verbose_name='소고기')
-    Bacon = models.BooleanField(default=False, verbose_name='베이컨')
-    Squid = models.BooleanField(default=False, verbose_name='오징어')
-    Cheese = models.BooleanField(default=False, verbose_name='치즈')
-    Tomato = models.BooleanField(default=False, verbose_name='토마토')
+    Bulgogi = models.BooleanField(default=False, null=True, verbose_name='불고기')
+    Chicken = models.BooleanField(default=False, null=True, verbose_name='치킨')
+    Shrimp = models.BooleanField(default=False, null=True, verbose_name='새우')
+    Beef = models.BooleanField(default=False, null=True, verbose_name='소고기')
+    Bacon = models.BooleanField(default=False, null=True, verbose_name='베이컨')
+    Squid = models.BooleanField(default=False, null=True, verbose_name='오징어')
+    Cheese = models.BooleanField(default=False, null=True, verbose_name='치즈')
+    Tomato = models.BooleanField(default=False, null=True, verbose_name='토마토')
     # 야채류는?
 
     ### 소스
