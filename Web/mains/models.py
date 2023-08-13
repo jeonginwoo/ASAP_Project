@@ -11,7 +11,7 @@ class TestMenuTable(models.Model):
     name = models.CharField(max_length=25, verbose_name='메뉴명')
     price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
     image = models.ImageField(null=True, blank=True, verbose_name='이미지')
-    info = models.TextField(verbose_name='정보')
+    info = models.TextField(default="맛있다.", verbose_name='정보')
 
     ### 재료
     Bulgogi = models.BooleanField(default=False, null=True, verbose_name='불고기')
@@ -29,3 +29,6 @@ class TestMenuTable(models.Model):
     Whopper = models.BooleanField(default=False, null=True, verbose_name='와퍼')
     Hot = models.BooleanField(default=False, null=True)
     Cold = models.BooleanField(default=False, null=True)
+    
+    def __str__(self):
+        return self.name

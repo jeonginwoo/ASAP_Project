@@ -1,34 +1,60 @@
-<h1>{{ menu.name }}</h1>
-<strong>가격</strong> : {{ menu.price }}₩ <br/><br/>
-<strong>이미지</strong> : {{ menu.image }} <br/><br/>
-<strong>정보</strong> : {{ menu.info }} <br/><br/>
-
-<hr/>
-<strong>재료</strong> : 
-{% if menu.Bulgogi %} 불고기 {% endif %}
-{% if menu.Chicken %} 치킨 {% endif %}
-{% if menu.Shrimp %} 새우 {% endif %}
-{% if menu.Beef %} 소고기 {% endif %}
-{% if menu.Bacon %} 배이컨 {% endif %}
-{% if menu.Squid %} 오징어 {% endif %}
-{% if menu.Cheese %} 치즈 {% endif %}
-{% if menu.Tomato %} 토마토 {% endif %}
-<br/><br/>
-
-<strong>맵기</strong> : 
-{% if menu.Spicy %}
-    맵다
-{% else %}
-    안맵다
-{% endif %}
-<br/><br/>
-
-<strong>와퍼</strong> : {{ menu.Whopper }}
-<br/><br/>
-
-<strong>HOT/COLD</strong> : 
-{% if menu.Hot %}
-    HOT
-{% else %}
-    Cold
-{% endif %}
+<table frame="below" cellpadding="10">
+    <caption><h3>{{ menu.name }}</h3></caption>
+    <tbody>
+        <tr>
+            <td rowspan="6" valign="top">
+                <img
+                src="../../static/img/BURGERKING_MENU/Burger/{{ menu.name }}.png"
+                alt="이미지를 불러오지 못했습니다"
+                height="150px"
+            />
+            </td>
+            <th align="right" valign="top">가격</th>
+            <td>{{ menu.price }}원</td>
+        </tr>
+        <tr>
+            <th align="right" valign="top">정보</th>
+            <td>{{ menu.info }}</td>
+        </tr>
+        <tr>
+            <th align="right" valign="top">재료</th>
+            <td>
+                {% if menu.Bulgogi %} 불고기<br/> {% endif %}
+                {% if menu.Chicken %} 치킨<br/> {% endif %}
+                {% if menu.Shrimp %} 새우<br/> {% endif %}
+                {% if menu.Beef %} 소고기<br/> {% endif %}
+                {% if menu.Prok %} 돼지고기<br/> {% endif %}
+                {% if menu.Bacon %} 베이컨<br/> {% endif %}
+                {% if menu.Squid %} 오징어<br/> {% endif %}
+                {% if menu.Cheese %} 치즈<br/> {% endif %}
+                {% if menu.Tomato %} 토마토<br/> {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th align="right" valign="top">맵기</th>
+            <td>
+                {% if menu.Spicy %}
+                    맵다
+                {% else %}
+                    안맵다
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th align="right" valign="top">와퍼</th>
+            <td>
+                {{ menu.Whopper }}
+            </td>
+        </tr>
+        <tr>
+            <th align="right" valign="top">HOT/COLD</th>
+            <td>
+                {% if menu.Hot %}
+                    HOT
+                {% else %}
+                    Cold
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
