@@ -1,7 +1,7 @@
 {% if menu_list %}
     <ul>
     {% for menu in menu_list %}
-        <li><a href="{% url 'mains:testTable' menu.id %}">{{ menu.name }}</a></li>
+        <li><a href="{% url 'mains:menuDetail' menu.id %}">{{ menu.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

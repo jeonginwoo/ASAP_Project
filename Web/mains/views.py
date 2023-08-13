@@ -40,3 +40,8 @@ def testTable(request):
     menu_list = TestMenuTable.objects.all()
     context = {'menu_list': menu_list}
     return render(request, 'main/menu_list.html', context)
+
+def menuDetail(request, menu_id):
+    menu = TestMenuTable.objects.get(id=menu_id)
+    context = {'menu': menu}
+    return render(request, 'main/menu_detail.html', context)

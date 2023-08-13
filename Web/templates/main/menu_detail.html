@@ -1,0 +1,34 @@
+<h1>{{ menu.name }}</h1>
+<strong>가격</strong> : {{ menu.price }}₩ <br/><br/>
+<strong>이미지</strong> : {{ menu.image }} <br/><br/>
+<strong>정보</strong> : {{ menu.info }} <br/><br/>
+
+<hr/>
+<strong>재료</strong> : 
+{% if menu.Bulgogi %} 불고기 {% endif %}
+{% if menu.Chicken %} 치킨 {% endif %}
+{% if menu.Shrimp %} 새우 {% endif %}
+{% if menu.Beef %} 소고기 {% endif %}
+{% if menu.Bacon %} 배이컨 {% endif %}
+{% if menu.Squid %} 오징어 {% endif %}
+{% if menu.Cheese %} 치즈 {% endif %}
+{% if menu.Tomato %} 토마토 {% endif %}
+<br/><br/>
+
+<strong>맵기</strong> : 
+{% if menu.Spicy %}
+    맵다
+{% else %}
+    안맵다
+{% endif %}
+<br/><br/>
+
+<strong>와퍼</strong> : {{ menu.Whopper }}
+<br/><br/>
+
+<strong>HOT/COLD</strong> : 
+{% if menu.Hot %}
+    HOT
+{% else %}
+    Cold
+{% endif %}
