@@ -11,5 +11,4 @@ urlpatterns = [
     path('speechrecognize/', views.speechRecognition, name="speechRecognition"),
     
     path('test/', views.testTable, name='testTable'),
-    path('<int:menu_id>/', views.menuDetail, name='menuDetail'),
 ]
