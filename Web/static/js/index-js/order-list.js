@@ -1,3 +1,4 @@
+
 const order_list = document.querySelector('.ordered-list');
 const order_result = document.getElementById('result-price');
 

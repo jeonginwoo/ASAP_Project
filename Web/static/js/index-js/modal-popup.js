@@ -1,3 +1,4 @@
+
 const modal = document.getElementById('modal');
 const scribe_button = document.getElementById('scribe');
 const close_button_up = modal.querySelector('.btn-close');
