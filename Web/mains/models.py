@@ -2,45 +2,33 @@ from django.db import models
 
 
 class Menu(models.Model):
-    image = models.ImageField(verbose_name='이미지',null = True, blank= True)
-    name = models.CharField(max_length = 25, verbose_name='메뉴명')
+    image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    name = models.CharField(max_length=25, verbose_name='메뉴명')
     price = models.IntegerField(verbose_name='가격', default=10000)
     calorie = models.FloatField(verbose_name='칼로리', default=100.5)
+
+class TestMenuTable(models.Model):
+    name = models.CharField(max_length=25, verbose_name='메뉴명')
+    price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
+    image = models.ImageField(null=True, blank=True, verbose_name='이미지')
+    info = models.TextField(default="맛있다.", verbose_name='정보')
+
+    ### 재료
+    Bulgogi = models.BooleanField(default=False, null=True, verbose_name='불고기')
+    Chicken = models.BooleanField(default=False, null=True, verbose_name='치킨')
+    Shrimp = models.BooleanField(default=False, null=True, verbose_name='새우')
+    Beef = models.BooleanField(default=False, null=True, verbose_name='소고기')
+    Prok = models.BooleanField(default=False, null=True, verbose_name='돼지고기')
+    Bacon = models.BooleanField(default=False, null=True, verbose_name='베이컨')
+    Squid = models.BooleanField(default=False, null=True, verbose_name='오징어')
+    Cheese = models.BooleanField(default=False, null=True, verbose_name='치즈')
+    Tomato = models.BooleanField(default=False, null=True, verbose_name='토마토')
+    # 야채류는?
+
+    Spicy = models.BooleanField(default=False, null=True, verbose_name='맵기')
+    Whopper = models.BooleanField(default=False, null=True, verbose_name='와퍼')
+    Hot = models.BooleanField(default=False, null=True)
+    Cold = models.BooleanField(default=False, null=True)
     
-class test_Menu_Set(models.Model):
-    menu_name = models.CharField(max_length=45, primary_key=True)
-    weight = models.IntegerField(null=True)
-    calories = models.IntegerField(null=True)
-    protein = models.IntegerField(null=True)
-    sodium = models.IntegerField(null=True)
-    sugars = models.IntegerField(null=True)
-    saturated_fat = models.IntegerField(null=True)
-    caffeine = models.IntegerField(null=True)
-    milk = models.IntegerField(null=True)
-    pork = models.IntegerField(null=True)
-    tomato = models.IntegerField(null=True)
-    beef = models.IntegerField(null=True)
-    egg = models.IntegerField(null=True)
-    squid = models.IntegerField(null=True)
-    lettuce = models.IntegerField(null=True)
-    mayo = models.IntegerField(null=True)
-    sliced_cheese = models.IntegerField(null=True)
-    shredded_cheese = models.IntegerField(null=True)
-    pickle = models.IntegerField(null=True)
-    jalapeno = models.IntegerField(null=True)
-    whole_shrimp = models.IntegerField(null=True)
-    bacon = models.IntegerField(null=True)
-    onion = models.IntegerField(null=True)
-    bulgogi = models.IntegerField(null=True)
-    barbecue = models.IntegerField(null=True)
-    ketchup = models.IntegerField(null=True)
-    diablo = models.IntegerField(null=True)
-    spicy_tomato = models.IntegerField(null=True)
-    cheese = models.IntegerField(null=True)
-    tartar = models.IntegerField(null=True)
-
     def __str__(self):
-        return self.menu_name
-
-
-
+        return self.name
