@@ -7,11 +7,13 @@
                 <tbody>
                     <tr>
                         <td rowspan="6" valign="top">
+                        {% if menu.image %}
                             <img
-                            src="../../static/img/BURGERKING_MENU/Burger/{{ menu.name }}.png"
+                            src="{{ menu.image.url }}"
                             alt="이미지를 불러오지 못했습니다"
                             height="150px"
                         />
+                        {% endif %}
                         </td>
                         <th align="right" valign="top">가격</th>
                         <td width="300px">{{ menu.price }}원</td>
