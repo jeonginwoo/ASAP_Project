@@ -5,7 +5,7 @@ from .models import Menu
 from .serializers import MenuSerializer
 from django.http import JsonResponse
 
-from .models import TestMenuTable
+from .models import MenuTable
 
 def index(request):
     return render(request, 'main/index.html')
@@ -37,6 +37,6 @@ def speechRecognition(request):
     return JsonResponse({"message": "This request is GET method"})
 
 def testTable(request):
-    menu_list = TestMenuTable.objects.all()
+    menu_list = MenuTable.objects.all()
     context = {'menu_list': menu_list}
     return render(request, 'main/menu_list.html', context)
