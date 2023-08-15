@@ -88,6 +88,7 @@ function delete_item(object) {
 for (let i = 0; i < 10; i++) {
     let menu_name = '메뉴' + String(i + 1);
     let menu_img = "static/img/pubao_1.webp";
+
     let menu_price = Math.floor(Math.random() * 50000);
     let menu_etc = '테스트 테스트 테스트';
 

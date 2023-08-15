@@ -10,8 +10,9 @@ class Menu(models.Model):
 class TestMenuTable(models.Model):
     name = models.CharField(max_length=25, verbose_name='메뉴명')
     price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
-    image = models.ImageField(null=True, blank=True, verbose_name='이미지')
+    image = models.ImageField(upload_to = 'mains/images/burger',null=True, blank=True, verbose_name='이미지')
     info = models.TextField(default="맛있다.", verbose_name='정보')
+    
 
     ### 재료
     Bulgogi = models.BooleanField(default=False, null=True, verbose_name='불고기')
