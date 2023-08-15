@@ -25,12 +25,12 @@ class MenuTable(models.Model):
 
     # allergy
     A_milk = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 우유')
-    A_Chicken = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 치킨')
+    A_chicken = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 치킨')
     A_pork = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 돼지')
     A_beef = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 소')
     A_egg = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 난류')
     A_squid = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 오징어')
-    A_Tomato = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 토마토')
+    A_tomato = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 토마토')
     A_clam = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 조개')
     A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
 
@@ -41,8 +41,8 @@ class MenuTable(models.Model):
     I_jalapeno = models.IntegerField(default=0, verbose_name='재료 : 할라피뇨')
     I_whole_shrimp = models.IntegerField(default=0, verbose_name='재료 : 통새우')
     I_bacon = models.IntegerField(default=0, verbose_name='재료 : 베이컨')
-    I_bulgogi = models.IntegerField(default=0, verbose_name='재료 : 불고기')
-    I_barbecue = models.IntegerField(default=0, verbose_name='재료 : 바비큐')
+    I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
+    I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 마늘 칩')
     I_lettuce = models.IntegerField(default=0, verbose_name='재료 : 상추')
     I_onion = models.IntegerField(default=0, verbose_name='재료 : 양파')
     I_hashbrown = models.IntegerField(default=0, verbose_name='재료 : 해쉬브라운')
