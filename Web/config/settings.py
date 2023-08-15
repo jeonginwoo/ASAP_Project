@@ -12,7 +12,25 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from transformers import pipeline
 
+# 튜닝한 Whisper Model 가져오기
+transcriber = pipeline(
+    "automatic-speech-recognition",
+    model="JorangHorse/whisper-base",
+    
+)
+transcriber.model.config.forced_decoder_ids = (
+    transcriber.tokenizer.get_decoder_prompt_ids(
+        language="ko",
+        task="transcribe"
+    )
+)
+print('-----------------------')
+print(transcriber)
+transcription = transcriber("../test_record_data.mp3")
+print(transcriber)
+print('-----------------------')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
