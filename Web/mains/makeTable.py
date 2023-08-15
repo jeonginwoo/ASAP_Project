@@ -1,13 +1,11 @@
-import os
 import django
 import csv
-import re
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+
 django.setup()
 
 from .models import MenuTable
 
-f = open('../../../Data/Menu_Table', 'r', encoding='cp949')
+f = open('C:/Users/jiw41/Downloads/MenuTable', 'r', encoding='cp949')
 info_list = []
 
 rdr = csv.reader(f)
