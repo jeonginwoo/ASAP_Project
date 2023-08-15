@@ -37,7 +37,7 @@ def speechRecognition(request):
         return JsonResponse(data)
     
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    return JsonResponse({"message": "This request is GET method"})
+    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
