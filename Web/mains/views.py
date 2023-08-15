@@ -9,7 +9,6 @@ import json
 def index(request):
     return render(request, 'main/index.html')
 
-
 class MenuDetailView(APIView):
     def get(self,request,menu_key):
         try:
