@@ -1,8 +1,9 @@
+
 const order_list = document.querySelector('.ordered-list');
 const order_result = document.getElementById('result-price');
 
-let result_price = 0;   // 총 주문 금액
-let item_list = [];     // 주문 리스트
+window.result_price = 0;   // 총 주문 금액
+window.item_list = [];     // 주문 리스트
 
 
 order_result.innerText = result_price.toLocaleString('ko-KR') + '원';

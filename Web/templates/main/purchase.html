@@ -13,9 +13,9 @@
   <link href="{% static 'css/bootstrap.min.css' %}?ver=1" rel="stylesheet">
   <style>
     body {
-      background-color: #F5EBDC; /* 페이지 배경색을 오렌지 색으로 변경 */
-      margin: 0; /* 기본 마진 제거 */
-      padding: 0; /* 기본 패딩 제거 */
+      background-color: #F5EBDC; 
+      margin: 0; 
+      padding: 0; 
     }
     .card {
       height: 70%;
@@ -41,7 +41,7 @@
       background-color: #FF8732;
     }
     .btn-customize {
-      background-color: #F5EBDC;;
+      background-color: #F5EBDC;
       height: 35%; 
       width: 70%; 
       margin-left: 10px; 
@@ -62,7 +62,12 @@
       <div class="order-container">
         <ul class="list-group list-group-flush">
           <template id="temp">
-            <li class="list-group-item"></li>
+            <li class="list-group-item" style="background-color: #b08972; color: white; font-weight: bold;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="menu-name">메뉴 이름</span>
+                <span class="menu-price">가격 정보</span>
+              </div>
+            </li>
           </template>
         </ul>
         <div class="card-body"></div>
@@ -82,7 +87,8 @@
       </div>
     </div>
   </div>
-  <script type="module" src="{% static 'js/order-list-to-purchase-page.js' %}?ver=1"></script>
+  <script src="{% static 'js/purchase-js/purchase-button.js' %}?ver=1"></script>
+  <script src="{% static 'js/purchase-js/using-order-list-at-purchase-page.js' %}?ver=0"></script>
 </body>
 
 </html>

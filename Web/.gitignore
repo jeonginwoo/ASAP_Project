@@ -142,8 +142,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-.asap
 asap/
+.asap
 
 # Spyder project settings
 .spyderproject
