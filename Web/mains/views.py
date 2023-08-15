@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Menu
+from .models import MenuTable
 from .serializers import MenuSerializer
 from django.http import JsonResponse
 import json
-
-from .models import TestMenuTable
 
 def index(request):
     return render(request, 'main/index.html')
@@ -60,6 +58,6 @@ def textInput(request):
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 def testTable(request):
-    menu_list = TestMenuTable.objects.all()
+    menu_list = MenuTable.objects.all()
     context = {'menu_list': menu_list}
     return render(request, 'main/menu_list.html', context)

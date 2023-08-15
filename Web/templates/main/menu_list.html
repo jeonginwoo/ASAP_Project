@@ -3,15 +3,18 @@
     {% for menu in menu_list %}
         <div style="display: inline-block;">
             <table frame="below" cellpadding="10">
-                <caption><h3>{{ menu.name }}</h3></caption>
+                <caption><h3>{{ menu.menu_name }}</h3></caption>
                 <tbody>
+                    {############ 기본 정보 ############}
                     <tr>
-                        <td rowspan="6" valign="top">
+                        <td rowspan="10" valign="top">
+                        {% if menu.image %}
                             <img
-                            src="../../static/img/BURGERKING_MENU/Burger/{{ menu.name }}.png"
+                            src="{{ menu.image.url }}"
                             alt="이미지를 불러오지 못했습니다"
                             height="150px"
                         />
+                        {% endif %}
                         </td>
                         <th align="right" valign="top">가격</th>
                         <td width="300px">{{ menu.price }}원</td>
@@ -21,47 +24,80 @@
                         <td>{{ menu.info }}</td>
                     </tr>
                     <tr>
-                        <th align="right" valign="top">재료</th>
-                        <td>
-                            {% if menu.Bulgogi %} 불고기<br/> {% endif %}
-                            {% if menu.Chicken %} 치킨<br/> {% endif %}
-                            {% if menu.Shrimp %} 새우<br/> {% endif %}
-                            {% if menu.Beef %} 소고기<br/> {% endif %}
-                            {% if menu.Prok %} 돼지고기<br/> {% endif %}
-                            {% if menu.Bacon %} 베이컨<br/> {% endif %}
-                            {% if menu.Squid %} 오징어<br/> {% endif %}
-                            {% if menu.Cheese %} 치즈<br/> {% endif %}
-                            {% if menu.Tomato %} 토마토<br/> {% endif %}
-                        </td>
+                        <th align="right" valign="top">인기 순위</th>
+                        <td>{{ menu.rank }}</td>
                     </tr>
                     <tr>
                         <th align="right" valign="top">맵기</th>
+                        <td>{{ menu.spicy }}단계</td>
+                    </tr>
+                    <tr>
+                        {############ 영양 성분 ############}
+                        <th align="right" valign="top">영양 성분</th>
                         <td>
-                            {% if menu.Spicy %}
-                                맵다
-                            {% else %}
-                                안맵다
-                            {% endif %}
+                            칼로리 : {{ menu.N_calories }}<br/>
+                            단백질 : {{ menu.N_protein }}<br/>
+                            나트륨 : {{ menu.N_sodium }}<br/>
+                            설탕 : {{ menu.N_sugars }}<br/>
+                            포화지방 : {{ menu.N_saturated_fat }}<br/>
                         </td>
                     </tr>
                     <tr>
-                        <th align="right" valign="top">와퍼</th>
+                        {############ 알레르기 ############}
+                        <th align="right" valign="top">알레르기</th>
                         <td>
-                            {% if menu.Whopper %}
-                                맞다
-                            {% else %}
-                                아니다
-                            {% endif %}
+                            {% if menu.A_milk %} 우유<br/> {% endif %}
+                            {% if menu.A_chicken %} 치킨<br/> {% endif %}
+                            {% if menu.A_pork %} 돼지<br/> {% endif %}
+                            {% if menu.A_beef %} 소<br/> {% endif %}
+                            {% if menu.A_egg %} 난류<br/> {% endif %}
+                            {% if menu.A_squid %} 오징어<br/> {% endif %}
+                            {% if menu.A_tomato %} 토마토<br/> {% endif %}
+                            {% if menu.A_clam %} 조개<br/> {% endif %}
+                            {% if menu.A_shrimp %} 새우<br/> {% endif %}
                         </td>
                     </tr>
                     <tr>
-                        <th align="right" valign="top">HOT/COLD</th>
+                        {############ 재료 ############}
+                        <th align="right" valign="top">재료</th>
                         <td>
-                            {% if menu.Hot %}
-                                HOT
-                            {% else %}
-                                Cold
-                            {% endif %}
+                            {% if menu.I_sliced_cheese %} 얇게 썬 치즈<br/> {% endif %}
+                            {% if menu.I_shredded_cheese %} 잘게 썬 치즈<br/> {% endif %}
+                            {% if menu.I_pickle %} 피클<br/> {% endif %}
+                            {% if menu.I_jalapeno %} 할라피뇨<br/> {% endif %}
+                            {% if menu.I_whole_shrimp %} 통새우<br/> {% endif %}
+                            {% if menu.I_bacon %} 베이컨<br/> {% endif %}
+                            {% if menu.I_tomato %} 토마토<br/> {% endif %}
+                            {% if menu.I_garlic_chip %} 마늘 칩<br/> {% endif %}
+                            {% if menu.I_lettuce %} 상추<br/> {% endif %}
+                            {% if menu.I_onion %} 양파<br/> {% endif %}
+                            {% if menu.I_hashbrown %} 해쉬브라운<br/> {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        {############ 패티 ############}
+                        <th align="right" valign="top">패티</th>
+                        <td>
+                            {% if menu.P_beef %} 소고기 패티 : {{ menu.P_beef }}장<br/> {% endif %}
+                            {% if menu.P_shrimp %} 새우 패티 : {{ P_shrimp }}장<br/> {% endif %}
+                            {% if menu.P_chicken %} 치킨 패티 : {{ P_chicken }}장<br/> {% endif %}
+                            {% if menu.P_steak %} 스테이크 패티 : {{ P_steak }}장<br/> {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        {############ 소스 ############}
+                        <th align="right" valign="top">소스</th>
+                        <td>
+                            {% if menu.S_mayo %} 마요네즈<br/> {% endif %}
+                            {% if menu.S_bulgogi %} 불고기 소스<br/> {% endif %}
+                            {% if menu.S_barbecue %} 바비큐 소스<br/> {% endif %}
+                            {% if menu.S_ketchup %} 캐첩<br/> {% endif %}
+                            {% if menu.S_diablo %} 디아블로 소스<br/> {% endif %}
+                            {% if menu.S_spicy_tomato %} 매운 토마토 소스<br/> {% endif %}
+                            {% if menu.S_cheese %} 치즈 소스<br/> {% endif %}
+                            {% if menu.S_tartar %} 타르타르 소스<br/> {% endif %}
+                            {% if menu.S_baconjam %} 베이컨잼<br/> {% endif %}
+                            {% if menu.S_mustard %} 머스타드<br/> {% endif %}
                         </td>
                     </tr>
                 </tbody>

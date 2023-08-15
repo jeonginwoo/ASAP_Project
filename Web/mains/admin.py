@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import TestMenuTable
+from .models import MenuTable
 
-admin.site.register(TestMenuTable)
+admin.site.register(MenuTable)

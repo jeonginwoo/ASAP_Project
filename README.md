@@ -30,22 +30,22 @@ ASAP(AI Selection Assistant Program)은 ...
 </br></br>
 
 # 기술 설명
-## - STT
+### - STT
 
 
 </br></br>
 
-## - Modeling
+### - Modeling
 
 
 </br></br>
 
-## - Web
+### - Web
 
 
 </br></br>
 
-## References
+# References
 - [Django REST Framework 강의](https://www.youtube.com/watch?v=1qiQkKshMUs&list=PLQFurmxCuZ2Qmcl0TJame_N79kP2o7VzG&index=1)
 - [OpenAI Documentation](https://platform.openai.com/docs)
 - [fine-tuning 사용법](https://domdom.tistory.com/604)
