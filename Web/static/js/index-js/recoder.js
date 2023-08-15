@@ -19,7 +19,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 mediaRecorder.onstop = (event) => {
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
 
-                    fetch('http://127.0.0.1:8000/speechrecognize/', {
+                    fetch('http://127.0.0.1:8000/main/speechrecognize/', {
                         method: "POST",
                         headers: {
                             "Content-Type": "audio/mpeg",

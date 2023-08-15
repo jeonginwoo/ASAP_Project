@@ -22,7 +22,7 @@ speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부�
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
 
-        fetch("http://127.0.0.1:8000/textinput/", {
+        fetch("http://127.0.0.1:8000/main/textinput/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
