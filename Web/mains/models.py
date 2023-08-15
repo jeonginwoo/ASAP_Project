@@ -9,12 +9,12 @@ class Menu(models.Model):
 
 class MenuTable(models.Model):
     # base information
-    menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
-    price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
-    image = models.ImageField(verbose_name='이미지', null=True, blank=True)
-    info = models.TextField(default="맛있다.", verbose_name='정보')
-    rank = models.IntegerField(default=99, verbose_name='인기순위')
-    spicy = models.IntegerField(default=0, verbose_name='맵기')
+    M_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    M_price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
+    M_image = models.ImageField(max_length=50, verbose_name='이미지',null = True , blank = True)
+    M_info = models.TextField(default="맛있다.", verbose_name='정보')
+    M_rank = models.IntegerField(default=99, verbose_name='인기순위')
+    M_spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
     N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
@@ -41,11 +41,12 @@ class MenuTable(models.Model):
     I_jalapeno = models.IntegerField(default=0, verbose_name='재료 : 할라피뇨')
     I_whole_shrimp = models.IntegerField(default=0, verbose_name='재료 : 통새우')
     I_bacon = models.IntegerField(default=0, verbose_name='재료 : 베이컨')
-    I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
-    I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 마늘 칩')
     I_lettuce = models.IntegerField(default=0, verbose_name='재료 : 상추')
     I_onion = models.IntegerField(default=0, verbose_name='재료 : 양파')
     I_hashbrown = models.IntegerField(default=0, verbose_name='재료 : 해쉬브라운')
+    I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
+    I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 갈릭칩')
+
 
     # sauce
     S_mayo = models.BooleanField(default=False, null=True, verbose_name='소스 : 마요네즈')
@@ -67,4 +68,4 @@ class MenuTable(models.Model):
 
 
     def __str__(self):
-        return self.menu_name
+        return self.M_menu_name

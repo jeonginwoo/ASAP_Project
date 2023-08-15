@@ -18,7 +18,7 @@ class MenuDetailView(APIView):
         except Menu.DoesNotExist:
             return Response({"error" : "Menu not found"}, status= 404)
 
-# 결제 페이지 이동 
+# 결제 페이지 이동
 def purchase(request):
     return render(request, 'main/purchase.html')
 
@@ -34,7 +34,7 @@ def speechRecognition(request):
         data = {"message": "Response OK!"}
 
         return JsonResponse(data)
-    
+
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
@@ -52,7 +52,7 @@ def textInput(request):
             return JsonResponse(data)
         except: # Requset 형식이 올바른 JSON 형식이 아님
             return JsonResponse({"message": "Invalid JSON format!", "status": 400}, status = 400)
-    
+
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
