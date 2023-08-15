@@ -1,0 +1,31 @@
+﻿meue_name,price,image,info,rank,spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,A_milk,A_Chicken,Apork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp,I_sliced_cheese,I_shredded_cheese,I_pickle,I_jalapeno,I_whole_shrimp,I_bacon,I_tomato,I_lettuce,I_onion,I_hashbrown,I_garlic_chip,S_mayo,S_bulgogi,S_barbecue,S_ketchup,S_diablo,S_spicy_tomato,S_cheese,S_tartar,S_baconjam,S_mustard,P_beef,P_shrimp,P_chicken,P_steak
+갈릭불고기와퍼,7400,Burger/갈릭불고기와퍼.png,TEST 중입니다.,27,0,693,32,841,13,11,False,False,False,True,True,FALSE,True,0,0,0,0,0,0,0,0,1,1,1,0,1,True,True,False,False,False,False,False,False,False,False,1,0,0,0
+더블비프불고기버거,5000,,TEST 중입니다.,13,0,527,26,776,10,11,True,False,False,True,True,False,False,0,0,1,0,0,0,0,0,0,1,1,0,0,True,True,False,False,False,False,False,False,False,False,1,0,0,0
+더블오리지날치즈버거,6500,,TEST 중입니다.,26,0,499,29,794,4.6,10.7,True,False,False,True,True,False,True,0,0,1,0,1,0,0,0,0,1,1,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+롱치킨,4700,,TEST 중입니다.,25,0,615,23,1223,7,7,True,True,False,False,True,False,False,0,0,0,0,0,0,0,0,0,1,0,0,0,True,False,False,False,False,False,False,False,False,False,0,0,1,0
+몬스터와퍼,9300,,TEST 중입니다.,4,1,1013,50,2057,14,19,False,True,True,True,True,False,True,0,0,2,0,0,0,0,2,1,1,1,0,0,True,False,False,False,True,False,False,False,False,False,1,0,1,0
+몬스터X,10100,,TEST 중입니다.,24,1,1010,47,1906,16,20,True,True,True,True,True,False,True,1,0,2,0,0,0,0,2,1,1,1,0,0,True,False,False,False,True,False,False,False,False,False,1,0,1,1
+바비큐치킨버거,3700,,TEST 중입니다.,14,0,476,19,800,8,6,True,True,False,False,True,False,True,0,0,0,0,0,0,0,0,0,1,0,0,0,True,False,True,False,False,False,False,False,False,False,0,0,1,0
+불고기와퍼,7100,,TEST 중입니다.,15,0,690,29,886,16.8,10,False,False,False,True,True,False,True,0,0,0,0,1,0,0,0,1,1,1,0,0,True,True,False,False,False,False,False,False,False,False,1,0,0,0
+불고기와퍼 주니어,4700,,TEST 중입니다.,16,0,397,17,548,8.5,5,False,False,False,True,True,False,True,0,0,0,0,1,0,0,0,1,1,1,0,0,True,True,False,False,False,False,False,False,False,False,1,0,0,0
+블랙바비큐와퍼,9300,,TEST 중입니다.,5,0,778,36,1140,11.9,14.3,True,False,True,True,True,True,True,0,0,0,0,0,0,0,4,1,1,1,0,0,True,False,True,False,False,False,False,False,False,False,1,0,0,0
+블랙바비큐콰트로치즈와퍼,9300,,TEST 중입니다.,17,0,888,42,1412,13.9,21.5,True,False,True,True,True,True,True,0,0,2,1,0,0,0,2,1,1,1,0,0,True,False,True,False,False,False,False,False,False,False,1,0,0,0
+비프불고기,4000,,TEST 중입니다.,18,0,366,15,454,8,5,False,False,False,True,True,False,False,0,0,0,0,0,0,0,0,0,1,1,0,0,True,True,False,False,False,False,False,False,False,False,1,0,0,0
+비프슈림프,7000,,TEST 중입니다.,19,0,574,24,1165,4.6,8.3,True,False,False,True,True,False,True,0,1,0,0,0,0,0,0,1,1,1,0,0,False,False,False,False,False,False,False,True,False,True,1,1,0,0
+슈림프버거,5000,,TEST 중입니다.,20,0,439,14,1159,4.1,5,True,False,False,True,True,False,False,0,1,0,0,0,0,0,0,0,1,0,0,0,False,False,False,False,False,False,False,True,False,False,0,1,0,0
+와퍼,7100,,TEST 중입니다.,1,0,619,29,809,10.5,13,False,False,False,True,True,False,True,0,0,0,0,1,0,0,0,1,1,1,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+와퍼 주니어,4700,,TEST 중입니다.,6,0,399,17,570,4.6,8,False,False,False,True,True,False,True,0,0,0,0,1,0,0,0,1,1,1,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+치즈버거,3500,,TEST 중입니다.,21,0,386,17,755,3.8,6.9,True,False,False,False,True,False,False,0,0,1,0,1,0,0,0,0,1,0,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+치즈와퍼,7700,,TEST 중입니다.,22,0,716,33,1288,7.1,16,True,False,False,True,True,False,True,0,0,2,0,1,0,0,0,1,1,1,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+치즈와퍼주니어,5000,,TEST 중입니다.,7,0,438,19,771,4.8,10,True,False,False,True,True,False,True,0,0,1,0,1,0,0,0,1,1,1,0,0,True,False,False,True,False,False,False,False,False,False,1,0,0,0
+치킨버거,3700,,TEST 중입니다.,12,0,538,18,851,4,7,True,True,False,False,True,False,False,0,0,0,0,0,0,0,0,0,1,0,0,0,True,False,False,False,False,False,False,False,False,False,0,0,1,0
+치킨킹,6400,,TEST 중입니다.,11,1,751,27,1158,9,11,True,True,False,False,True,False,False,0,0,0,0,1,0,0,0,0,1,0,0,0,True,False,False,False,False,False,False,False,False,True,0,0,1,0
+치킨킹BLT,7400,,TEST 중입니다.,23,1,821,28,1184,13,12,True,True,True,False,True,False,True,0,0,0,0,1,0,0,1,1,1,0,0,0,True,False,False,False,False,False,False,False,False,True,0,0,1,0
+콰트로치즈와퍼,7900,,TEST 중입니다.,2,0,769,40,1051,6.2,20,True,False,False,True,True,False,True,0,0,2,1,0,0,0,0,1,1,1,0,0,True,False,False,False,False,False,True,False,False,False,1,0,0,0
+콰트로치즈와퍼 주니어,5300,,TEST 중입니다.,9,0,446,21,631,3.1,10,True,False,False,True,True,False,True,0,0,1,0,1,0,0,0,1,1,1,0,0,True,False,False,False,False,False,True,False,False,False,1,0,0,0
+통새우 슈림프,6000,,TEST 중입니다.,10,0,459,16,938,7,5,True,False,False,False,True,False,False,0,1,0,0,0,0,2,0,0,1,0,0,0,False,False,False,False,False,False,False,True,False,False,0,1,0,0
+통새우와퍼,7900,,TEST 중입니다.,3,1,741,34,984,4.8,15,True,False,False,True,True,False,True,0,1,0,0,0,0,4,0,1,1,1,0,0,True,False,False,False,False,True,False,False,False,False,1,0,0,0
+통새우와퍼 주니어,5300,,TEST 중입니다.,8,1,381,21,522,5,7,True,False,False,True,True,False,True,0,1,0,0,0,0,2,0,1,1,1,0,0,True,False,False,False,False,True,False,False,False,False,1,0,0,0
+헬로 디아블로 와퍼,13000,,TEST 중입니다.,99,1,1124,57,1649,30,20,True,False,True,True,True,True,True,0,0,0,0,0,0,0,3,1,1,1,1,0,True,False,False,False,True,False,False,False,True,False,2,0,0,0
+헬로 릴리트 와퍼,9500,,TEST 중입니다.,99,1,893,37,1675,17,14,False,False,True,True,True,False,True,0,0,0,0,0,0,0,3,1,1,1,1,0,True,False,False,False,True,False,False,False,False,False,1,0,0,0
+헬로 이나리우스,9500,,TEST 중입니다.,99,0,925,37,1487,25,14,False,False,True,True,True,False,True,0,0,0,0,0,0,0,3,1,1,1,1,0,True,False,False,False,False,False,False,False,True,False,1,0,0,0
