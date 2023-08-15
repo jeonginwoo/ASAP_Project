@@ -7,6 +7,6 @@ button_card.onclick = () => {
 };
 
 button_cache.onclick = () => {
-    alert(button_cache.textContent + '로 결제합니다.');
+    alert(button_cache.textContent + '으로 결제합니다.');
     window.location.href = 'http://127.0.0.1:8000/';
 };
