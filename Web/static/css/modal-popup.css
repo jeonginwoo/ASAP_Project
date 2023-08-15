@@ -1,4 +1,4 @@
-#modal.modal-overlay {
+#modal {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -35,7 +35,6 @@
     display: inline;
     text-shadow: 1px 1px 2px gray;
     color: white;
-
 }
 
 #modal .title h2 {
@@ -56,4 +55,20 @@
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
+}
+
+.modal-header {
+    background-color: #683A2F;
+}
+
+.btn-close {
+    color: white;
+}
+
+.modal-body{
+    background-color: #FF8732; 
+}
+
+.modal-footer {
+    background-color: #683A2F;
 }

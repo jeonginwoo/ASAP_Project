@@ -1,6 +1,8 @@
+
 const modal = document.getElementById('modal');
 const scribe_button = document.getElementById('scribe');
-const close_button = modal.querySelector('.close-area');
+const close_button_up = modal.querySelector('.btn-close');
+const close_button_down = modal.querySelector('.btn-secondary');
 const modal_image = modal.querySelector('.image');
 const modal_content = modal.querySelector('.content');
 
@@ -18,7 +20,18 @@ scribe_button.onclick = () => {
     };
 };
 
-close_button.addEventListener("click", () => {
+close_button_up.addEventListener("click", () => {
+    if (isScribe) isScribe = false;
+
+    if (!isScribe) {
+        modal.style.display = "none";
+
+        modal_image.innerHTML = "";
+        modal_content.innerHTML = "";
+    }
+});
+
+close_button_down.addEventListener("click", () => {
     if (isScribe) isScribe = false;
 
     if (!isScribe) {

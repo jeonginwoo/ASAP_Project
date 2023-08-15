@@ -17,12 +17,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 };
 
                 mediaRecorder.onstop = (event) => {
-                    // chunks.forEach(async (data) => {
-                    //     // console.log(data);
-                    //     let temp = await data.text();
-                    //     console.log(temp);
-                    // });
-
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
 
                     fetch('http://127.0.0.1:8000/speechrecognize/', {
@@ -41,12 +35,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         location.href = err;
                     });
 
-                    chunks.splice(0);
+                    // chunks.splice(0);
 
-                    const recordURL = window.URL.createObjectURL(recordData);
+                    // const recordURL = window.URL.createObjectURL(recordData);
 
-                    audio.src = recordURL;
-                    audio.play();
+                    // audio.src = recordURL;
+                    // audio.play();
                 };
 
                 mediaRecorder.start(1000);
