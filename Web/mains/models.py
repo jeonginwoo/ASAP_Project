@@ -41,11 +41,12 @@ class MenuTable(models.Model):
     I_jalapeno = models.IntegerField(default=0, verbose_name='재료 : 할라피뇨')
     I_whole_shrimp = models.IntegerField(default=0, verbose_name='재료 : 통새우')
     I_bacon = models.IntegerField(default=0, verbose_name='재료 : 베이컨')
-    I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
-    I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 마늘 칩')
     I_lettuce = models.IntegerField(default=0, verbose_name='재료 : 상추')
     I_onion = models.IntegerField(default=0, verbose_name='재료 : 양파')
     I_hashbrown = models.IntegerField(default=0, verbose_name='재료 : 해쉬브라운')
+    I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
+    I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 갈릭칩')
+
 
     # sauce
     S_mayo = models.BooleanField(default=False, null=True, verbose_name='소스 : 마요네즈')
