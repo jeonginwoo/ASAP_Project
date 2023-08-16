@@ -12,7 +12,7 @@ model_bert = BertModel.from_pretrained(CHECKPOINT_NAME).to(device)
 tokenizer = BertTokenizer.from_pretrained(CHECKPOINT_NAME)
 
 bert = CustomBertModel(CHECKPOINT_NAME).to(device)
-bert.load_state_dict(torch.load('C:/Users/tkdal/Desktop/바트/bert-kor-base.pth',map_location=torch.device('cpu')))
+bert.load_state_dict(torch.load('/Users/ho/데청캠/D_Git/ASAP_Project/Model/Ko_Bert/bert-kor-base.pth',map_location=torch.device('cpu')))
 
 labels = {
     0: '추천 입니다',
