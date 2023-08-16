@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import MenuTable
 from .serializers import MenuSerializer
 from django.http import JsonResponse
+from config.settings import transcriber
 import json
 
 def index(request):
@@ -28,10 +29,12 @@ def speechRecognition(request):
         recordData = request.body
 
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
-        with open('../test_record_data.mp3', 'wb') as mpeg:
+        with open('../test_record_data.wav', 'wb') as mpeg:
             mpeg.write(recordData)
 
-        data = {"message": "Response OK!"}
+        transcription = transcriber('C:/Users/joung/Visual_Studio_Code_Workspace/repos/ASAP_Project/test_record_data.wav')
+
+        data = {"message": transcription}
 
         return JsonResponse(data)
 
