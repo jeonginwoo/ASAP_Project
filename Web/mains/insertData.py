@@ -119,11 +119,10 @@ def insert_DD():
     with open('C:/Projects/ASAP_Project/Data/음료&디저트_CSV.csv', encoding = 'utf-8') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
-            print(len(data_reader[0]))
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
-                    for i in range(12,22):
+                    for i in range(12, 22):
                         if row[i] == 'True' or row[i] == 'TRUE':
                               row[i] = True
                         else:
