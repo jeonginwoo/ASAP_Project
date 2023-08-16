@@ -1,10 +1,11 @@
 const speak_textarea = document.getElementById('speak');
 const answer_div = document.getElementById('answer');
 
-function speak() {  // 초기 실행 시, 한 번만 실행
+function speak() {
     let temp_speak = "이 부분에 원하는 것을 입력하거나, 음성 인식 버튼을 눌러 원하는 것을 말해주세요.";
 
-    speak_textarea.innerText = temp_speak;
+    speak_textarea.value = null;
+    speak_textarea.setAttribute('placeholder', temp_speak);
 };
 
 function answer(answer_text) {
@@ -21,7 +22,7 @@ speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부�
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
 
-        fetch("http://127.0.0.1:8000/textinput/", {
+        fetch("http://127.0.0.1:8000/main/textinput/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,6 +34,8 @@ speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부�
         })
         .then((response) => response.json())
         .then((data) => {
+            speak(); 
+
             if (data.status === 400 || data.status === 405)
                 throw Error(data.message);  // 올바른 형식으로 Request를 보내지 않았다면 Error 발생
 

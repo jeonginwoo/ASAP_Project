@@ -19,7 +19,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 mediaRecorder.onstop = (event) => {
                     const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
 
-                    fetch('http://127.0.0.1:8000/speechrecognize/', {
+                    fetch('http://127.0.0.1:8000/main/speechrecognize/', {
                         method: "POST",
                         headers: {
                             "Content-Type": "audio/mpeg",
@@ -29,10 +29,13 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     })
                     .then((response) => response.json())    //response를 json으로 파싱
                     .then((data) => {
+                        if (data.status === 400)
+                            throw Error(data.message);
+                        
                         console.log(data.message);
                     })
                     .catch((err) => {
-                        location.href = err;
+                        alert(err);
                     });
 
                     // chunks.splice(0);
