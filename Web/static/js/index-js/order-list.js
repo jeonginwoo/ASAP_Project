@@ -10,10 +10,10 @@ order_result.innerText = result_price.toLocaleString('ko-KR') + '원';
 
 /**
  * object 정보에 해당하는 주문 item을 html 문서에 추가
- * 
+ *
  * add_item 메소드에서 사용
- * 
- * @param {*} object 
+ *
+ * @param {*} object
  */
 function add_item_html(object) {
     const menu_name = object.name;
@@ -37,10 +37,10 @@ function add_item_html(object) {
 
 /**
  * object 정보에 해당하는 주문 item을 html 문서에서 삭제
- * 
+ *
  * delete_item 메소드에서 사용
- * 
- * @param {*} object 
+ *
+ * @param {*} object
  */
 function delete_item_html(object) {
     const menu_name = object.name;
@@ -55,7 +55,7 @@ function delete_item_html(object) {
 
 /**
  * object에 해당하는 주문 item을 추가
- * 
+ *
  * @param {*} object -
  * - object.name(String): 메뉴의 이름
  * - object.img(String): 메뉴 이미지의 저장 위치
@@ -69,7 +69,7 @@ function add_item(object) {
 
 /**
  * object에 해당하는 주문 item을 삭제
- * 
+ *
  * @param {*} object -
  * - object.name(String): 메뉴의 이름
  * - object.img(String): 메뉴 이미지의 저장 위치
@@ -117,4 +117,3 @@ for (let i = 0; i < 4; i++) {
 
     delete_item(random_object);
 };
-

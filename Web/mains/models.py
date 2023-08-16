@@ -11,7 +11,7 @@ class MenuTable(models.Model):
     # base information
     M_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
     M_price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
-    M_image = models.ImageField(max_length=50, verbose_name='이미지',null = True , blank = True)
+    M_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     M_info = models.TextField(default="맛있다.", verbose_name='정보')
     M_rank = models.IntegerField(default=99, verbose_name='인기순위')
     M_spicy = models.IntegerField(default=0, verbose_name='맵기')

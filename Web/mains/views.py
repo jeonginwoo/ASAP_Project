@@ -13,7 +13,6 @@ def index(request):
     context = {'menu_list': menu_list}
     return render(request, 'main/index.html',context)
 
-
 class MenuDetailView(APIView):
     def get(self,request,menu_key):
         try:
@@ -31,21 +30,20 @@ def purchase(request):
 def speechRecognition(request):
     if request.method == 'POST':
         recordData = request.body
-        
+
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
         with open('../test_record_data.mp3', 'wb') as mpeg:
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
-        
-        
+
+
         data = {"message": "Response OK!"}
 
         return JsonResponse(data)
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    return JsonResponse({"message": "This request is GET method"})
-    
+    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
