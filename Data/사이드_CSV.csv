@@ -1,29 +1,29 @@
-S_meue_name,S_price,S_image,S_info,S_rank,S_spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,A_milk,A_Chicken,A_pork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp
-해쉬브라운,1800,Side/해쉬브라운.png,TEST 중입니다.,1,0,182,1.3,382,0.2,2.5,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-너겟킹 8조각,4400,Side/너겟킹_8조각.png,TEST 중입니다.,2,0,294,17,843,0.7,4,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-너겟킹 10조각,5500,Side/너겟킹_10조각.png,TEST 중입니다.,3,0,368,22,1054,0.9,5,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-너겟킹 4조각,2200,Side/너겟킹_4조각.png,TEST 중입니다.,4,0,147,9,422,0.4,2,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-21치즈스틱,2500,Side/21치즈스틱.png,TEST 중입니다.,5,0,136,7,271,2,2,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE
-어니언링,2400,Side/어니언링.png,TEST 중입니다.,6,0,306,5,333,6,3,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-바삭킹4조각,5800,Side/바삭킹4조각.png,TEST 중입니다.,7,0,544,29,993,3.4,10,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-바삭킹2조각,3000,Side/바삭킹2조각.png,TEST 중입니다.,8,0,272,15,497,1.7,5,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-바삭킹8조각+디아블로소스,11400,Side/바삭킹8조각+디아블로소스.png,TEST 중입니다.,9,1,1127,59,2279,14.1,20.1,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE
-바삭킹8조각+스위트칠리소스,11400,Side/바삭킹8조각+스위트칠리소스.png,TEST 중입니다.,10,1,1138,59,2191,16.9,20.1,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-쉐이킹프라이 구운갈릭,2400,Side/쉐이킹프라이_구운갈릭.png,TEST 중입니다.,11,0,292,4,634,0.5,3.1,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
-쉐이킹프라이 스윗어니언,2400,Side/쉐이킹프라이_스윗어니언.png,TEST 중입니다.,12,0,297,4,486,1.29,3,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-쉐이킹프라이 매콤치즈,2400,Side/쉐이킹프라이_매콤치즈.png,TEST 중입니다.,13,1,287,4,687,0.6,3.1,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-크리미모짜볼(10조각),4700,Side/크리미모짜볼(10조각).png,TEST 중입니다.,14,0,395,14,248,9,1,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-크리미모짜볼(5조각),2600,Side/크리미모짜볼(5조각).png,TEST 중입니다.,15,0,198,7,124,4,1,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
-코코넛슈림프(9조각)^+스위트칠리소스,9900,Side/코코넛슈림프(9조각)^+스위트칠리소스.png,TEST 중입니다.,16,1,293,18,736,15.3,2.6,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
-코코넛슈림프(6조각)^+스위트칠리소스,7000,Side/코코넛슈림프(6조각)^+스위트칠리소스.png,TEST 중입니다.,17,1,212,12,558,13.6,1.7,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
-코코넛슈림프(3조각)^+스위트칠리소스,3900,Side/코코넛슈림프(3조각)^+스위트칠리소스.png,TEST 중입니다.,18,1,131,6,382,11.9,0.9,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
-치즈프라이,3000,Side/치즈프라이.png,TEST 중입니다.,19,0,440,12,447,1.8,8,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-프렌치프라이(L),2600,Side/프렌치프라이(L).png,TEST 중입니다.,20,0,377,5,432,0.4,4,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-프렌치프라이(R),2100,Side/프렌치프라이(R).png,TEST 중입니다.,21,0,285,4,326,0.3,3,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-코울슬로,2100,Side/코울슬로.png,TEST 중입니다.,22,0,130,1,218,13.2,0.9,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE
-콘샐러드,2100,Side/콘샐러드.png,TEST 중입니다.,23,0,189,2,226,6.3,1,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-디아블로소스,500,Side/디아블로소스.png,TEST 중입니다.,24,1,39,0,293,7.4,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
-스위트칠리소스,300,Side/스위트칠리소스.png,TEST 중입니다.,25,1,50,0,205,10.2,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
-구운갈릭 시즈닝,300,Side/구운갈릭_시즈닝.png,TEST 중입니다.,26,0,10,0,134,1.8,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-스윗어니언 시즈닝,300,Side/스윗어니언_시즈닝.png,TEST 중입니다.,27,0,10,0,130,1.9,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-매콤치즈 시즈닝,300,Side/매콤치즈_시즈닝.png,TEST 중입니다.,28,1,9,0,224,1.3,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+S_meue_name,S_price,S_image,S_info,S_rank,S_spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,A_milk,A_Chicken,Apork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp
+해쉬브라운,1800,Side/해쉬브라운.png,촉촉한 감자에 바삭함은 더했다! 해쉬브라운,1,0,182,1.3,382,0.2,2.5,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+너겟킹 8조각,4400,Side/너겟킹_8조각.png,바삭~ 촉촉~ 한입에 쏙 부드러운 너겟킹!,2,0,294,17,843,0.7,4,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+너겟킹 10조각,5500,Side/너겟킹_10조각.png,바삭~ 촉촉~ 한입에 쏙 부드러운 너겟킹!,3,0,368,22,1054,0.9,5,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+너겟킹 4조각,2200,Side/너겟킹_4조각.png,바삭~ 촉촉~ 한입에 쏙 부드러운 너겟킹!,4,0,147,9,422,0.4,2,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+21치즈스틱,2500,Side/21치즈스틱.png,21cm의 역대급 사이즈! 진하고 고소한 자연 모짜렐라가 가득한 21치즈스틱,5,0,136,7,271,2,2,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE
+어니언링,2400,Side/어니언링.png,더 바삭하게 한 입에 쏙!,6,0,306,5,333,6,3,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+바삭킹4조각,5800,Side/바삭킹4조각.png,매콤하게! 바삭하게 튀긴 치킨윙,7,0,544,29,993,3.4,10,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+바삭킹2조각,3000,Side/바삭킹2조각.png,매콤하게! 바삭하게 튀긴 치킨윙,8,0,272,15,497,1.7,5,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+바삭킹8조각+디아블로소스,11400,Side/바삭킹8조각+디아블로소스.png,매콤하게! 바삭하게 튀긴 치킨윙,9,1,1127,59,2279,14.1,20.1,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE
+바삭킹8조각+스위트칠리소스,11400,Side/바삭킹8조각+스위트칠리소스.png,매콤하게! 바삭하게 튀긴 치킨윙,10,1,1138,59,2191,16.9,20.1,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+쉐이킹프라이 구운갈릭,2400,Side/쉐이킹프라이_구운갈릭.png,깊은 풍미가 느껴지는 시즈닝으로 취향 저격!,11,0,292,4,634,0.5,3.1,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
+쉐이킹프라이 스윗어니언,2400,Side/쉐이킹프라이_스윗어니언.png,깊은 풍미가 느껴지는 시즈닝으로 취향 저격!,12,0,297,4,486,1.29,3,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+쉐이킹프라이 매콤치즈,2400,Side/쉐이킹프라이_매콤치즈.png,깊은 풍미가 느껴지는 시즈닝으로 취향 저격!,13,1,287,4,687,0.6,3.1,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+크리미모짜볼(10조각),4700,Side/크리미모짜볼(10조각).png,"겉은 바삭~ 속은 부드러운 크림치즈가 쏘옥, 크리미모짜볼!",14,0,395,14,248,9,1,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+크리미모짜볼(5조각),2600,Side/크리미모짜볼(5조각).png,"겉은 바삭~ 속은 부드러운 크림치즈가 쏘옥, 크리미모짜볼!",15,0,198,7,124,4,1,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+코코넛슈림프(9조각)^+스위트칠리소스,9900,Side/코코넛슈림프(9조각)^+스위트칠리소스.png,바삭한 코코넛 옷을 입은 탱글한 통새우와 새콤달콤 칠리소스,16,1,293,18,736,15.3,2.6,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
+코코넛슈림프(6조각)^+스위트칠리소스,7000,Side/코코넛슈림프(6조각)^+스위트칠리소스.png,바삭한 코코넛 옷을 입은 탱글한 통새우와 새콤달콤 칠리소스,17,1,212,12,558,13.6,1.7,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
+코코넛슈림프(3조각)^+스위트칠리소스,3900,Side/코코넛슈림프(3조각)^+스위트칠리소스.png,바삭한 코코넛 옷을 입은 탱글한 통새우와 새콤달콤 칠리소스,18,1,131,6,382,11.9,0.9,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,TRUE
+치즈프라이,3000,Side/치즈프라이.png,바삭한 프렌치프라이에 고소한 치즈가 듬뿍!,19,0,440,12,447,1.8,8,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+프렌치프라이(L),2600,Side/프렌치프라이(L).png,세계최고의 감자만 엄선해서 버거킹만의 비법으로 바삭하게!,20,0,377,5,432,0.4,4,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+프렌치프라이(R),2100,Side/프렌치프라이(R).png,세계최고의 감자만 엄선해서 버거킹만의 비법으로 바삭하게!,21,0,285,4,326,0.3,3,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+코울슬로,2100,Side/코울슬로.png,아삭아삭한 양배추와 상큼한 드레싱의 코울슬로,22,0,130,1,218,13.2,0.9,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE
+콘샐러드,2100,Side/콘샐러드.png,달콤한 옥수수와 싱싱한 야채의 어울림,23,0,189,2,226,6.3,1,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+디아블로소스,500,Side/디아블로소스.png,"바삭킹, 너겟, 프렌치프라이 등 사이드를 더 맛있게!",24,1,39,0,293,7.4,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
+스위트칠리소스,300,Side/스위트칠리소스.png,"바삭킹, 너겟, 프렌치프라이 등 사이드를 더 맛있게!",25,1,50,0,205,10.2,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE
+구운갈릭 시즈닝,300,Side/구운갈릭_시즈닝.png,시즈닝,26,0,10,0,134,1.8,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+스윗어니언 시즈닝,300,Side/스윗어니언_시즈닝.png,시즈닝,27,0,10,0,130,1.9,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+매콤치즈 시즈닝,300,Side/매콤치즈_시즈닝.png,시즈닝,28,1,9,0,224,1.3,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
