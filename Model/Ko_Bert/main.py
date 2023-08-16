@@ -32,13 +32,10 @@ class Ko_Bert():
 
 
     # 사용자 입력에 대하여 예측 후 출력을 낼 수 있는 간단한 함수를 생성합니다.
-    def predict_sentence(self,pre):
-        input_sentence = input('문장을 입력해 주세요: ')
-        pre.predict(input_sentence)
+    def predict_sentence(self,pre,text):
+        input_sentence = text#input('문장을 입력해 주세요: ')
+        return pre.predict(input_sentence)
     
-    def Start_bert(self):
-        self.predict_sentence(self.pre)
+    def start(self,text):
+        return self.predict_sentence(self.pre, text)
 
-
-K = Ko_Bert()
-K.Start_bert()

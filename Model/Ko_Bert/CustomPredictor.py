@@ -20,5 +20,6 @@ class CustomPredictor():
         prediction = self.model(**tokens)
         prediction = F.softmax(prediction, dim=1)
         output = prediction.argmax(dim=1).item()
-        prob, result = prediction.max(dim=1)[0].item(), self.labels[output]
-        print(f'[{result}]\n확률은: {prob*100:.3f}% 입니다.')
+        return output
+        #prob, result = prediction.max(dim=1)[0].item(), self.labels[output]
+        #print(f'[{result}]\n확률은: {prob*100:.3f}% 입니다.')
