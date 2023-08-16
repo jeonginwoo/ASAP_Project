@@ -1,6 +1,5 @@
 #pip install konlpy 하시면 됩니다
 from konlpy.tag import Kkma
-from konlpy.utils import pprint
 from hanspell import spell_checker
 import re
 kkma = Kkma()
@@ -133,7 +132,7 @@ def toQuery(a):
                 re1.append('i') # 정보
             elif i in sb:
                 re1.append('0') # 빼는거
-            else : print('어라' + g) # 혹시 오류
+            else : print('어라' + 'g') # 혹시 오류
     print('re1')
     print(re1) # 첫 결과
 
