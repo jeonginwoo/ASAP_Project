@@ -12,8 +12,8 @@ class Ko_Bert():
         self.model_bert = BertModel.from_pretrained(CHECKPOINT_NAME).to(self.device)
         self.tokenizer = BertTokenizer.from_pretrained(CHECKPOINT_NAME)
         self.bert = CustomBertModel(CHECKPOINT_NAME).to(self.device)
-        self.bert.load_state_dict(torch.load('C:/Users/tkdal/Desktop/바트/bert-kor-base.pth',map_location=torch.device('cpu')))
-        self.labels = labels = {
+        self.bert.load_state_dict(torch.load('bert-kor-base.pth',map_location=torch.device('cpu')))
+        '''self.labels = labels = {
     0: '추천 입니다',
     1: '남성 입니다',
     2 : '여성 입니다',
@@ -26,8 +26,8 @@ class Ko_Bert():
     9 : '여름이었다',
     10 : '겨울입니다',
     11 : '기타'
-}
-        self.pre = CustomPredictor(self.bert, self.tokenizer, self.labels,self.device)
+}''' 
+        self.pre = CustomPredictor(self.bert, self.tokenizer, self.device)# self.labels,self.device)
         
 
 

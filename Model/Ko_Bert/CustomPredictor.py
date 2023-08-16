@@ -1,10 +1,10 @@
 import torch.nn.functional as F
 
 class CustomPredictor():
-    def __init__(self, model, tokenizer, labels: dict, devic):
+    def __init__(self, model, tokenizer, devic):#labels: dict, devic):
         self.model = model
         self.tokenizer = tokenizer
-        self.labels = labels
+        #self.labels = labels
         self.device = devic
 
     def predict(self, sentence):
