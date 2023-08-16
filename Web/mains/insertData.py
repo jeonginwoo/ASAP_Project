@@ -19,7 +19,7 @@ def insert_Menu():
                     print(type(row[11]))
                     print('----------------')
                     for i in range(31,41):
-                        if row[i] == 'True':
+                        if row[i] == 'True' or row[i] == 'TRUE':
                               row[i] = True
                         else:
                              row[i] = False
@@ -85,17 +85,8 @@ def insert_Side():
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
-                    print('----------------')
-                    print(row[11])
-                    print(type(row[11]))
-                    print('----------------')
-                    for i in range(31,41):
-                        if row[i] == 'True':
-                              row[i] = True
-                        else:
-                             row[i] = False
                     for i in range(11,20):
-                        if row[i] == 'True':
+                        if row[i] == 'True' or row[i] == 'TRUE':
                               row[i] = True
                         else:
                              row[i] = False
@@ -128,31 +119,23 @@ def insert_DD():
     with open('C:/Projects/ASAP_Project/Data/음료&디저트_CSV.csv', encoding = 'utf-8') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
+            print(len(data_reader[0]))
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
-                    print('----------------')
-                    print(row[11])
-                    print(type(row[11]))
-                    print('----------------')
-                    for i in range(31,41):
-                        if row[i] == 'True':
-                              row[i] = True
-                        else:
-                             row[i] = False
-                    for i in range(11,20):
-                        if row[i] == 'True':
+                    for i in range(12,22):
+                        if row[i] == 'True' or row[i] == 'TRUE':
                               row[i] = True
                         else:
                              row[i] = False
 
-                    menu = SideTable(
-                        S_menu_name=row[0],
-                        S_price=row[1],
-                        S_image=row[2],
-                        S_info=row[3],
-                        S_rank=row[4],
-                        S_spicy=row[5],
+                    menu = DDTable(
+                        DD_menu_name=row[0],
+                        DD_price=row[1],
+                        DD_image=row[2],
+                        DD_info=row[3],
+                        DD_rank=row[4],
+                        DD_spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
                         N_sodium=row[8],
@@ -168,5 +151,6 @@ def insert_DD():
                         A_tomato=row[18],
                         A_clam=row[19],
                         A_shrimp=row[20],
+                        A_peach=row[21],
                     )
                     menu.save()

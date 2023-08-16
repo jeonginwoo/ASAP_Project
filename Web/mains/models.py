@@ -1,11 +1,10 @@
 from django.db import models
 
-
-class Menu(models.Model):
-    image = models.ImageField(upload_to='static/img/BURGERKING_MENU/Burger/', verbose_name='이미지', null=True, blank=True)
-    name = models.CharField(max_length=25, verbose_name='메뉴명')
-    price = models.IntegerField(verbose_name='가격', default=10000)
-    calorie = models.FloatField(verbose_name='칼로리', default=100.5)
+# class Menu(models.Model):
+#     image = models.ImageField(upload_to='static/img/BURGERKING_MENU/Burger/', verbose_name='이미지', null=True, blank=True)
+#     name = models.CharField(max_length=25, verbose_name='메뉴명')
+#     price = models.IntegerField(verbose_name='가격', default=10000)
+#     calorie = models.FloatField(verbose_name='칼로리', default=100.5)
 
 class MenuTable(models.Model):
     # base information
@@ -17,9 +16,9 @@ class MenuTable(models.Model):
     M_spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
-    N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
-    N_protein = models.IntegerField(default=0, verbose_name='영양성분 : 단백질')
-    N_sodium = models.IntegerField(default=0, verbose_name='영양성분 : 나트륨')
+    N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
+    N_protein = models.FloatField(default=0, verbose_name='영양성분 : 단백질')
+    N_sodium = models.FloatField(default=0, verbose_name='영양성분 : 나트륨')
     N_sugars = models.FloatField(default=0, verbose_name='영양성분 : 설탕')
     N_saturated_fat = models.FloatField(default=0, verbose_name='영양성분 : 포화지방')
 
@@ -79,9 +78,9 @@ class SideTable(models.Model):
     S_spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
-    N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
-    N_protein = models.IntegerField(default=0, verbose_name='영양성분 : 단백질')
-    N_sodium = models.IntegerField(default=0, verbose_name='영양성분 : 나트륨')
+    N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
+    N_protein = models.FloatField(default=0, verbose_name='영양성분 : 단백질')
+    N_sodium = models.FloatField(default=0, verbose_name='영양성분 : 나트륨')
     N_sugars = models.FloatField(default=0, verbose_name='영양성분 : 설탕')
     N_saturated_fat = models.FloatField(default=0, verbose_name='영양성분 : 포화지방')
 
@@ -110,9 +109,9 @@ class DDTable(models.Model):    # Drink & Dessert
     DD_spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
-    N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
-    N_protein = models.IntegerField(default=0, verbose_name='영양성분 : 단백질')
-    N_sodium = models.IntegerField(default=0, verbose_name='영양성분 : 나트륨')
+    N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
+    N_protein = models.FloatField(default=0, verbose_name='영양성분 : 단백질')
+    N_sodium = models.FloatField(default=0, verbose_name='영양성분 : 나트륨')
     N_sugars = models.FloatField(default=0, verbose_name='영양성분 : 설탕')
     N_saturated_fat = models.FloatField(default=0, verbose_name='영양성분 : 포화지방')
     N_caffeine = models.FloatField(default=0, verbose_name='영양성분 : 카페인')
@@ -127,6 +126,7 @@ class DDTable(models.Model):    # Drink & Dessert
     A_tomato = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 토마토')
     A_clam = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 조개')
     A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
+    A_peach = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 복숭아')
 
     def __str__(self):
         return self.DD_menu_name

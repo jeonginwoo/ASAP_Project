@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import MenuTable, SideTable, DDTable
-from .serializers import MenuSerializer
+#from .serializers import MenuSerializer
 from django.http import JsonResponse
 import json
 
@@ -77,7 +77,7 @@ def testDD(request):
 
 def menuQuery(request):
     a = ['0 S_bulgogi', '1 I_sliced_cheese', '1 I_shredded_cheese']
-    d = {}
+    d = {'M_menu_list':'이름'}
 
     if 'M_menu_list' in d:
         menu_list = MenuTable.objects.get(M_menu_list=d['M_menu_list'])
