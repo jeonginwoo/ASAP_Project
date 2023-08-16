@@ -61,3 +61,9 @@ def testTable(request):
     menu_list = MenuTable.objects.all()
     context = {'menu_list': menu_list}
     return render(request, 'main/menu_list.html', context)
+
+def testQuery(request):
+    a = ['0 S_bulgogi', '1 I_sliced_cheese', '1 I_shredded_cheese']
+    menu_list = MenuTable.objects.all()
+    context = {'menu_list': menu_list}
+    return render(request,)
