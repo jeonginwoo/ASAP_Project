@@ -69,118 +69,113 @@ etc = ['영양소','영양성분','알레르기','가격','정보','상세정보
 cat = ['M','S','DD','햄버거','버거','사이드','디저트','음료수','아이스크림']
 eve = ham+side+drink+neu+al+ing+sau+pat+etc+cat
 
-a = input()
-a = replace_multiple_words(a, replacements)
-#b = spell_checker.check(a)
-#b = b.checked
-m = kkma.morphs(a) # 형태소 추출
-n = kkma.nouns(a) # 명사만 추출
+def toQuery(a):
+    a = replace_multiple_words(a, replacements)
+    m = kkma.morphs(a) # 형태소 추출
+    n = kkma.nouns(a) # 명사만 추출
 
-print('원래 문장 : ' + a)
-#print('고친 문장 : ' + b)
+    print('원래 문장 : ' + a)
 
 
-mor = []
-ct = 0
-full = ''
-count=0
-what = 'M'
-#print(m)
-#print(len(m))
-for i in range(ct,len(m)):
-    full+=m[i]
-while ct<len(m)-1:
-    tmp = full
-    for i in range(len(m)-1, ct-1, -1):
-        if i==ct:
-            mor.append(m[ct])
-            full=full[len(m[ct]):]
-            ct+=1
-            break
-        if tmp in replacements: tmp = replacements[tmp] 
-        if tmp in eve:
-            if tmp in side+['사이드'] : what = 'S'
-            elif tmp in drink+['디저트','음료수','아이스크림'] : what = 'DD'
-            mor.append(tmp)
-            for j in range(ct, i+1) : full=full[len(m[j]):]
-            ct = i+1
-            break
-            
-        tmp=tmp[:len(tmp)-len(m[i])]
-if full!='' : mor.append(full)
 
-print('mor')
-print(mor)
+    mor = []
+    ct = 0
+    full = ''
+    count=0
+    what = 'M'
+
+    for i in range(ct,len(m)):
+        full+=m[i]
+    while ct<len(m)-1:
+        tmp = full
+        for i in range(len(m)-1, ct-1, -1):
+            if i==ct:
+                mor.append(m[ct])
+                full=full[len(m[ct]):]
+                ct+=1
+                break
+            if tmp in replacements: tmp = replacements[tmp] 
+            if tmp in eve:
+                if tmp in side+['사이드'] : what = 'S'
+                elif tmp in drink+['디저트','음료수','아이스크림'] : what = 'DD'
+                mor.append(tmp)
+                for j in range(ct, i+1) : full=full[len(m[j]):]
+                ct = i+1
+                break
+
+            tmp=tmp[:len(tmp)-len(m[i])]
+    if full!='' : mor.append(full)
+
+    print('mor')
+    print(mor)
         
         
         
-re1 = [] # 결과
-sg = ['추가','넣', '들어가', '좋', '들어가', '듣', '있'] # 주문 - 추가 키워드
-si = [] # 주문 - 들어가는 키워드
-sb = ['없', '빼주', '빼', '싫'] # 주문 - 빼는
-en = ['에', '에다', '에다가'] # 공백 키워드
+    re1 = [] # 결과
+    sg = ['추가','넣', '들어가', '좋', '들어가', '듣', '있'] # 주문 - 추가 키워드
+    si = [] # 주문 - 들어가는 키워드
+    sb = ['없', '빼주', '빼', '싫'] # 주문 - 빼는
+    en = ['에', '에다', '에다가'] # 공백 키워드
 
-#주문 토큰화
-for i in mor: # 형태소로 나뉘었을 때
-    if i in eve:
-        re1.append(i)
-    elif i in sg+sb: # 형태소 단위로 주문 키워드 넣기
-        if i in sg:
-            re1.append('1') # 들어가는거
-        elif i in si:
-            re1.append('i') # 정보
-        elif i in sb:
-            re1.append('0') # 빼는거
-        else : print('어라' + g) # 혹시 오류
-    else: 
-        pass
-print('re1')
-print(re1) # 첫 결과
+    #주문 토큰화
+    for i in mor: # 형태소로 나뉘었을 때
+        if i in eve:
+            re1.append(i)
+        elif i in sg+sb: # 형태소 단위로 주문 키워드 넣기
+            if i in sg:
+                re1.append('1') # 들어가는거
+            elif i in si:
+                re1.append('i') # 정보
+            elif i in sb:
+                re1.append('0') # 빼는거
+            else : print('어라' + g) # 혹시 오류
+    print('re1')
+    print(re1) # 첫 결과
 
 
-#토큰 결합
-re2 = [] # 찐 결과 리스트
-tmp = '' # 임시로 이을 문장
-for i in re1: # 토큰
-    if i in toQ.keys() : i = toQ[i]
-    if i in en: # 공백 키워드가 들어오면 리스트에 넣고 tmp 초기화
-        tmp = '1 ' + tmp
-        re2.append(tmp)
-        tmp = ''
-    elif i in ['0','1']: # 주문 키워드 들어오면 tmp에 추가 후 리스트 넣고 tmp 초기화
-        tmp = i + ' ' + tmp
-        re2.append(tmp)
-        tmp = ''
-    elif tmp == '' : # tmp가 빈 배열일 때 무조건 더하기
-        tmp+=(i + ' ')
-    else : tmp += (i + ' ') # 그 이외 (명사)는 추가
-if tmp!='' : re2.append('1 ' + tmp)
+    #토큰 결합
+    re2 = [] # 찐 결과 리스트
+    tmp = '' # 임시로 이을 문장
+    for i in re1: # 토큰
+        if i in toQ.keys() : i = toQ[i]
+        if i in en: # 공백 키워드가 들어오면 리스트에 넣고 tmp 초기화
+            tmp = '1 ' + tmp
+            re2.append(tmp)
+            tmp = ''
+        elif i in ['0','1']: # 주문 키워드 들어오면 tmp에 추가 후 리스트 넣고 tmp 초기화
+            tmp = i + ' ' + tmp
+            re2.append(tmp)
+            tmp = ''
+        elif tmp == '' : # tmp가 빈 배열일 때 무조건 더하기
+            tmp+=(i + ' ')
+        else : tmp += (i + ' ') # 그 이외 (명사)는 추가
+    if tmp!='' : re2.append('1 ' + tmp)
 
-print(re2)
+    print(re2)
 
 
-re3 = []
-for i in range(len(re2)):
-    how = ''
-    for j in re2[i].split():
-        if j in neu+cat: 
-            re3.append(j)
-        elif j in ham : 
-            re3.append('M_menu_name ' + j)
-            what = 'M'
-        elif j in side:
-            re3.append('S_menu_name ' + j)
-            what = 'S'
-        elif j in drink:
-            re3.append('DD_menu_name ' + j)
-            what = 'DD'
-        elif j in etc:
-            if j == '맵': re3.append(what + '_spicy' + ' 1')
-            elif j == '안맵': re3.append(what + '_spicy' + ' 0')
-            else:
-                re3.append(what + '_' + j)
-        elif j in ['0','1'] : how = j
-        else :
-            re3.append(how + ' ' +j)
+    re3 = []
+    for i in range(len(re2)):
+        how = ''
+        for j in re2[i].split():
+            if j in neu+cat: 
+                re3.append(j)
+            elif j in ham : 
+                re3.append('M_menu_name ' + j)
+                what = 'M'
+            elif j in side:
+                re3.append('S_menu_name ' + j)
+                what = 'S'
+            elif j in drink:
+                re3.append('DD_menu_name ' + j)
+                what = 'DD'
+            elif j in etc:
+                if j == '맵': re3.append(what + '_spicy' + ' 1')
+                elif j == '안맵': re3.append(what + '_spicy' + ' 0')
+                else:
+                    re3.append(what + '_' + j)
+            elif j in ['0','1'] : how = j
+            else :
+                re3.append(how + ' ' +j)
 
-print(re3)
+    return re3
