@@ -10,7 +10,7 @@ class Menu(models.Model):
 class MenuTable(models.Model):
     # base information
     M_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
-    M_price = models.IntegerField(default=5000, verbose_name='가격')    # integer? float? char?
+    M_price = models.IntegerField(default=5000, verbose_name='가격')
     M_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     M_info = models.TextField(default="맛있다.", verbose_name='정보')
     M_rank = models.IntegerField(default=99, verbose_name='인기순위')
@@ -47,7 +47,6 @@ class MenuTable(models.Model):
     I_tomato = models.IntegerField(default=0, verbose_name='재료 : 토마토')
     I_garlic_chip = models.IntegerField(default=0, verbose_name='재료 : 갈릭칩')
 
-
     # sauce
     S_mayo = models.BooleanField(default=False, null=True, verbose_name='소스 : 마요네즈')
     S_bulgogi = models.BooleanField(default=False, null=True, verbose_name='소스 : 불고기')
@@ -66,6 +65,68 @@ class MenuTable(models.Model):
     P_chicken = models.IntegerField(default=0, verbose_name='패티 : 치킨')
     P_steak = models.IntegerField(default=0, verbose_name='패티 : 스테이크')
 
-
     def __str__(self):
         return self.M_menu_name
+
+
+class SideTable(models.Model):
+    # base information
+    S_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    S_price = models.IntegerField(default=5000, verbose_name='가격')
+    S_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    S_info = models.TextField(default="맛있다.", verbose_name='정보')
+    S_rank = models.IntegerField(default=99, verbose_name='인기순위')
+    S_spicy = models.IntegerField(default=0, verbose_name='맵기')
+
+    # nutrition information
+    N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
+    N_protein = models.IntegerField(default=0, verbose_name='영양성분 : 단백질')
+    N_sodium = models.IntegerField(default=0, verbose_name='영양성분 : 나트륨')
+    N_sugars = models.FloatField(default=0, verbose_name='영양성분 : 설탕')
+    N_saturated_fat = models.FloatField(default=0, verbose_name='영양성분 : 포화지방')
+
+    # allergy
+    A_milk = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 우유')
+    A_chicken = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 치킨')
+    A_pork = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 돼지')
+    A_beef = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 소')
+    A_egg = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 난류')
+    A_squid = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 오징어')
+    A_tomato = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 토마토')
+    A_clam = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 조개')
+    A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
+
+    def __str__(self):
+        return self.S_menu_name
+    
+
+class DDTable(models.Model):    # Drink & Dessert
+    # base information
+    DD_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    DD_price = models.IntegerField(default=5000, verbose_name='가격')
+    DD_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    DD_info = models.TextField(default="맛있다.", verbose_name='정보')
+    DD_rank = models.IntegerField(default=99, verbose_name='인기순위')
+    DD_spicy = models.IntegerField(default=0, verbose_name='맵기')
+
+    # nutrition information
+    N_calories = models.IntegerField(default=0, verbose_name='영양성분 : 칼로리')
+    N_protein = models.IntegerField(default=0, verbose_name='영양성분 : 단백질')
+    N_sodium = models.IntegerField(default=0, verbose_name='영양성분 : 나트륨')
+    N_sugars = models.FloatField(default=0, verbose_name='영양성분 : 설탕')
+    N_saturated_fat = models.FloatField(default=0, verbose_name='영양성분 : 포화지방')
+    N_caffeine = models.FloatField(default=0, verbose_name='영양성분 : 카페인')
+
+    # allergy
+    A_milk = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 우유')
+    A_chicken = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 치킨')
+    A_pork = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 돼지')
+    A_beef = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 소')
+    A_egg = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 난류')
+    A_squid = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 오징어')
+    A_tomato = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 토마토')
+    A_clam = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 조개')
+    A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
+
+    def __str__(self):
+        return self.DD_menu_name

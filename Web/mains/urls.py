@@ -10,6 +10,8 @@ urlpatterns = [
     path('purchase/', views.purchase, name='purchase'),
     path('speechrecognize/', views.speechRecognition, name="speechRecognition"),
 
-    path('test/', views.testTable, name='testTable'),
-    path('testReco/', views.testTable, name='testQuery'),
+    path('burgerlist/', views.testBurger, name='testBurger'),
+    path('sidelist/', views.testSide, name='testSide'),
+    path('ddlist/', views.testDD, name='testDD'),
+    path('menuReco/', views.menuQuery, name='testQuery'),
 ]
