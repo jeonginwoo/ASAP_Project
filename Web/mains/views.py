@@ -8,7 +8,10 @@ from config.settings import transcriber
 import json
 
 def index(request):
-    return render(request, 'main/index.html')
+    # 첫화면에 보여질 메뉴 설정중
+    menu_list = MenuTable.objects.all().values('M_menu_name','M_price','M_image').order_by('M_rank')[:6]
+    context = {'menu_list': menu_list}
+    return render(request, 'main/index.html',context)
 
 
 class MenuDetailView(APIView):
@@ -29,8 +32,6 @@ def speechRecognition(request):
     if request.method == 'POST':
         recordData = request.body
         
-
-
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
         with open('../test_record_data.mp3', 'wb') as mpeg:
             mpeg.write(recordData)
@@ -43,8 +44,8 @@ def speechRecognition(request):
         return JsonResponse(data)
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    # return JsonResponse({"message": "This request is GET method"})
-    return '1111'
+    return JsonResponse({"message": "This request is GET method"})
+    
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
@@ -63,6 +64,7 @@ def textInput(request):
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+
 
 def testTable(request):
     menu_list = MenuTable.objects.all()

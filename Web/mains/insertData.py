@@ -16,10 +16,6 @@ def insert_Menu():
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
-                    print('----------------')
-                    print(row[11])
-                    print(type(row[11]))
-                    print('----------------')
                     for i in range(31,41):
                         if row[i] == 'True':
                               row[i] = True

@@ -87,8 +87,10 @@ function delete_item(object) {
 
 
 for (let i = 0; i < 10; i++) {
+
+    const img_list = ["static/img/BURGERKING_MENU/Burger/와퍼.png", "static/img/BURGERKING_MENU/Burger/갈릭불고기와퍼.png", "static/img/BURGERKING_MENU/Burger/몬스터와퍼.png", "static/img/BURGERKING_MENU/Burger/와퍼주니어.png", "static/img/BURGERKING_MENU/Burger/블랙바비큐와퍼.png", "static/img/BURGERKING_MENU/Burger/비프&슈림프버거.png", "static/img/BURGERKING_MENU/Burger/헬로_디아블로_와퍼.png", "static/img/BURGERKING_MENU/Burger/치즈와퍼.png", "static/img/BURGERKING_MENU/Burger/통새우와퍼.png", "static/img/BURGERKING_MENU/Burger/치킨킹.png"];
     let menu_name = '메뉴' + String(i + 1);
-    let menu_img = "static/img/pubao_1.webp";
+    let menu_img = img_list[i];
 
     let menu_price = Math.floor(Math.random() * 50000);
     let menu_etc = '테스트 테스트 테스트';

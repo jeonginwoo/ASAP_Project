@@ -86,7 +86,8 @@
 </head>
 
 <body>
-  <h1>초기 상태</h1>
+  <h1>초기 상태v1</h1>
+
   <br>
   <p>
     <button type="button" class="btn btn-primary btn-sm" id="menu_burger">버거 메뉴</button>
@@ -98,7 +99,9 @@
   </p>
   <hr>
   <div id="answer" class="form-floating mb-3"></div>
+
   <table id="table" class="table table-striped table-bordered">
+
     <thead id="table_head">
       <tr>
         <th scope="col">버거</th>
@@ -106,6 +109,7 @@
         <th scope="col">음료</th>
       </tr>
     </thead>
+
     <tbody id="table_body" class="table-group-divider">
       <tr>
         <td>버거1</td>
@@ -124,6 +128,7 @@
       </tr>
     </tbody>
   </table>
+
   <textarea id="speak" class="form-floating mb-3"></textarea>
   <div style="display:flex; justify-content: center; margin: 10px;">
     <button class="btn btn-primary" id="record_button" type="button" data-bs-toggle="collapse"
@@ -137,6 +142,7 @@
   <div class="ordered-list">
     <template id="temp">
       <div class="ordered-item card mb-3">
+
         <h3 class="menu-name card-header"></h3>
         <img id="menu-img" style="display: block; margin: 10px auto" , width="150" , height="200">
         <h4 id="menu-price"></h4>
@@ -168,14 +174,25 @@
       </div>
     </div>
   </div>
+
   <input type="hidden" id="csrfToken" value="{{ csrf_token }}"> <!--Django CSRF 토큰 값을 JS 파일로 보내주기 위한 부분-->
   <script src="{% static 'js/index-js/modal-popup.js' %}?ver=2"></script>
   <script src="{% static 'js/index-js/conversation-box.js' %}?ver=2"></script>
-  <script src="{% static 'js/index-js/adjust-table.js' %}?ver=1"></script>
+  <script src="{% static 'js/index-js/adjust-table.js' %}?ver=5"></script>
   <script src="{% static 'js/index-js/recoder.js' %}?ver=2"></script>
-  <script src="{% static 'js/index-js/order-list.js' %}?ver=2"></script>
+  <script src="{% static 'js/index-js/order-list.js' %}?ver=3"></script>
   <script src="{% static 'js/index-js/order-list-to-purchase-page.js' %}?ver=4"></script>
+  <script>
+    var m_list = []
+    {% for m in menu_list %}
+    m_list.push(["{{ m.M_menu_name }}", "{{ m.M_price }}", "{{ m.M_image }}"]);
+    // console.log(m_list[0][0])
+    {% endfor %}
+    menu_burger.onclick = () => {
+      adjust_table("버거", {{ menu_list| length }}, m_list);
+      };
 
+  </script>
 </body>
 
 </html>
