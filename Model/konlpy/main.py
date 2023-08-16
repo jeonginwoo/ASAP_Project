@@ -1,6 +1,5 @@
 #pip install konlpy 하시면 됩니다
 from konlpy.tag import Kkma
-from konlpy.utils import pprint
 from hanspell import spell_checker
 import re
 kkma = Kkma()
@@ -69,8 +68,13 @@ etc = ['영양소','영양성분','알레르기','가격','정보','상세정보
 cat = ['M','S','DD','햄버거','버거','사이드','디저트','음료수','아이스크림']
 eve = ham+side+drink+neu+al+ing+sau+pat+etc+cat
 
+def replace_multiple_words(text):
+    for old_word, new_word in replacements.items():
+        text = text.replace(old_word, new_word)
+    return text
+
 def toQuery(a):
-    a = replace_multiple_words(a, replacements)
+    a = replace_multiple_words(a)
     m = kkma.morphs(a) # 형태소 추출
     n = kkma.nouns(a) # 명사만 추출
 
@@ -128,7 +132,7 @@ def toQuery(a):
                 re1.append('i') # 정보
             elif i in sb:
                 re1.append('0') # 빼는거
-            else : print('어라' + g) # 혹시 오류
+            else : print('어라' + 'g') # 혹시 오류
     print('re1')
     print(re1) # 첫 결과
 

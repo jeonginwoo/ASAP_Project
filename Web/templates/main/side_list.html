@@ -1,0 +1,65 @@
+{% if side_list %}
+<ul>
+    {% for side in side_list %}
+    <div style="display: inline-block;">
+        <table frame="below" cellpadding="10">
+            <caption>
+                <h3>{{ side.S_menu_name }}</h3>
+            </caption>
+            <tbody>
+                {############ 기본 정보 ############}
+                <tr>
+                    <td rowspan="10" valign="top">
+                        {% if side.S_image %}
+                        <img src="{{ side.S_image.url }}" alt="이미지를 불러오지 못했습니다" height="150px" />
+                        {% endif %}
+                    </td>
+                    <th align="right" valign="top">가격</th>
+                    <td width="300px">{{ side.S_price }}원</td>
+                </tr>
+                <tr>
+                    <th align="right" valign="top">정보</th>
+                    <td>{{ side.S_info }}</td>
+                </tr>
+                <tr>
+                    <th align="right" valign="top">인기 순위</th>
+                    <td>{{ side.S_rank }}</td>
+                </tr>
+                <tr>
+                    <th align="right" valign="top">맵기</th>
+                    <td>{{ side.S_spicy }}단계</td>
+                </tr>
+                <tr>
+                    {############ 영양 성분 ############}
+                    <th align="right" valign="top">영양 성분</th>
+                    <td>
+                        칼로리 : {{ side.N_calories }}<br />
+                        단백질 : {{ side.N_protein }}<br />
+                        나트륨 : {{ side.N_sodium }}<br />
+                        설탕 : {{ side.N_sugars }}<br />
+                        포화지방 : {{ side.N_saturated_fat }}<br />
+                    </td>
+                </tr>
+                <tr>
+                    {############ 알레르기 ############}
+                    <th align="right" valign="top">알레르기</th>
+                    <td>
+                        {% if side.A_milk %} 우유<br /> {% endif %}
+                        {% if side.A_chicken %} 치킨<br /> {% endif %}
+                        {% if side.A_pork %} 돼지<br /> {% endif %}
+                        {% if side.A_beef %} 소<br /> {% endif %}
+                        {% if side.A_egg %} 난류<br /> {% endif %}
+                        {% if side.A_squid %} 오징어<br /> {% endif %}
+                        {% if side.A_tomato %} 토마토<br /> {% endif %}
+                        {% if side.A_clam %} 조개<br /> {% endif %}
+                        {% if side.A_shrimp %} 새우<br /> {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</ul>
+{% else %}
+<p>메뉴가 없습니다.</p>
+{% endif %}
