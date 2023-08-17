@@ -1,0 +1,20 @@
+DD_meue_name,DD_price,DD_image,DD_info,DD_rank,DD_spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,N_caffeine,A_milk,A_Chicken,A_pork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp,A_peach
+망고 선데,2300,Drink&Dessert/망고_선데.png,여름을 더욱 프루티하게! 망고가 버거킹 선데에 빠졌다!,1,0,179,2,61,34,2,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+초코 망고 선데,2500,Drink&Dessert/초코_망고_선데.png,여름을 더욱 프루티하게! 망고가 버거킹 선데에 빠졌다!,2,0,246,3,92,45,2,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+레드애플맛제로,2200,Drink&Dessert/레드애플맛제로.png,"괜찮아, 제로니까! 제로슈가로 즐기는 새콤달콤함~",3,0,40,0.2,77,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+레몬라임맛제로,2200,Drink&Dessert/레몬라임맛제로.png,"괜찮아, 제로니까! 제로슈가로 즐기는 새콤달콤함~",4,0,39,0.1,44,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+컵 망고 아이스크림,1300,Drink&Dessert/컵_망고_아이스크림.png,여름을 더욱 프루티하게! 망고가 버거킹 컵 아이스크림에 빠졌다!,5,0,131,2,45,25,1,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+아메리카노,1500,Drink&Dessert/아메리카노.png,자연을 담은 버거킹 RA인증커피,6,0,6,0,0,0,0,85.3,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+아이스 아메리카노,1500,Drink&Dessert/아이스아메리카노.png,자연을 담은 버거킹 RA인증커피,7,0,5,0,0,0,0,124,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+핫초코,2000,Drink&Dessert/핫초코.png,"달콤한 초코, 따뜻하게 즐기세요!",8,0,210,2,86,23,4,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+아이스초코,2000,Drink&Dessert/아이스초코.png,"달콤한 초코, 시원하게 즐기세요!",9,0,253,3,75,31,4.3,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+코카콜라(L),2200,Drink&Dessert/코카콜라.png,코카-콜라로 더 짜릿하게!,10,0,215,0,22,55.9,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+코카콜라(R),2000,Drink&Dessert/코카콜라.png,코카-콜라로 더 짜릿하게!,11,0,150,0,15,39.1,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+코카콜라 제로(L),2200,Drink&Dessert/코카콜라_제로.png,"100% 짜릿함, 칼로리는 제로!",12,0,0,0,43,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+코카콜라 제로(R),2000,Drink&Dessert/코카콜라_제로.png,"100% 짜릿함, 칼로리는 제로!",13,0,0,0,30,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+스프라이트(L),2200,Drink&Dessert/스프라이트.png,나를 깨우는 상쾌함!,14,0,237,0,32,60.2,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+스프라이트(R),2000,Drink&Dessert/스프라이트.png,나를 깨우는 상쾌함!,15,0,165,0,23,42.1,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+스프라이트 제로(R),2000,Drink&Dessert/스프라이트_제로.png,제대로 상쾌한 맛남 스프라이트 제로!,16,0,0,0,64,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+스프라이트 제로(L),2200,Drink&Dessert/스프라이트_제로.png,제대로 상쾌한 맛남 스프라이트 제로!,17,0,0,0,91,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+미닛메이드 오렌지,2800,Drink&Dessert/미닛메이드_오렌지.png,미닛메이드 오렌지,18,0,172,0,11,36,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+순수(미네랄워터),1300,Drink&Dessert/순수(미네랄워터).png,순수(미네랄워터),19,0,0,0,0,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE

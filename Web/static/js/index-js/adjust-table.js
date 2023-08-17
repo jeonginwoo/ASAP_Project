@@ -12,30 +12,35 @@ const table_body = table.querySelector('#table_body');
  * @param {*Array} menu_list
  */
 function adjust_table(menu_type, menu_count, menu_list) {
+    console.log(menu_type, menu_count, menu_list);
+
     table_head.innerHTML = "<tr>" + "<th colspan='3' scope='col'>" + menu_type + " 메뉴" + "</th>" + "</tr>";
-    
+
+
     let html_text = '';
 
-    for(let i = 0; i < menu_count; i++){
+
+    for (let i = 0; i < menu_count; i++) {
         if (i % 3 === 0) {
             if (i === 0) {
                 html_text += '<tr><td>';
-                // html_text += menu_type + menu_list[i];
-                html_text += menu_type + String(i + 1);
+                html_text += menu_list[i][0] + menu_list[i][1] + "<img src=" + "static/img/BURGERKING_MENU/" + menu_list[i][2] + " alt='이미지를 불러오지 못했습니다' height='150px' />";
+                // html_text += menu_type + String(i + 1);
                 html_text += '</td>';
             }
             else {
                 html_text += '</tr><tr>';
                 html_text += '<td>';
-                // html_text += menu_type + menu_list[i];
-                html_text += menu_type + String(i + 1);
+                html_text += menu_list[i][0] + menu_list[i][1] + "<img src=" + "static/img/BURGERKING_MENU/" + menu_list[i][2] + " alt='이미지를 불러오지 못했습니다' height='150px' />";
+
+                //html_text += menu_type + String(i + 1);
                 html_text += '</td>';
             }
         }
         else {
             html_text += '<td>';
-            // html_text += menu_type + menu_list[i];
-            html_text += menu_type + String(i + 1);
+            html_text += menu_list[i][0] + menu_list[i][1] + "<img src=" + "static/img/BURGERKING_MENU/" + menu_list[i][2] + " alt='이미지를 불러오지 못했습니다' height='150px' />";
+            //html_text += menu_type + String(i + 1);
             html_text += '</td>';
         }
 
@@ -47,9 +52,7 @@ function adjust_table(menu_type, menu_count, menu_list) {
     table_body.innerHTML = html_text;
 }
 
-menu_burger.onclick = () => {
-    adjust_table('버거', 10, []);
-};
+
 
 menu_side.onclick = () => {
     adjust_table('사이드', 17, []);
