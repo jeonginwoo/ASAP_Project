@@ -72,7 +72,7 @@ ing = ['치즈','슬라이스치즈','슈레디드치즈','피클','할라피뇨
 sau = ['마요','마요네즈','마요네즈소스','불고기','불고기소스','바베큐','바베큐소스','케찹','케찹소스','디아블로','디아블로소스',
       '매운토마토','매운토마토소스','치즈소스','타르타르','타르타르소스','베이컨잼','베이컨잼소스','머스타드','머스타드소스']
 pat = ['소고기','비프','새우','쉬림프','슈림프','치킨','닭','스테이크']
-etc = ['영양소','영양성분','알레르기','가격','정보','상세정보','맵기','맵','안맵','nutrition_info','allergy','n','a','price','info','spicy']
+etc = ['영양소','영양성분','알레르기','가격','정보','상세정보','맵기','맵','안맵','nutrition_info','allergy','N','A','price','info','spicy']
 cat = ['M','S','DD','햄버거','버거','사이드','디저트','음료수','아이스크림']
 eve = ham+side+drink+neu+al+ing+sau+pat+etc+cat
 
@@ -86,7 +86,7 @@ def toQuery(a):
     m = kkma.morphs(a) # 형태소 추출
     n = kkma.nouns(a) # 명사만 추출
 
-    print('원래 문장 : ' + a)
+    #print('원래 문장 : ' + a)
 
 
 
@@ -118,15 +118,15 @@ def toQuery(a):
             tmp=tmp[:len(tmp)-len(m[i])]
     if full!='' : mor.append(full)
 
-    print('mor')
-    print(mor)
+    #print('mor')
+    #print(mor)
         
         
         
     re1 = [] # 결과
     sg = ['추가','넣', '들어가', '좋', '들어가', '듣', '있'] # 주문 - 추가 키워드
     si = [] # 주문 - 들어가는 키워드
-    sb = ['없', '빼주', '빼', '싫'] # 주문 - 빼는
+    sb = ['없', '빼주', '빼', '싫','안'] # 주문 - 빼는
     en = ['에', '에다', '에다가'] # 공백 키워드
 
     #주문 토큰화
@@ -140,7 +140,7 @@ def toQuery(a):
                 re1.append('i') # 정보
             elif i in sb:
                 re1.append('0') # 빼는거
-            else : print('어라' + 'g') # 혹시 오류
+            #else : print('어라' + 'g') # 혹시 오류
     print('re1')
     print(re1) # 첫 결과
 
@@ -163,14 +163,14 @@ def toQuery(a):
         else : tmp += (i + ' ') # 그 이외 (명사)는 추가
     if tmp!='' : re2.append('1 ' + tmp)
 
-    print(re2)
+    #print(re2)
 
 
     re3 = []
     for i in range(len(re2)):
         how = ''
         for j in re2[i].split():
-            if j in neu+cat: 
+            if j in neu+cat+['A','N']: 
                 re3.append(j)
             elif j in ham+side+drink:
                 if j in ham: what = 'M'
