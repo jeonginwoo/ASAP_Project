@@ -65,7 +65,7 @@ class BurgerTable(models.Model):
     P_steak = models.IntegerField(default=0, verbose_name='패티 : 스테이크')
 
     def __str__(self):
-        return self.M_menu_name
+        return self.menu_name
 
 
 class SideTable(models.Model):
@@ -96,7 +96,7 @@ class SideTable(models.Model):
     A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
 
     def __str__(self):
-        return self.S_menu_name
+        return self.menu_name
 
 
 class DDTable(models.Model):    # Drink & Dessert
@@ -129,4 +129,4 @@ class DDTable(models.Model):    # Drink & Dessert
     A_peach = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 복숭아')
 
     def __str__(self):
-        return self.DD_menu_name
+        return self.menu_name

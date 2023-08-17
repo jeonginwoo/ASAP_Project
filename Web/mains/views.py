@@ -76,24 +76,27 @@ def testDD(request):
 
 def testQuery(request):
     d = {}
-    a = ['M_menu_list "헬로 디아블로 와퍼"', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
+    a = ['M_menu_list 헬로_디아블로_와퍼', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
     for i in a:
         j = i.split()
+        j[1] = j[1].replace('_', ' ')
         d[j[0]] = j[1]
 
+    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 모두 찾기.
+
     if 'M_menu_list' in d:
-        menu_list = BurgerTable.objects.get(M_menu_list=d['M_menu_list'])
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
         context = {'menu_list':menu_list}
-        return render(request, 'main/testRecommend.html', context)
+        return render(request, 'main/testQuery.html', context)
     elif 'S_menu_list' in d:
-        menu_list = SideTable.objects.get(S_menu_list=d['S_menu_list'])
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
         context = {'menu_list':menu_list}
-        return render(request, 'main/testRecommend.html', context)
+        return render(request, 'main/testQuery.html', context)
     elif 'DD_menu_list' in d:
-        menu_list = DDTable.objects.get(DD_menu_list=d['DD_menu_list'])
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
         context = {'menu_list':menu_list}
-        return render(request, 'main/testRecommend.html', context)
+        return render(request, 'main/testQuery.html', context)
     else:
         menu_list = BurgerTable.objects.filter()
         context = {'menu_list':menu_list}

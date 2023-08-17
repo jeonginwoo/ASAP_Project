@@ -5,7 +5,7 @@ import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings")
 
-from mains.models import MenuTable, SideTable, DDTable
+from mains.models import BurgerTable, SideTable, DDTable
 
 def insert_Menu():
     with open('C:/Projects/ASAP_Project/Data/버거단품_CSV.csv', encoding = 'utf-8') as csv_file:
@@ -25,7 +25,7 @@ def insert_Menu():
                         else:
                             row[i] = False
 
-                    menu = MenuTable(
+                    menu = BurgerTable(
                         M_menu_name=row[0],
                         M_price=row[1],
                         M_image=row[2],
