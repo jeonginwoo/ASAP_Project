@@ -10,9 +10,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+#Ko Bert 경로 추가
 from pathlib import Path
 import os
 from transformers import pipeline
+
+# 튜닝한 Whisper Model 가져오기
+transcriber = pipeline(
+    "automatic-speech-recognition",
+    model="JorangHorse/whisper-base",
+    
+)
+transcriber.model.config.forced_decoder_ids = (
+    transcriber.tokenizer.get_decoder_prompt_ids(
+        language="ko",
+        task="transcribe"
+    )
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +58,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+''' 
+Ko Bert사용 예시
+kk = Ko_Bert()
+a = kk.start('버거 추천해줘')
+a = 0 or 1 or....11
+'''
 # Application definition
 
 INSTALLED_APPS = [

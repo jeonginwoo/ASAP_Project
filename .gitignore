@@ -2,6 +2,7 @@
 config/__pycache__
 */__pycache__
 migrations/
+bert-kor-base.pth
 # Created by https://www.toptal.com/developers/gitignore/api/macos,python,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,python,django
 
@@ -16,6 +17,8 @@ db.sqlite3-journal
 media
 asap/
 asap
+test_record_data.mp3
+py-hanspell-master
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
 # <django-project-name>/staticfiles/

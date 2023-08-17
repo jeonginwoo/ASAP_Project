@@ -7,16 +7,16 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     .then((stream) => {
         const mediaRecorder = new MediaRecorder(stream);    // 음성 녹음을 위해 MediaRecoder에 마이크 연결
 
-        record.onclick = () => {
-            if (!isRecording){
-                let chunks = [];
+            record.onclick = () => {
+                if (!isRecording) {
+                    let chunks = [];
 
-                mediaRecorder.ondataavailable = async (event) => {
-                    chunks.push(event.data);
-                };
+                    mediaRecorder.ondataavailable = async (event) => {
+                        chunks.push(event.data);
+                    };
 
-                mediaRecorder.onstop = (event) => {
-                    const recordData = new Blob(chunks, {"type": "audio/mpeg codecs=opus"});
+                    mediaRecorder.onstop = (event) => {
+                        const recordData = new Blob(chunks, { "type": "audio/mpeg codecs=opus" });
 
                     fetch('http://127.0.0.1:8000/main/speechrecognize/', {
                         method: "POST",
@@ -38,22 +38,22 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     });
                 };
 
-                mediaRecorder.start(1000);
-                isRecording = true;
+                    mediaRecorder.start(1000);
+                    isRecording = true;
 
-                record.style.background = "red";
-                record.style.color = "black";
+                    record.style.background = "red";
+                    record.style.color = "black";
 
-                setTimeout(() => {
-                    if (mediaRecorder.state = 'recording') {
-                        mediaRecorder.stop();
+                    setTimeout(() => {
+                        if (mediaRecorder.state = 'recording') {
+                            mediaRecorder.stop();
 
-                        record.style.background = "";
-                        record.style.color = "";
-                    };
+                            record.style.background = "";
+                            record.style.color = "";
+                        };
 
                     isRecording = false;
-                }, 5000)
+                }, 3000)
             }
         }
     }).catch((err) => {
