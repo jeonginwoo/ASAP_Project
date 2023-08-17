@@ -1,22 +1,22 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import MenuTable
-from .serializers import MenuSerializer
+from .models import BurgerTable, SideTable, DDTable
+#from .serializers import MenuSerializer
 from django.http import JsonResponse
 import json
 
 def index(request):
     return render(request, 'main/index.html')
 
-class MenuDetailView(APIView):
-    def get(self,request,menu_key):
-        try:
-            menu = Menu.objects.get(name=menu_key)
-            serializer = MenuSerializer(menu)
-            return Response(serializer.data)
-        except Menu.DoesNotExist:
-            return Response({"error" : "Menu not found"}, status= 404)
+# class MenuDetailView(APIView):
+#     def get(self,request,menu_key):
+#         try:
+#             menu = Menu.objects.get(name=menu_key)
+#             serializer = MenuSerializer(menu)
+#             return Response(serializer.data)
+#         except Menu.DoesNotExist:
+#             return Response({"error" : "Menu not found"}, status= 404)
 
 # 결제 페이지 이동
 def purchase(request):
@@ -56,7 +56,52 @@ def textInput(request):
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
-def testTable(request):
-    menu_list = MenuTable.objects.all()
-    context = {'menu_list': menu_list}
-    return render(request, 'main/menu_list.html', context)
+def testBurger(request):
+    print(request)
+    burger_list = BurgerTable.objects.all()
+    context = {'burger_list': burger_list}
+    return render(request, 'main/list/burger_list.html', context)
+
+def testSide(request):
+    print(request)
+    side_list = SideTable.objects.all()
+    context = {'side_list': side_list}
+    return render(request, 'main/list/side_list.html', context)
+
+def testDD(request):
+    print(request)
+    dd_list = DDTable.objects.all()
+    context = {'dd_list': dd_list}
+    return render(request, 'main/list/dd_list.html', context)
+
+def testQuery(request):
+    d = {}
+    a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
+
+    for i in a:
+        j = i.split()
+        j[1] = j[1].replace('_', ' ')
+        d[j[0]] = j[1]
+
+    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
+    # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
+
+    # 특정 메뉴 찾기
+    if 'M_menu_list' in d:
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'S_menu_list' in d:
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'DD_menu_list' in d:
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    
+    # 특정 메뉴가 아닌 경우 추천
+    else:
+        menu_list = BurgerTable.objects.filter()
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
