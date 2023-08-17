@@ -1,4 +1,7 @@
 #pip install konlpy 하시면 됩니다
+#https://github.com/ssut/py-hanspell
+#노션-ASAP프로젝트-GPT 안에 DataSet 아래에 kkma-2.0.zip 다운 받고 압축 해제하면 kkma-2.0.jar 나옴
+#......\Lib\site-packages\konlpy\java 파일 들어가면 kkma-2.0.jar 있는데 압축 해제한거로 대체하면 단어 인식 훨씬 잘해줌
 from konlpy.tag import Kkma
 from hanspell import spell_checker
 import re
@@ -33,6 +36,11 @@ replacements = {
     # 다른 단어들도 필요하다면 추가로 정의할 수 있습니다.
 }
 
+queryName = {'헬로디아블로와퍼':'헬로_디아블로_와퍼', '헬로릴리트와퍼':'헬로_릴리트_와퍼','헬로이나리우스와퍼':'헬로_이나리우스_와퍼',
+            '구운갈릭시즈닝':'구운갈릭_시즈닝', '스윗어니언시즈닝':'스윗어니언_시즈닝','매콤치즈시즈닝':'매콤치즈_시즈닝',
+            '망고선데':'망고_선데','초코망고선데':'초코_망고_선데','컵망고아이스크림':'컵_망고_아이스크림','코카콜라 제로':'코카콜라_제로',
+            '스프라이트제로':'스프라이트_제로','미닛메이드오렌지':'미닛메이드_오렌지'}
+
 toQ = {'칼로리': 'N_calories','포화지방': 'N_saturated_fat','단백질': 'N_protein','당': 'N_sugars','설탕': 'N_sugars','나트륨': 'N_sodium','카페인':'N_caffeine',
        '우유알레르기': 'A_milk','치킨알레르기': 'A_Chicken','돼지고기알레르기': 'A_pork','돼지알레르기': 'A_pork','소고기알레르기': 'A_beef','소알레르기':'A_beef',
        '비프알레르기': 'A_beef','계란알레르기': 'A_egg','달걀알레르기': 'A_egg','오징어알레르기': 'A_squid','토마토알레르기': 'A_tomato',
@@ -52,8 +60,8 @@ ham = ['와퍼','치즈와퍼','불고기와퍼','갈릭불고기와퍼','콰트
         '치킨버거','슈림프버거','통새우슈림프버거','비프슈림프버거','블랙바비큐콰트로치즈와퍼','블랙바비큐와퍼',
         '비프불고기버거','비프앤슈림프버거','비프&슈림프버거','몬스터와퍼','몬스터X','더블비프불고기버거','더블오리지날치즈버거',
       '치킨와퍼']
-side = ['해쉬브라운','너겟킹','치즈스틱','어니언링','바삭킹','쉐이킹프라이','크리미모짜볼','코코넛슈림프','21치즈스틱',
-        '치즈프라이','프렌치프라이','코울슬로','콘샐러드','디아블로소스','스위트칠리소스','구운갈릭시즈닝','스윗어니언시즈닝','매콤치즈시즈닝']
+side = ['너겟킹','치즈스틱','어니언링','바삭킹','쉐이킹프라이','크리미모짜볼','코코넛슈림프','21치즈스틱',
+        '치즈프라이','프렌치프라이','코울슬로','콘샐러드','구운갈릭시즈닝','스윗어니언시즈닝','매콤치즈시즈닝']
 drink = ['망고선데','초코망고선데','레드애플맛제로','레몬라임맛제로','컵망고아이스크림','아메리카노','아이스아메리카노','핫초코','아이스초코','코카콜라',
         '코카콜라제로','스프라이트','스프라이트제로','미닛메이드오렌지','순수','순수(미네랄워터)']
 neu = ['칼로리','열량','포화지방','단백질','당','설탕','나트륨','카페인', 
@@ -164,15 +172,12 @@ def toQuery(a):
         for j in re2[i].split():
             if j in neu+cat: 
                 re3.append(j)
-            elif j in ham : 
-                re3.append('M_menu_name ' + j)
-                what = 'M'
-            elif j in side:
-                re3.append('S_menu_name ' + j)
-                what = 'S'
-            elif j in drink:
-                re3.append('DD_menu_name ' + j)
-                what = 'DD'
+            elif j in ham+side+drink:
+                if j in ham: what = 'M'
+                elif j in side : what = 'S'
+                elif j in drink : what = 'DD'
+                if j in queryName: j = queryName[j]
+                re3.append(what + '_menu_name ' + j)
             elif j in etc:
                 if j == '맵': re3.append(what + '_spicy' + ' 1')
                 elif j == '안맵': re3.append(what + '_spicy' + ' 0')
