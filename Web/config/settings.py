@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+#Ko Bert 경로 추가
 from pathlib import Path
 import os
 from transformers import pipeline
@@ -41,7 +42,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+''' 
+Ko Bert사용 예시
+kk = Ko_Bert()
+a = kk.start('버거 추천해줘')
+a = 0 or 1 or....11
+'''
 # Application definition
 
 INSTALLED_APPS = [
