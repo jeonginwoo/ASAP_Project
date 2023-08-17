@@ -60,19 +60,19 @@ def testBurger(request):
     print(request)
     burger_list = MenuTable.objects.all()
     context = {'burger_list': burger_list}
-    return render(request, 'main/burger_list.html', context)
+    return render(request, 'main/list/burger_list.html', context)
 
 def testSide(request):
     print(request)
     side_list = SideTable.objects.all()
     context = {'side_list': side_list}
-    return render(request, 'main/side_list.html', context)
+    return render(request, 'main/list/side_list.html', context)
 
 def testDD(request):
     print(request)
     dd_list = DDTable.objects.all()
     context = {'dd_list': dd_list}
-    return render(request, 'main/dd_list.html', context)
+    return render(request, 'main/list/dd_list.html', context)
 
 def menuQuery(request):
     a = ['0 S_bulgogi', '1 I_sliced_cheese', '1 I_shredded_cheese']
