@@ -10,7 +10,7 @@ class CustomBertModel(nn.Module):
         # dropout 설정
         self.dr = nn.Dropout(p=dropout_rate)
         # 최종 출력층 정의
-        self.fc = nn.Linear(768, 11)
+        self.fc = nn.Linear(768, 12)
 
     def forward(self, input_ids, attention_mask, token_type_ids):
         # 입력을 pre-trained bert model 로 대입
