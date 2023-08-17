@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import MenuTable, SideTable, DDTable
+from .models import BurgerTable, SideTable, DDTable
 #from .serializers import MenuSerializer
 from django.http import JsonResponse
 import json
@@ -9,14 +9,14 @@ import json
 def index(request):
     return render(request, 'main/index.html')
 
-class MenuDetailView(APIView):
-    def get(self,request,menu_key):
-        try:
-            menu = Menu.objects.get(name=menu_key)
-            serializer = MenuSerializer(menu)
-            return Response(serializer.data)
-        except Menu.DoesNotExist:
-            return Response({"error" : "Menu not found"}, status= 404)
+# class MenuDetailView(APIView):
+#     def get(self,request,menu_key):
+#         try:
+#             menu = Menu.objects.get(name=menu_key)
+#             serializer = MenuSerializer(menu)
+#             return Response(serializer.data)
+#         except Menu.DoesNotExist:
+#             return Response({"error" : "Menu not found"}, status= 404)
 
 # 결제 페이지 이동
 def purchase(request):
@@ -58,7 +58,7 @@ def textInput(request):
 
 def testBurger(request):
     print(request)
-    burger_list = MenuTable.objects.all()
+    burger_list = BurgerTable.objects.all()
     context = {'burger_list': burger_list}
     return render(request, 'main/list/burger_list.html', context)
 
@@ -74,25 +74,27 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def menuQuery(request):
-    a = ['0 S_bulgogi', '1 I_sliced_cheese', '1 I_shredded_cheese']
-    d = {'M_menu_list':'이름'}
+def testQuery(request):
+    d = {}
+    a = ['M_menu_list "헬로 디아블로 와퍼"', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
+
+    for i in a:
+        j = i.split()
+        d[j[0]] = j[1]
 
     if 'M_menu_list' in d:
-        menu_list = MenuTable.objects.get(M_menu_list=d['M_menu_list'])
+        menu_list = BurgerTable.objects.get(M_menu_list=d['M_menu_list'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testRecommend.html', context)
     elif 'S_menu_list' in d:
-        side_list = SideTable.objects.get(S_menu_list=d['S_menu_list'])
-        context = {'side_list':side_list}
+        menu_list = SideTable.objects.get(S_menu_list=d['S_menu_list'])
+        context = {'menu_list':menu_list}
         return render(request, 'main/testRecommend.html', context)
     elif 'DD_menu_list' in d:
-        DD_list = DDTable.objects.get(DD_menu_list=d['DD_menu_list'])
-        context = {'DD_list':DD_list}
+        menu_list = DDTable.objects.get(DD_menu_list=d['DD_menu_list'])
+        context = {'menu_list':menu_list}
         return render(request, 'main/testRecommend.html', context)
     else:
-        menu_list = MenuTable.objects.all()
-        side_list = SideTable.objects.all()
-        DD_list = DDTable.objects.all()
-        context = {'menu_list':DD_list, 'side_list':side_list, 'DD_list':DD_list}
-        return render(request, 'main/testRecommend.html', context)
+        menu_list = BurgerTable.objects.filter()
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)

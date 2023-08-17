@@ -4,30 +4,30 @@
     <div style="display: inline-block;">
         <table frame="below" cellpadding="10">
             <caption>
-                <h3>{{ dd.DD_menu_name }}</h3>
+                <h3>{{ dd.menu_name }}</h3>
             </caption>
             <tbody>
                 {############ 기본 정보 ############}
                 <tr>
                     <td rowspan="10" valign="top">
-                        {% if dd.DD_image %}
-                        <img src="{{ dd.DD_image.url }}" alt="이미지를 불러오지 못했습니다" height="150px" />
+                        {% if dd.image %}
+                        <img src="{{ dd.image.url }}" alt="이미지를 불러오지 못했습니다" height="150px" />
                         {% endif %}
                     </td>
                     <th align="right" valign="top">가격</th>
-                    <td width="300px">{{ dd.DD_price }}원</td>
+                    <td width="300px">{{ dd.price }}원</td>
                 </tr>
                 <tr>
                     <th align="right" valign="top">정보</th>
-                    <td>{{ dd.DD_info }}</td>
+                    <td>{{ dd.info }}</td>
                 </tr>
                 <tr>
                     <th align="right" valign="top">인기 순위</th>
-                    <td>{{ dd.DD_rank }}</td>
+                    <td>{{ dd.rank }}</td>
                 </tr>
                 <tr>
                     <th align="right" valign="top">맵기</th>
-                    <td>{{ dd.DD_spicy }}단계</td>
+                    <td>{{ dd.spicy }}단계</td>
                 </tr>
                 <tr>
                     {############ 영양 성분 ############}
