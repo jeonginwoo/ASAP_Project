@@ -58,7 +58,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         };
 
                         isRecording = false;
-                    }, 2000)
+                    }, 3000)
                 };
             };
         }).catch((err) => {

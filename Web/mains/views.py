@@ -5,7 +5,12 @@ from .models import MenuTable, SideTable, DDTable
 #from .serializers import MenuSerializer
 from django.http import JsonResponse
 from config.settings import transcriber
+from Model.Ko_Bert.main import *
+from Model.Ko_Bert.CustomBertModel import *
+from Model.Ko_Bert.CustomPredictor import *
 import json
+
+
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
@@ -36,6 +41,7 @@ def speechRecognition(request):
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
+        inputBert(transcription['text'])
 
 
         data = {"message": "Response OK!"}
@@ -103,3 +109,9 @@ def menuQuery(request):
         DD_list = DDTable.objects.all()
         context = {'menu_list':DD_list, 'side_list':side_list, 'DD_list':DD_list}
         return render(request, 'main/testRecommend.html', context)
+
+def inputBert(text_file):
+    k = Ko_Bert()
+    result = k.start(text_file)
+    print(result)
+    return result
