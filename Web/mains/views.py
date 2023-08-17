@@ -8,13 +8,14 @@ from config.settings import transcriber
 from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
+from Model.konlpy.main import *
 import json
 
 
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
-    menu_list = MenuTable.objects.all().values('M_menu_name','M_price','M_image').order_by('M_rank')[:6]
+    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
     context = {'menu_list': menu_list}
     return render(request, 'main/index.html',context)
 
@@ -42,6 +43,7 @@ def speechRecognition(request):
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
         inputBert(transcription['text'])
+        inputKonlp(transcription['text'])
 
 
         data = {"message": "Response OK!"}
@@ -124,3 +126,9 @@ def inputBert(text_file):
     result = k.start(text_file)
     print(result)
     return result
+
+def inputKonlp(text_file):
+    nlp_result = toQuery(text_file)
+    print(nlp_result)
+    return nlp_result
+

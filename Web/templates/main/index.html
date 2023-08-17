@@ -46,21 +46,26 @@
       font-size: 13px;
       font-weight: bold;
     }
-    #answer{
+
+    #answer {
       background-color: #F9F4E5;
       /* border: 1px solid #000000;  */
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      /* 그림자 추가 */
       height: 100px;
       margin: 10px;
       padding: 8px;
       overflow: auto;
     }
-    #speak{
+
+    #speak {
       background-color: #F9F4E5;
       border: none;
       outline: none;
-      resize: none; /* 크기 조정 비활성화 */
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+      resize: none;
+      /* 크기 조정 비활성화 */
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      /* 그림자 추가 */
       height: 100px;
       width: 99%;
       margin: 10px;
@@ -92,20 +97,25 @@
 
     /* 웹킷 브라우저용 스크롤 바 스타일 */
     .scroll-bar-style::-webkit-scrollbar {
-      width: 10px; /* 스크롤 바 너비 */
+      width: 10px;
+      /* 스크롤 바 너비 */
     }
 
     .scroll-bar-style::-webkit-scrollbar-thumb {
-      background-color: #888; /* 스크롤 바 썸네일 색상 */
-      border-radius: 5px; /* 썸네일 둥글기 */
+      background-color: #888;
+      /* 스크롤 바 썸네일 색상 */
+      border-radius: 5px;
+      /* 썸네일 둥글기 */
     }
 
     .scroll-bar-style::-webkit-scrollbar-thumb:hover {
-      background-color: #555; /* 스크롤 바 썸네일 호버 시 색상 */
+      background-color: #555;
+      /* 스크롤 바 썸네일 호버 시 색상 */
     }
 
     .scroll-bar-style::-webkit-scrollbar-track {
-      background-color: none; /* 스크롤 바 트랙 색상 */
+      background-color: none;
+      /* 스크롤 바 트랙 색상 */
     }
   </style>
 </head>
@@ -208,7 +218,7 @@
   <script>
     var m_list = []
     {% for m in menu_list %}
-    m_list.push(["{{ m.M_menu_name }}", "{{ m.M_price }}", "{{ m.M_image }}"]);
+    m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
     // console.log(m_list[0][0])
     {% endfor %}
     menu_burger.onclick = () => {

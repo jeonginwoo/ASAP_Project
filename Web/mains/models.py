@@ -100,7 +100,7 @@ class SideTable(models.Model):
 
 
 class DDTable(models.Model):    # Drink & Dessert
-    # base information
+    # base informations
     menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
     price = models.IntegerField(default=5000, verbose_name='가격')
     image = models.ImageField(verbose_name='이미지', null=True, blank=True)
@@ -130,3 +130,4 @@ class DDTable(models.Model):    # Drink & Dessert
 
     def __str__(self):
         return self.menu_name
+    
