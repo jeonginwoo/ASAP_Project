@@ -76,15 +76,17 @@ def testDD(request):
 
 def testQuery(request):
     d = {}
-    a = ['M_menu_list 헬로_디아블로_와퍼', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
+    a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
 
     for i in a:
         j = i.split()
         j[1] = j[1].replace('_', ' ')
         d[j[0]] = j[1]
 
-    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 모두 찾기.
+    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
+    # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
+    # 특정 메뉴 찾기
     if 'M_menu_list' in d:
         menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
         context = {'menu_list':menu_list}
@@ -97,6 +99,8 @@ def testQuery(request):
         menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
+    
+    # 특정 메뉴가 아닌 경우 추천
     else:
         menu_list = BurgerTable.objects.filter()
         context = {'menu_list':menu_list}
