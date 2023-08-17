@@ -36,6 +36,11 @@ replacements = {
     # 다른 단어들도 필요하다면 추가로 정의할 수 있습니다.
 }
 
+queryName = {'헬로디아블로와퍼':'헬로_디아블로_와퍼', '헬로릴리트와퍼':'헬로_릴리트_와퍼','헬로이나리우스와퍼':'헬로_이나리우스_와퍼',
+            '구운갈릭시즈닝':'구운갈릭_시즈닝', '스윗어니언시즈닝':'스윗어니언_시즈닝','매콤치즈시즈닝':'매콤치즈_시즈닝',
+            '망고선데':'망고_선데','초코망고선데':'초코_망고_선데','컵망고아이스크림':'컵_망고_아이스크림','코카콜라 제로':'코카콜라_제로',
+            '스프라이트제로':'스프라이트_제로','미닛메이드오렌지':'미닛메이드_오렌지'}
+
 toQ = {'칼로리': 'N_calories','포화지방': 'N_saturated_fat','단백질': 'N_protein','당': 'N_sugars','설탕': 'N_sugars','나트륨': 'N_sodium','카페인':'N_caffeine',
        '우유알레르기': 'A_milk','치킨알레르기': 'A_Chicken','돼지고기알레르기': 'A_pork','돼지알레르기': 'A_pork','소고기알레르기': 'A_beef','소알레르기':'A_beef',
        '비프알레르기': 'A_beef','계란알레르기': 'A_egg','달걀알레르기': 'A_egg','오징어알레르기': 'A_squid','토마토알레르기': 'A_tomato',
@@ -167,15 +172,12 @@ def toQuery(a):
         for j in re2[i].split():
             if j in neu+cat: 
                 re3.append(j)
-            elif j in ham : 
-                re3.append('M_menu_name ' + j)
-                what = 'M'
-            elif j in side:
-                re3.append('S_menu_name ' + j)
-                what = 'S'
-            elif j in drink:
-                re3.append('DD_menu_name ' + j)
-                what = 'DD'
+            elif j in ham+side+drink:
+                if j in ham: what = 'M'
+                elif j in side : what = 'S'
+                elif j in drink : what = 'DD'
+                if j in queryName: j = queryName[j]
+                re3.append(what + '_menu_name ' + j)
             elif j in etc:
                 if j == '맵': re3.append(what + '_spicy' + ' 1')
                 elif j == '안맵': re3.append(what + '_spicy' + ' 0')
