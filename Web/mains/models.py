@@ -6,14 +6,14 @@ from django.db import models
 #     price = models.IntegerField(verbose_name='가격', default=10000)
 #     calorie = models.FloatField(verbose_name='칼로리', default=100.5)
 
-class MenuTable(models.Model):
+class BurgerTable(models.Model):
     # base information
-    M_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
-    M_price = models.IntegerField(default=5000, verbose_name='가격')
-    M_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
-    M_info = models.TextField(default="맛있다.", verbose_name='정보')
-    M_rank = models.IntegerField(default=99, verbose_name='인기순위')
-    M_spicy = models.IntegerField(default=0, verbose_name='맵기')
+    menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    price = models.IntegerField(default=5000, verbose_name='가격')
+    image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    info = models.TextField(default="맛있다.", verbose_name='정보')
+    rank = models.IntegerField(default=99, verbose_name='인기순위')
+    spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
     N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
@@ -65,17 +65,17 @@ class MenuTable(models.Model):
     P_steak = models.IntegerField(default=0, verbose_name='패티 : 스테이크')
 
     def __str__(self):
-        return self.M_menu_name
+        return self.menu_name
 
 
 class SideTable(models.Model):
     # base information
-    S_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
-    S_price = models.IntegerField(default=5000, verbose_name='가격')
-    S_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
-    S_info = models.TextField(default="맛있다.", verbose_name='정보')
-    S_rank = models.IntegerField(default=99, verbose_name='인기순위')
-    S_spicy = models.IntegerField(default=0, verbose_name='맵기')
+    menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    price = models.IntegerField(default=5000, verbose_name='가격')
+    image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    info = models.TextField(default="맛있다.", verbose_name='정보')
+    rank = models.IntegerField(default=99, verbose_name='인기순위')
+    spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
     N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
@@ -96,17 +96,17 @@ class SideTable(models.Model):
     A_shrimp = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 새우')
 
     def __str__(self):
-        return self.S_menu_name
-    
+        return self.menu_name
+
 
 class DDTable(models.Model):    # Drink & Dessert
     # base information
-    DD_menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
-    DD_price = models.IntegerField(default=5000, verbose_name='가격')
-    DD_image = models.ImageField(verbose_name='이미지', null=True, blank=True)
-    DD_info = models.TextField(default="맛있다.", verbose_name='정보')
-    DD_rank = models.IntegerField(default=99, verbose_name='인기순위')
-    DD_spicy = models.IntegerField(default=0, verbose_name='맵기')
+    menu_name = models.CharField(max_length=25, verbose_name='메뉴명')
+    price = models.IntegerField(default=5000, verbose_name='가격')
+    image = models.ImageField(verbose_name='이미지', null=True, blank=True)
+    info = models.TextField(default="맛있다.", verbose_name='정보')
+    rank = models.IntegerField(default=99, verbose_name='인기순위')
+    spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
     N_calories = models.FloatField(default=0, verbose_name='영양성분 : 칼로리')
@@ -129,4 +129,4 @@ class DDTable(models.Model):    # Drink & Dessert
     A_peach = models.BooleanField(default=False, null=True, verbose_name='알레르기 : 복숭아')
 
     def __str__(self):
-        return self.DD_menu_name
+        return self.menu_name

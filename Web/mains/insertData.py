@@ -5,7 +5,7 @@ import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings")
 
-from mains.models import MenuTable, SideTable, DDTable
+from mains.models import BurgerTable, SideTable, DDTable
 
 def insert_Menu():
     with open('C:/Projects/ASAP_Project/Data/버거단품_CSV.csv', encoding = 'utf-8') as csv_file:
@@ -14,18 +14,18 @@ def insert_Menu():
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
+                    for i in range(11,20):
+                        if row[i] == 'True' or row[i] == 'TRUE':
+                            row[i] = True
+                        else:
+                            row[i] = False
                     for i in range(31,41):
                         if row[i] == 'True' or row[i] == 'TRUE':
-                              row[i] = True
+                            row[i] = True
                         else:
-                             row[i] = False
-                    for i in range(11,20):
-                        if row[i] == 'True':
-                              row[i] = True
-                        else:
-                             row[i] = False
+                            row[i] = False
 
-                    menu = MenuTable(
+                    menu = BurgerTable(
                         M_menu_name=row[0],
                         M_price=row[1],
                         M_image=row[2],
