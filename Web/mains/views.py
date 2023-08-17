@@ -4,10 +4,19 @@ from rest_framework.views import APIView
 from .models import BurgerTable, SideTable, DDTable
 #from .serializers import MenuSerializer
 from django.http import JsonResponse
+from config.settings import transcriber
+from Model.Ko_Bert.main import *
+from Model.Ko_Bert.CustomBertModel import *
+from Model.Ko_Bert.CustomPredictor import *
 import json
 
+
+
 def index(request):
-    return render(request, 'main/index.html')
+    # 첫화면에 보여질 메뉴 설정중
+    menu_list = MenuTable.objects.all().values('M_menu_name','M_price','M_image').order_by('M_rank')[:6]
+    context = {'menu_list': menu_list}
+    return render(request, 'main/index.html',context)
 
 # class MenuDetailView(APIView):
 #     def get(self,request,menu_key):
@@ -30,6 +39,10 @@ def speechRecognition(request):
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
         with open('../test_record_data.mp3', 'wb') as mpeg:
             mpeg.write(recordData)
+            transcription = transcriber("../test_record_data.mp3")
+            print(transcription)
+        inputBert(transcription['text'])
+
 
         data = {"message": "Response OK!"}
 
@@ -103,7 +116,7 @@ def testQuery(request):
         menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
-    
+
     # 특정 메뉴가 아닌 경우 추천
     else:
         query_string = f"SELECT * FROM BurgerTable WHERE "
@@ -115,3 +128,9 @@ def testQuery(request):
         menu_list = BurgerTable.objects.raw(query_string)
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
+
+def inputBert(text_file):
+    k = Ko_Bert()
+    result = k.start(text_file)
+    print(result)
+    return result
