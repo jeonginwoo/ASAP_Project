@@ -76,7 +76,7 @@ def testDD(request):
 
 def testQuery(request):
     d = {}
-    a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
+    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
     for i in a:
         j = i.split()
@@ -87,21 +87,29 @@ def testQuery(request):
     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
     # 특정 메뉴 찾기
-    if 'M_menu_list' in d:
-        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
+    if 'M_menu_name' in d:
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
-    elif 'S_menu_list' in d:
-        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
+    elif 'S_menu_name' in d:
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
-    elif 'DD_menu_list' in d:
-        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
+    elif 'DD_menu_name' in d:
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
     
     # 특정 메뉴가 아닌 경우 추천
     else:
-        menu_list = BurgerTable.objects.filter()
+        menu_list = BurgerTable.objects.all()
+        for q in d.keys():
+            if q == 'N':
+                menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
+                print(0)
+            if q == 'I':
+                print(0)
+            if q == 'A':
+                print(0)
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
