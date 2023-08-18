@@ -14,7 +14,7 @@ import json
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
-    menu_list = MenuTable.objects.all().values('M_menu_name','M_price','M_image').order_by('M_rank')[:6]
+    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
     context = {'menu_list': menu_list}
     return render(request, 'main/index.html',context)
 

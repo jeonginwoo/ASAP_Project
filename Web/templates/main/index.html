@@ -208,7 +208,7 @@
   <script>
     var m_list = []
     {% for m in menu_list %}
-    m_list.push(["{{ m.M_menu_name }}", "{{ m.M_price }}", "{{ m.M_image }}"]);
+    m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
     // console.log(m_list[0][0])
     {% endfor %}
     menu_burger.onclick = () => {
