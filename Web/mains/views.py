@@ -119,12 +119,15 @@ def testQuery(request):
 
     # 특정 메뉴가 아닌 경우 추천
     else:
-        query_string = f"SELECT * FROM BurgerTable WHERE "
+        attribute, menu = ''
         for q in d.keys():
-            if q == 'N':
+            if q == 'N':    # 햄버거가 특정 되었을 때
+                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
+            elif q == 'A':    # 햄버거가 특정 되었을 때
                 query_string += ""
-            if q == 'A':
-                query_string += ""
+            
+
+        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
         menu_list = BurgerTable.objects.raw(query_string)
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
