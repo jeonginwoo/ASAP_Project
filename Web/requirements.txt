@@ -4,4 +4,5 @@ Django
 djangorestframework
 Pillow
 konlpy
+jamo
 https://github.com/ssut/py-hanspell/archive/master.zip
