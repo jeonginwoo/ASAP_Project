@@ -3,3 +3,5 @@ torch
 Django
 djangorestframework
 Pillow
+konlpy
+https://github.com/ssut/py-hanspell/archive/master.zip
