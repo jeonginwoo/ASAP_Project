@@ -8,6 +8,7 @@ from config.settings import transcriber
 from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
+from Model.konlpy.main import *
 import json
 
 
@@ -42,6 +43,7 @@ def speechRecognition(request):
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
         inputBert(transcription['text'])
+        inputKonlp(transcription['text'])
 
 
         data = {"message": "Response OK!"}
@@ -137,3 +139,9 @@ def inputBert(text_file):
     result = k.start(text_file)
     print(result)
     return result
+
+def inputKonlp(text_file):
+    nlp_result = toQuery(text_file)
+    print(nlp_result)
+    return nlp_result
+
