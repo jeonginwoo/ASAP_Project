@@ -104,7 +104,7 @@ class Leven():
 
     def select_List(self,ttt):
         ''' 
-        #첫 초성 기준
+        #첫 초성 기준 단어 리스트 접근
         first_chosung = self.chosung(ttt)
         
         if first_chosung>=ord('ㄱ') and first_chosung<ord('ㄹ'): #ㄱ,ㄴ,ㄷ
@@ -126,12 +126,13 @@ class Leven():
         else: #ㅎ
             self.list = word_i
         ''' 
-        #글자수 기준
+        #글자수 기준 단어 리스트 접근
         if len(ttt)<10: 
             word_list = {1:word_1, 2:word_2, 3:word_3, 4:word_4, 5:word_5, 6:word_6, 7:word_7, 8:word_8, 9:word_9}#,10:word_10}
             self.list = word_list[len(ttt)]
         else:
             self.list = word_10
+        #둘중에서 분류 기준 주석처리를 통해 선택
         
     def change_word(self,ttt):#단어 변경
         n = len(self.list)
