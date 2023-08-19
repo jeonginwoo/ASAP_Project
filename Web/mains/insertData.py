@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings")
 from mains.models import BurgerTable, SideTable, DDTable
 
 def insert_Menu():
-    with open('C:/Projects/ASAP_Project/Data/버거단품_CSV.csv', encoding = 'utf-8') as csv_file:
+    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/버거단품_CSV.csv') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
@@ -26,12 +26,12 @@ def insert_Menu():
                             row[i] = False
 
                     menu = BurgerTable(
-                        M_menu_name=row[0],
-                        M_price=row[1],
-                        M_image=row[2],
-                        M_info=row[3],
-                        M_rank=row[4],
-                        M_spicy=row[5],
+                        menu_name=row[0],
+                        price=row[1],
+                        image=row[2],
+                        info=row[3],
+                        rank=row[4],
+                        spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
                         N_sodium=row[8],
@@ -75,7 +75,7 @@ def insert_Menu():
                     menu.save()
 
 def insert_Side():
-    with open('C:/Projects/ASAP_Project/Data/사이드_CSV.csv', encoding = 'utf-8') as csv_file:
+    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/사이드_CSV.csv') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
@@ -88,12 +88,12 @@ def insert_Side():
                              row[i] = False
 
                     menu = SideTable(
-                        S_menu_name=row[0],
-                        S_price=row[1],
-                        S_image=row[2],
-                        S_info=row[3],
-                        S_rank=row[4],
-                        S_spicy=row[5],
+                        menu_name=row[0],
+                        price=row[1],
+                        image=row[2],
+                        info=row[3],
+                        rank=row[4],
+                        spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
                         N_sodium=row[8],
@@ -112,7 +112,7 @@ def insert_Side():
                     menu.save()
 
 def insert_DD():
-    with open('C:/Projects/ASAP_Project/Data/음료&디저트_CSV.csv', encoding = 'utf-8') as csv_file:
+    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/음료&디저트_CSV.csv') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
@@ -125,12 +125,12 @@ def insert_DD():
                              row[i] = False
 
                     menu = DDTable(
-                        DD_menu_name=row[0],
-                        DD_price=row[1],
-                        DD_image=row[2],
-                        DD_info=row[3],
-                        DD_rank=row[4],
-                        DD_spicy=row[5],
+                        menu_name=row[0],
+                        price=row[1],
+                        image=row[2],
+                        info=row[3],
+                        rank=row[4],
+                        spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
                         N_sodium=row[8],
