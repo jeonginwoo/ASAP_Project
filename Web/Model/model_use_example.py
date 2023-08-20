@@ -13,3 +13,4 @@ gpt = GPT()
 text = '주차장이 어디야'
 result = gpt.start_gpt(text)
 print(result)
+
