@@ -18,4 +18,6 @@ urlpatterns = [
 
     # 추천 리스트 페이지
     path('menuReco/', views.menuReco, name='menuReco'),
+
+    path('bootstrap/', views.bootstrap, name='bootstrap')
 ]

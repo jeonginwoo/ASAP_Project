@@ -10,9 +10,7 @@
                 {#---------- 기본 정보 ----------#}
                 <tr>
                     <td rowspan="10" valign="top">
-                        {% if burger.image %}
                         <img src="{{ burger.image.url }}" alt="이미지를 불러오지 못했습니다" height="150px" />
-                        {% endif %}
                     </td>
                     <th align="right" valign="top">가격</th>
                     <td width="300px">{{ burger.price }}원</td>
