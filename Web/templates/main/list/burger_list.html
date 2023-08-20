@@ -7,7 +7,7 @@
                 <h3>{{ burger.menu_name }}</h3>
             </caption>
             <tbody>
-                {############ 기본 정보 ############}
+                {#---------- 기본 정보 ----------#}
                 <tr>
                     <td rowspan="10" valign="top">
                         {% if burger.image %}
@@ -30,7 +30,7 @@
                     <td>{{ burger.spicy }}단계</td>
                 </tr>
                 <tr>
-                    {############ 영양 성분 ############}
+                    {#---------- 영양 성분 ----------#}
                     <th align="right" valign="top">영양 성분</th>
                     <td>
                         칼로리 : {{ burger.N_calories }}<br />
@@ -41,7 +41,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 알레르기 ############}
+                    {#---------- 알레르기 ----------#}
                     <th align="right" valign="top">알레르기</th>
                     <td>
                         {% if burger.A_milk %} 우유<br /> {% endif %}
@@ -56,7 +56,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 재료 ############}
+                    {#---------- 재료 ----------#}
                     <th align="right" valign="top">재료</th>
                     <td>
                         {% if burger.I_sliced_cheese %} 얇게 썬 치즈<br /> {% endif %}
@@ -73,7 +73,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 패티 ############}
+                    {#---------- 패티 ----------#}
                     <th align="right" valign="top">패티</th>
                     <td>
                         {% if burger.P_beef %} 소고기 패티 : {{ burger.P_beef }}장<br /> {% endif %}
@@ -83,7 +83,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 소스 ############}
+                    {#---------- 소스 ----------#}
                     <th align="right" valign="top">소스</th>
                     <td>
                         {% if burger.S_mayo %} 마요네즈<br /> {% endif %}

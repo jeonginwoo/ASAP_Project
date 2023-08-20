@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import BurgerTable, SideTable, DDTable
 #from .serializers import MenuSerializer
 from django.http import JsonResponse
+from django.db.models import Q
 from config.settings import transcriber
 from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
@@ -89,50 +90,53 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def testQuery(request):
-    d = {}
-    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
+def menuReco(request):
+    burger_list = []
+    side_list = []
+    dd_list = []
+    b_query = Q()
+    s_query = Q()
+    dd_query = Q()
 
-    for i in a:
-        j = i.split()
-        if len(j) == 1:
-            j.append('0')
-        j[1] = j[1].replace('_', ' ')
-        d[j[0]] = j[1]
+    # text_file = '안매운 햄버거'
+    # query_list = inputKonlp(text_file)
+    query_list = ['menu_name 너겟킹', 'Side']
+    query_list = ['menu_name 제로', 'DnD']
+    query_list = ['menu_name 치즈', 'Burger']
+    query_list = ['menu_name 아이스']
 
-    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
-    # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
+    if query_list[-1] not in ['Burger', 'Side', 'DnD']:
+        query_list.append('else')
 
-    query_string = ''
+    for query in query_list[:-1]:
+        tlist = query.split()
+        if len(tlist) == 1:
+            tlist.append('1')
+        tlist[0] += '__contains'
+        tlist[1] = tlist[1].replace('_', ' ')
 
-    # 특정 메뉴 찾기
-    if 'M_menu_name' in d:
-        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'S_menu_name' in d:
-        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'DD_menu_name' in d:
-        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+        if query_list[-1] == 'Burger':
+            b_query &= Q(**{tlist[0]:tlist[1]})
+        elif query_list[-1] == 'Side':
+            s_query &= Q(**{tlist[0]:tlist[1]})
+        elif query_list[-1] == 'DnD':
+            dd_query &= Q(**{tlist[0]:tlist[1]})
+        else:
+            b_query &= Q(**{tlist[0]:tlist[1]})
+            s_query &= Q(**{tlist[0]:tlist[1]})
+            dd_query &= Q(**{tlist[0]:tlist[1]})
 
-    # 특정 메뉴가 아닌 경우 추천
-    else:
-        attribute, menu = ''
-        for q in d.keys():
-            if q == 'N':    # 햄버거가 특정 되었을 때
-                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
-            elif q == 'A':    # 햄버거가 특정 되었을 때
-                query_string += ""
-            
 
-        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
-        menu_list = BurgerTable.objects.raw(query_string)
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+    if b_query != Q():
+        burger_list = BurgerTable.objects.filter(b_query)
+    if s_query != Q():
+        side_list = SideTable.objects.filter(s_query)
+    if dd_query != Q():
+        dd_list = DDTable.objects.filter(dd_query)
+
+    context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
+
+    return render(request, 'main/testQuery.html', context)
 
 def inputBert(text_file):
     k = Ko_Bert()
@@ -144,4 +148,3 @@ def inputKonlp(text_file):
     nlp_result = toQuery(text_file)
     print(nlp_result)
     return nlp_result
-

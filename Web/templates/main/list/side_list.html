@@ -2,12 +2,12 @@
 <ul>
     {% for side in side_list %}
     <div style="display: inline-block;">
-        <table frame="below" cellpadding="10">
+        <table frame="below" cellpasideing="10">
             <caption>
                 <h3>{{ side.menu_name }}</h3>
             </caption>
             <tbody>
-                {############ 기본 정보 ############}
+                {#---------- 기본 정보 ----------#}
                 <tr>
                     <td rowspan="10" valign="top">
                         {% if side.image %}
@@ -30,7 +30,7 @@
                     <td>{{ side.spicy }}단계</td>
                 </tr>
                 <tr>
-                    {############ 영양 성분 ############}
+                    {#---------- 영양 성분 ----------#}
                     <th align="right" valign="top">영양 성분</th>
                     <td>
                         칼로리 : {{ side.N_calories }}<br />
@@ -41,7 +41,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 알레르기 ############}
+                    {#---------- 알레르기 ----------#}
                     <th align="right" valign="top">알레르기</th>
                     <td>
                         {% if side.A_milk %} 우유<br /> {% endif %}
