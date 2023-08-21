@@ -53,13 +53,11 @@ def speechRecognition(request):
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
-        # i_B
-        # a = i_N
-        # M_R(a)
+
         return transcription['text']
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    #return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
@@ -105,14 +103,15 @@ def menuReco(request):
     s_query = Q()
     dd_query = Q()
 
-    query_list = ['menu_name 제로', 'DnD']
-    query_list = ['menu_name 치즈']
-    query_list = ['menu_name 아이스_아메리카노']
-    query_list =  ['I_tomato 1']
-    query_list = ['menu_name 너겟킹']
+    # query_list = ['menu_name 제로', 'DnD']
+    # query_list = ['menu_name 치즈']
+    # query_list = ['menu_name 아이스_아메리카노']
+    # query_list = ['menu_name 너겟킹']
+    # query_list = ['I_tomato 1']
 
-    text = speechRecognition(request)
-    print("SSSSSSSStext : ", text)
+    # text = speechRecognition(request)
+    text = "토마토 들어간 거죠"
+    print("text : ", text)
     bert = inputBert(text)
     print("bert : ", bert)
     query_list = inputKonlp(text)
