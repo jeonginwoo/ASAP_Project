@@ -29,14 +29,11 @@
                     <td>{{ burger.rank }}</td>
                 </tr>
                 {% endif %}
-                {% if burger.spicy %}
                 <tr>
                     <th align="right" valign="top">맵기</th>
                     <td>{{ burger.spicy }}단계</td>
                 </tr>
-                {% endif %}
-                {% if burger.N_calories or burger.N_protein or burger.N_sodium or burger.N_sugars or
-                burger.N_saturated_fat %}
+                {% if burger.N_calories or burger.N_protein or burger.N_sodium or burger.N_sugars or burger.N_saturated_fat %}
                 <tr>
                     {#---------- 영양 성분 ----------#}
                     <th align="right" valign="top">영양 성분</th>

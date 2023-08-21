@@ -56,7 +56,7 @@ def speechRecognition(request):
         recordData = request.body
 
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
-        with open('../test_record_data.mp3', 'wb') as mpeg:
+        with open('../test_record_data.wav', 'wb') as mpeg:
             mpeg.write(recordData)
             # 위스퍼 실행
             transcription = transcriber("../test_record_data.mp3")
@@ -64,7 +64,7 @@ def speechRecognition(request):
 
             result = inputKonlp(text)
             final_result = menuReco(result)
-           
+
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
             dd_list_json = serialize('json',  final_result['dd_list'])
@@ -78,12 +78,12 @@ def speechRecognition(request):
             'side_list': side_list,
             'dd_list': dd_list,
                         }
-                    
+
             #response_data = {'message': 'Audio data received and processed successfully'}
             # return render(request, 'main/menuReco.html',context)
-            
+
             return JsonResponse(context)
-        
+
     # Request의 method가 POST 방식이 아닌 GET 방식임
     #return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
     #return render(request, 'main/menuReco.html')
@@ -140,47 +140,80 @@ def menuReco(keyword):
 
     query_list = keyword
     print("query_list : ", type(query_list))
-    
+
     if not query_list: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
-    a = query_list[-1]    
+    a = query_list[-1]
     print(query_list[-1])
     if a not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
 
-    
+
 
     print("----쿼리 생성 부분----")
     # __contains : 해당 문자열이 포함되어 있는 것들 출력
     # __lte : ... 이하인 것들 출력 (lt는 미만)
     # __gte : ... 이상인 것들 출력 (gt는 초과)
-    for query in query_list[:-1]:
+    orCount = 0
+    for query in query_list[:-1]:   # ['or', 'cheese1 1', 'cheese2 1', 'else']
+        if query == 'or':
+            tempQuery = query
+            orCount = 3
+            continue
+        if orCount != 0:
+            tempQuery += " " + query
+            orCount -= 1
+            if orCount!=1:
+                continue
+            orCount -= 1
+            query = tempQuery
+
+        print("------------------")
+        print(f'query : {query}')
+        print("------------------")
+
+        # ['or cheese1 1 cheese2 1']
         tlist = query.split()
+        # ['or', 'cheese1', '1', 'cheese2', '2']
         if len(tlist) == 1:
             tlist.append('1')
-        tlist[1] = tlist[1].replace('_', ' ')
+        if tlist[0] != 'or':
+            tlist[1] = tlist[1].replace('_', ' ')
 
-        if query_list[-1] == 'M':  # 버거 질문
+        print()
+        print("------------------")
+        print("tlist : ", tlist)
+        print("------------------")
+        print()
+
+        if tlist[0] == 'or':
+            b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
+            burger_list = BurgerTable.objects.filter(b_query)
+
+        elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+
             burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
 
-        elif query_list[-1] == 'Side':  # 사이드 질문
+        elif query_list[-1] == 'S':  # 사이드 질문
+
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             side_list = SideTable.objects.filter(s_query).order_by('rank')[:4]
 
-        elif query_list[-1] == 'DnD':   # 음료&디저트 질문
+        elif query_list[-1] == 'DD':   # 음료&디저트 질문
             dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
 
         else:   # 기타 질문
             if tlist[0] == 'rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
             elif tlist[0] == 'N_calories':
                 b_query &= Q(**{tlist[0]:tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
                 try:
+
                     print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
@@ -206,6 +239,7 @@ def menuReco(keyword):
     #render(request, 'main/menuReco.html', context)
     return context
 
+
 def inputBert(text_file):
     result = k.start(text_file)
     print(result)
@@ -216,5 +250,3 @@ def inputKonlp(text_file):
     if nlp_result:
         print(nlp_result)
     return nlp_result
-
-
