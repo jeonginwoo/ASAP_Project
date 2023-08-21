@@ -94,33 +94,46 @@ def testDD(request):
 
 def testQuery(request):
     d = {}
-    a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
+    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
     for i in a:
         j = i.split()
+        if len(j) == 1:
+            j.append('0')
         j[1] = j[1].replace('_', ' ')
         d[j[0]] = j[1]
 
     # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
+    query_string = ''
+
     # 특정 메뉴 찾기
-    if 'M_menu_list' in d:
-        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
+    if 'M_menu_name' in d:
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
-    elif 'S_menu_list' in d:
-        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
+    elif 'S_menu_name' in d:
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
-    elif 'DD_menu_list' in d:
-        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
+    elif 'DD_menu_name' in d:
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
 
     # 특정 메뉴가 아닌 경우 추천
     else:
-        menu_list = BurgerTable.objects.filter()
+        attribute, menu = ''
+        for q in d.keys():
+            if q == 'N':    # 햄버거가 특정 되었을 때
+                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
+            elif q == 'A':    # 햄버거가 특정 되었을 때
+                query_string += ""
+            
+
+        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
+        menu_list = BurgerTable.objects.raw(query_string)
         context = {'menu_list':menu_list}
         return render(request, 'main/testQuery.html', context)
 
