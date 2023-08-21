@@ -160,6 +160,7 @@
     <div class="row g-5">
 
       <div class="col-md-8">
+        <!-- 버거 메뉴 -->
         {% if burger_list %}
         {% for burger in burger_list %}
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -181,6 +182,7 @@
         {% endfor %}
         {% endif %}
 
+        <!-- 사이드 메뉴 -->
         {% if side_list %}
         {% for side in side_list %}
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -202,6 +204,7 @@
         {% endfor %}
         {% endif %}
 
+        <!-- 음료&디저트 메뉴 -->
         {% if dd_list %}
         {% for dd in dd_list %}
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -224,7 +227,7 @@
         {% endif %}
       </div>
 
-      <!-- 채팅 부분 -->
+      <!-- 채팅 -->
       <div class="col-md-4">
         <div class="position-sticky" style="top: 2rem;">
           <section style="background-color: #eee;">
