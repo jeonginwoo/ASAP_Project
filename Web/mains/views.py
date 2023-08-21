@@ -124,15 +124,21 @@ def menuReco(request):
     # query_list = ['I_tomato 1']
 
     # text = speechRecognition(request)
-    text = "피클 없는거 줘"
+    text = "베이컨 들어간거 줘"
     print("text : ", text)
     bert = inputBert(text)
     print("bert : ", bert)
     query_list = inputKonlp(text)
     print("query_list : ", query_list)
 
-    print("---def menuReco---")
+    print("------------------")
+    print("def menuReco")
+    print("------------------")
+    print()
+    print("------------------")
     print("query_list : ", query_list)
+    print("------------------")
+
 
     if len(query_list) == 0: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
@@ -140,18 +146,51 @@ def menuReco(request):
         query_list.append('else')
 
     print(query_list)
-
-    print("----쿼리 생성 부분----")
+    print()
+    print("---------------------")
+    print("쿼리 생성 부분")
+    print("---------------------")
+    print()
     # __contains : 해당 문자열이 포함되어 있는 것들 출력
     # __lte : ... 이하인 것들 출력 (lt는 미만)
     # __gte : ... 이상인 것들 출력 (gt는 초과)
-    for query in query_list[:-1]:
+    orCount = 0
+    for query in query_list[:-1]:   # ['or', 'cheese1 1', 'cheese2 1', 'else']
+        if query == 'or':
+            tempQuery = query
+            orCount = 3
+            continue
+        if orCount != 0:
+            tempQuery += " " + query
+            orCount -= 1
+            if orCount!=1: 
+                continue
+            orCount -= 1
+            query = tempQuery
+        
+        print("------------------")
+        print(f'query : {query}')
+        print("------------------")
+
+        # ['or cheese1 1 cheese2 1']
         tlist = query.split()
+        # ['or', 'cheese1', '1', 'cheese2', '2']
         if len(tlist) == 1:
             tlist.append('1')
-        tlist[1] = tlist[1].replace('_', ' ')
+        if tlist[0] != 'or':
+            tlist[1] = tlist[1].replace('_', ' ')
 
-        if query_list[-1] == 'M':  # 버거 질문
+        print()
+        print("------------------")
+        print("tlist : ", tlist)
+        print("------------------")
+        print()
+
+        if tlist[0] == 'or':
+            b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
+            burger_list = BurgerTable.objects.filter(b_query)
+
+        elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             burger_list = BurgerTable.objects.filter(b_query)
         
@@ -188,14 +227,23 @@ def menuReco(request):
                 except:
                     dd_list = []
                 
+    print()
     print("----쿼리 생성----")
+    print("b_query : ", b_query)
+    print("s_query : ", s_query)
+    print("dd_query : ", dd_query)
+    print("-----------------")
+    print()
+    print("------------------")
     print("burger_list : ", burger_list)
     print("side_list : ", side_list)
     print("dd_list : ", dd_list)
+    print("------------------")
+    print()
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
 
-    print("---end menuReco---")
+    print("#### end menuReco ####")
 
     # return context
     return render(request, 'main/menuReco.html', context)
