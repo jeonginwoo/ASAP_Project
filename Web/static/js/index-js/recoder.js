@@ -38,21 +38,21 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     });
                 };
 
-                    mediaRecorder.start(1000);
-                    isRecording = true;
+                mediaRecorder.start(1000);
+                isRecording = true;
 
-                    record.style.background = "red";
-                    record.style.color = "black";
+                record.style.background = "red";
+                record.style.color = "black";
 
-                    setTimeout(() => {
-                        if (mediaRecorder.state = 'recording') {
-                            mediaRecorder.stop();
+                setTimeout(() => {
+                    if (mediaRecorder.state = 'recording') {
+                        mediaRecorder.stop();
 
-                            record.style.background = "";
-                            record.style.color = "";
-                        };
+                        record.style.background = "";
+                        record.style.color = "";
+                    };
 
-                    isRecording = false;
+                isRecording = false;
                 }, 3000)
             }
         }

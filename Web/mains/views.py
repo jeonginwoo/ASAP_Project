@@ -40,7 +40,7 @@ def speechRecognition(request):
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
         with open('../test_record_data.wav', 'wb') as mpeg:
             mpeg.write(recordData)
-            transcription = transcriber("../test_record_data.mp3")
+            transcription = transcriber("../test_record_data.wav")
             print(transcription)
         
         inputBert(transcription['text'])
