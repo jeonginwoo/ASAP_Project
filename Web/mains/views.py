@@ -52,13 +52,8 @@ def speechRecognition(request):
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
-        inputBert(transcription['text'])
-        inputKonlp(transcription['text'])
 
-
-        data = {"message": "Response OK!"}
-
-        return JsonResponse(data)
+        return transcription['text']
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
@@ -107,15 +102,16 @@ def menuReco(request):
     s_query = Q()
     dd_query = Q()
 
-    query_list = ['menu_name 너겟킹', 'Side']
-    query_list = ['menu_name 제로', 'DnD']
-    query_list = ['menu_name 치즈']
-    query_list = ['menu_name 아이스_아메리카노']
+    # query_list = ['menu_name 너겟킹', 'Side']
+    # query_list = ['menu_name 제로', 'DnD']
+    # query_list = ['menu_name 치즈']
+    # query_list = ['menu_name 아이스_아메리카노']
+
+    query_list = inputKonlp(speechRecognition(request))
 
     if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
     if query_list[-1] not in ['Burger', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
-                                                        # 승재가 구분해서 보내주면 좋을듯?
         query_list.append('else')
 
     # __contains : 해당 문자열이 포함되어 있는 것들 출력
