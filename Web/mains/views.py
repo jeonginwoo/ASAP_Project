@@ -141,9 +141,11 @@ def menuReco(request):
 
         else:   # 기타 질문
             if tlist[0] == 'rank':
-                if tlist[1]:
-                    b_query &= Q(**{tlist[0]+'__lte':3})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('rank').values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+                b_query &= Q(**{tlist[0]+'__lte':3})
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+            elif tlist[0] == 'N_calories':
+                b_query &= Q(**{tlist[0]:tlist[1]})
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
             else:
                 b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                 s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
