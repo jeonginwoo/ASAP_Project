@@ -39,3 +39,5 @@ class Ko_Bert():
     def start(self,text):
         return self.predict_sentence(self.pre, text)
 
+K=Ko_Bert()
+K.start('할아버지가 좋아할 버거 추천해주세요')

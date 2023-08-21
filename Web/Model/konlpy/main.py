@@ -53,13 +53,13 @@ class Konlp():
         self.toQ = {'칼로리': 'N_calories','포화지방': 'N_saturated_fat','단백질': 'N_protein','당': 'N_sugars','설탕': 'N_sugars','나트륨': 'N_sodium','카페인':'N_caffeine',
                     '우유알레르기': 'A_milk','치킨알레르기': 'A_Chicken','돼지고기알레르기': 'A_pork','돼지알레르기': 'A_pork','소고기알레르기': 'A_beef','소알레르기':'A_beef',
                     '비프알레르기': 'A_beef','계란알레르기': 'A_egg','달걀알레르기': 'A_egg','오징어알레르기': 'A_squid','토마토알레르기': 'A_tomato',
-                    '조개알레르기': 'A_clam','새우알레르기': 'A_shrimp','갑각류알레르기': 'A_clam A_shrimp','치즈': 'I_sliced_cheese I_shredded_cheese','슬라이스치즈': 'I_sliced_cheese','슈레디드치즈': 'I_shredded_cheese',
+                    '조개알레르기': 'A_clam','새우알레르기': 'A_shrimp','갑각류알레르기': 'A_clam A_shrimp','치즈': 'or I_sliced_cheese I_shredded_cheese','슬라이스치즈': 'I_sliced_cheese','슈레디드치즈': 'I_shredded_cheese',
                     '피클': 'I_pickle','할라피뇨': 'I_jalapeno','통새우': 'I_whole_shrimp','베이컨': 'I_bacon','양상추': 'I_lettuce','양파': 'I_onion','해쉬브라운': 'I_hashbrown',
                     '토마토': 'I_tomato','마늘': 'I_garlic_chip','마늘칩': 'I_garlic_chip','마요': 'S_mayo','마요네즈': 'S_mayo','마요네즈소스': 'S_mayo','불고기': 'S_bulgogi',
                     '불고기소스': 'S_bulgogi','바베큐': 'S_barbecue','바베큐소스': 'S_barbecue','케찹': 'S_ketchup','케찹소스': 'S_ketchup','디아블로': 'S_diablo',
                     '디아블로소스': 'S_diablo','매운토마토': 'S_spicy_tomato','매운토마토소스': 'S_spicy_tomato','매운': 'S_diablo S_spicy_tomato','치즈소스': 'S_cheese','타르타르': 'S_tartar',
                     '타르타르소스': 'S_tartar','베이컨잼': 'S_baconjam','베이컨잼소스': 'S_baconjam','머스타드': 'S_mustard','머스타드소스': 'S_mustard',
-                    '소고기': 'P_beef P_steak','비프': 'P_beef','새우': 'P_shrimp','쉬림프': 'P_shrimp','슈림프': 'P_shrimp','치킨': 'P_chicken','닭': 'P_chicken','스테이크': 'P_steak',
+                    '소고기': 'or P_beef P_steak','비프': 'P_beef','새우': 'P_shrimp','쉬림프': 'P_shrimp','슈림프': 'P_shrimp','치킨': 'P_chicken','닭': 'P_chicken','스테이크': 'P_steak',
                     '알레르기':'a', '영양소':'n', '영양성분':'n', '가격':'price','정보':'info','상세정보':'info','맵기':'spicy',
                     '햄버거':'M','버거':'M','아침':'M','점심':'M','저녁':'M','메뉴':'M','음식':'M','끼니':'M','배고프':'M','드시':'M','먹':'M',
                     '사이드':'S','디저트':'DD','음료수':'DD','아이스크림':'DD','높':'desc','낮':'asc','많':'desc','적':'asc','차갑':'ice','차':'ice',
@@ -180,7 +180,7 @@ class Konlp():
         for i in range(len(re2)):
             how = ''
             for j in re2[i].split():
-                if j in self.neu+self.cat+['A','N','asc','desc']:
+                if j in self.neu+self.cat+['A','N','asc','desc','or']:
                     re3.append(j)
                 elif j in self.ham+self.side+self.drink:
                     if j in self.ham: what = 'M'
