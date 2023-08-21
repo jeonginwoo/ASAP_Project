@@ -2,7 +2,6 @@
 #https://github.com/ssut/py-hanspell
 #노션-ASAP프로젝트-GPT 안에 DataSet 아래에 kkma-2.0.zip 다운 받고 압축 해제하면 kkma-2.0.jar 나옴
 #......\Lib\site-packages\konlpy\java 파일 들어가면 kkma-2.0.jar 있는데 압축 해제한거로 대체하면 단어 인식 훨씬 잘해줌
-from konlpy.tag import Kkma
 from hanspell import spell_checker
 import re
 
@@ -68,7 +67,7 @@ class Konlp():
                 '치즈프라이','프렌치프라이','코울슬로','콘샐러드','구운갈릭시즈닝','스윗어니언시즈닝','매콤치즈시즈닝']
         self.drink = ['망고선데','초코망고선데','레드애플맛제로','레몬라임맛제로','컵망고아이스크림','아메리카노','아이스아메리카노','핫초코','아이스초코','코카콜라',
                 '코카콜라제로','스프라이트','스프라이트제로','미닛메이드오렌지','순수','순수(미네랄워터)']
-        self.neu = ['칼로리','열량','포화지방','단백질','당','설탕','나트륨','카페인', 
+        self.neu = ['칼로리','열량','포화지방','단백질','당','설탕','나트륨','카페인',
             'N_calories','N_staurated_fat','N_protein','N_sugars','N_sodium','N_caffeine']
         self.al = ['우유알레르기','치킨알레르기','돼지고기알레르기','돼지알레르기','소고기알레르기','소알레르기','비프알레르기','계란알레르기','달걀알레르기',
                 '오징어알레르기','토마토알레르기','조개알레르기','새우알레르기','갑각류알레르기']
@@ -109,7 +108,7 @@ class Konlp():
                     full=full[len(m[ct]):]
                     ct+=1
                     break
-                if tmp in self.replacements: tmp = self.replacements[tmp] 
+                if tmp in self.replacements: tmp = self.replacements[tmp]
                 if tmp in self.eve:
                     if tmp in self.side+['사이드'] : what = 'S'
                     elif tmp in self.drink+['디저트','음료수','아이스크림'] : what = 'DD'
@@ -123,9 +122,9 @@ class Konlp():
 
         #print('mor')
         #print(mor)
-            
-            
-            
+
+
+
         re1 = [] # 결과
         sg = ['추가','넣', '들어가', '좋', '들어가', '듣', '있'] # 주문 - 추가 키워드
         si = [] # 주문 - 들어가는 키워드

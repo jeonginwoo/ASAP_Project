@@ -17,5 +17,7 @@ urlpatterns = [
     path('ddlist/', views.testDD, name='testDD'),
 
     # 추천 리스트 페이지
-    #path('menuReco/', views.testQuery, name='testQuery'),
+    path('menuReco/', views.menuReco, name='menuReco'),
+
+    path('bootstrap/', views.bootstrap, name='bootstrap')
 ]
