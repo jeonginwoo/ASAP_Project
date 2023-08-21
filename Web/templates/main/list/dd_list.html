@@ -7,7 +7,7 @@
                 <h3>{{ dd.menu_name }}</h3>
             </caption>
             <tbody>
-                {############ 기본 정보 ############}
+                {#---------- 기본 정보 ----------#}
                 <tr>
                     <td rowspan="10" valign="top">
                         {% if dd.image %}
@@ -30,7 +30,7 @@
                     <td>{{ dd.spicy }}단계</td>
                 </tr>
                 <tr>
-                    {############ 영양 성분 ############}
+                    {#---------- 영양 성분 ----------#}
                     <th align="right" valign="top">영양 성분</th>
                     <td>
                         칼로리 : {{ dd.N_calories }}<br />
@@ -41,7 +41,7 @@
                     </td>
                 </tr>
                 <tr>
-                    {############ 알레르기 ############}
+                    {#---------- 알레르기 ----------#}
                     <th align="right" valign="top">알레르기</th>
                     <td>
                         {% if dd.A_milk %} 우유<br /> {% endif %}
@@ -53,7 +53,6 @@
                         {% if dd.A_tomato %} 토마토<br /> {% endif %}
                         {% if dd.A_clam %} 조개<br /> {% endif %}
                         {% if dd.A_shrimp %} 새우<br /> {% endif %}
-                        {% if dd.A_peach %} 복숭아<br /> {% endif %}
                     </td>
                 </tr>
             </tbody>

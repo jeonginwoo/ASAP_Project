@@ -255,14 +255,23 @@
   <script src="{% static 'js/index-js/menu-list.js' %}?ver=6"></script>
   <script src="{% static 'js/index-js/order-list-to-purchase-page.js' %}?ver=6"></script>
   <script>
-    // var m_list = []
-    // {% for m in menu_list %}
-    // m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
-    // // console.log(m_list[0][0])
-    // {% endfor %}
-    // menu_burger.onclick = () => {
-    //   adjust_table("버거", {{ menu_list| length }}, m_list);
-    //   };
+    var m_list = []
+    {% for m in menu_list %}
+    m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
+    // console.log(m_list[0][0])
+    {% endfor %}
+    menu_burger.onclick = () => {
+      adjust_table("버거", {{ menu_list| length }}, m_list);
+      };
+
+    // 사이드 메뉴 버튼 클릭시
+    menu_side.onclick = () => {
+      adjust_table("사이드", {{ side_list| length }}, s_list);
+      };
+
+    menu_baverage.onclick = () => {
+      adjust_table("음료", {{ drink_list| length }}, d_list);
+      };
 
   </script>
 </body>
