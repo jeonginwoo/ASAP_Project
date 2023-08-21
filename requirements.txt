@@ -1,0 +1,9 @@
+transformers
+torch
+Django
+djangorestframework
+Pillow
+konlpy
+jamo
+openai
+https://github.com/ssut/py-hanspell/archive/master.zip

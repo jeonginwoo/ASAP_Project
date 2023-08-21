@@ -25,7 +25,7 @@ def index(request):
         'side_list': side_list,
         'drink_list': drink_list,
                }
-    
+
     return render(request, 'main/index.html',context)
 
 # class MenuDetailView(APIView):
@@ -98,37 +98,50 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-# def testQuery(request):
-#     d = {}
-#     a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
+def testQuery(request):
+    d = {}
+    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
-#     for i in a:
-#         j = i.split()
-#         j[1] = j[1].replace('_', ' ')
-#         d[j[0]] = j[1]
+    for i in a:
+        j = i.split()
+        if len(j) == 1:
+            j.append('0')
+        j[1] = j[1].replace('_', ' ')
+        d[j[0]] = j[1]
 
 #     # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
 #     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
-#     # 특정 메뉴 찾기
-#     if 'M_menu_list' in d:
-#         menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
-#         context = {'menu_list':menu_list}
-#         return render(request, 'main/testQuery.html', context)
-#     elif 'S_menu_list' in d:
-#         menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
-#         context = {'menu_list':menu_list}
-#         return render(request, 'main/testQuery.html', context)
-#     elif 'DD_menu_list' in d:
-#         menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
-#         context = {'menu_list':menu_list}
-#         return render(request, 'main/testQuery.html', context)
+    query_string = ''
 
-#     # 특정 메뉴가 아닌 경우 추천
-#     else:
-#         menu_list = BurgerTable.objects.filter()
-#         context = {'menu_list':menu_list}
-#         return render(request, 'main/testQuery.html', context)
+    # 특정 메뉴 찾기
+    if 'M_menu_name' in d:
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'S_menu_name' in d:
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'DD_menu_name' in d:
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+
+    # 특정 메뉴가 아닌 경우 추천
+    else:
+        attribute, menu = ''
+        for q in d.keys():
+            if q == 'N':    # 햄버거가 특정 되었을 때
+                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
+            elif q == 'A':    # 햄버거가 특정 되었을 때
+                query_string += ""
+
+
+        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
+        menu_list = BurgerTable.objects.raw(query_string)
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
 
 def inputBert(text_file):
     k = Ko_Bert()
@@ -152,18 +165,17 @@ def recommendMenu(menu_list):
         if len(word_list) > 1 :
             value_list.append(word_list[0])
             key_list.append(word_list[1])
-    
+
     filters = Q()
 
     for field_name, value in zip(key_list,value_list):
         filters &= Q(**{field_name: value})
-    
+
     menu_list = BurgerTable.objects.filter(filters)
     print(menu_list)
     #추천메뉴는 최대 4개까지만 보여줄기위함
     if len(menu_list) > 4:
         pass
-    
+
     # side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
     # drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-
