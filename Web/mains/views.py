@@ -59,7 +59,7 @@ def speechRecognition(request):
         return transcription['text']
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+    #return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
@@ -105,22 +105,27 @@ def menuReco(request):
     s_query = Q()
     dd_query = Q()
 
-    # query_list = ['menu_name 너겟킹', 'Side']
-    # query_list = ['menu_name 제로', 'DnD']
-    # query_list = ['menu_name 치즈']
-    # query_list = ['menu_name 아이스_아메리카노']
+    query_list = ['menu_name 제로', 'DnD']
+    query_list = ['menu_name 치즈']
+    query_list = ['menu_name 아이스_아메리카노']
+    query_list =  ['I_tomato 1']
+    query_list = ['menu_name 너겟킹']
 
     text = speechRecognition(request)
-    print("text : ", text)
+    print("SSSSSSSStext : ", text)
+    bert = inputBert(text)
+    print("bert : ", bert)
     query_list = inputKonlp(text)
     print("query_list : ", query_list)
-    #query_list = ['spicy 0', 'M']
 
     if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
     if query_list[-1] not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
 
+    print(query_list)
+
+    print("----쿼리 생성 부분----")
     # __contains : 해당 문자열이 포함되어 있는 것들 출력
     # __lte : ... 이하인 것들 출력 (lt는 미만)
     # __gte : ... 이상인 것들 출력 (gt는 초과)
@@ -150,16 +155,31 @@ def menuReco(request):
                 b_query &= Q(**{tlist[0]:tlist[1]})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
-                b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query)
-                side_list = SideTable.objects.filter(s_query)
-                dd_list = DDTable.objects.filter(dd_query)
+                try:
+                    print(tlist)
+                    b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    burger_list = BurgerTable.objects.filter(b_query)
+                except:
+                    burger_list = []
+                try:
+                    s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    side_list = SideTable.objects.filter(s_query)
+                except:
+                    side_list = []
+                try:
+                    dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    dd_list = DDTable.objects.filter(dd_query)
+                except:
+                    dd_list = []
+                
+    print("----쿼리 생성----")
+    print("burger_list : ", burger_list)
+    print("side_list : ", side_list)
+    print("dd_list : ", dd_list)
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
 
-    return render(request, 'main/testQuery.html', context)
+    return render(request, 'main/menuReco.html', context)
 
 def inputBert(text_file):
     result = k.start(text_file)

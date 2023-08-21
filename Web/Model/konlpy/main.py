@@ -5,7 +5,6 @@
 from hanspell import spell_checker
 from konlpy.tag import Kkma
 import re
-from konlpy.tag import Kkma
 
 
 class Konlp():
