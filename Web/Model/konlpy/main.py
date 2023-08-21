@@ -4,6 +4,7 @@
 #......\Lib\site-packages\konlpy\java 파일 들어가면 kkma-2.0.jar 있는데 압축 해제한거로 대체하면 단어 인식 훨씬 잘해줌
 from hanspell import spell_checker
 import re
+from konlpy.tag import Kkma
 
 class Konlp():
     def __init__(self):

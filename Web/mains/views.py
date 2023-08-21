@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from .models import BurgerTable, SideTable, DDTable
 #from .serializers import MenuSerializer
 from django.http import JsonResponse
-from django.db.models import Q
 from config.settings import transcriber
 from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
@@ -13,7 +12,8 @@ from Model.konlpy.main import *
 from django.db.models import Q,F
 import json
 
-
+k = Ko_Bert()
+nlp = Konlp()
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
@@ -99,137 +99,62 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def menuReco(request):
-    burger_list = []
-    side_list = []
-    dd_list = []
-    b_query = Q()
-    s_query = Q()
-    dd_query = Q()
+def testQuery(request):
+    d = {}
+    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
-    query_list = ['menu_name 너겟킹', 'Side']
-    query_list = ['menu_name 제로', 'DnD']
-    query_list = ['menu_name 치즈']
-    query_list = ['menu_name 아이스_아메리카노']
+    for i in a:
+        j = i.split()
+        if len(j) == 1:
+            j.append('0')
+        j[1] = j[1].replace('_', ' ')
+        d[j[0]] = j[1]
 
-    if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
-        query_list = ['rank 1']
-    if query_list[-1] not in ['Burger', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
-                                                        # 승재가 구분해서 보내주면 좋을듯?
-        query_list.append('else')
+#     # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
+#     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
-    # __contains : 해당 문자열이 포함되어 있는 것들 출력
-    # __lte : ... 이하인 것들 출력 (lt는 미만)
-    # __gte : ... 이상인 것들 출력 (gt는 초과)
-    for query in query_list[:-1]:
-        tlist = query.split()
-        if len(tlist) == 1:
-            tlist.append('1')
-        tlist[1] = tlist[1].replace('_', ' ')
+    query_string = ''
 
-        if query_list[-1] == 'Burger':  # 버거 질문
-            b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query)
-        
-        elif query_list[-1] == 'Side':  # 사이드 질문
-            s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            side_list = SideTable.objects.filter(s_query)
+    # 특정 메뉴 찾기
+    if 'M_menu_name' in d:
+        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'S_menu_name' in d:
+        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
+    elif 'DD_menu_name' in d:
+        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
 
-        elif query_list[-1] == 'DnD':   # 음료&디저트 질문
-            dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            dd_list = DDTable.objects.filter(dd_query)
+    # 특정 메뉴가 아닌 경우 추천
+    else:
+        attribute, menu = ''
+        for q in d.keys():
+            if q == 'N':    # 햄버거가 특정 되었을 때
+                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
+            elif q == 'A':    # 햄버거가 특정 되었을 때
+                query_string += ""
 
-        else:   # 기타 질문
-            if tlist[0] == 'rank':
-                b_query &= Q(**{tlist[0]+'__lte':3})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
-            elif tlist[0] == 'N_calories':
-                b_query &= Q(**{tlist[0]:tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
-            else:
-                b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query)
-                side_list = SideTable.objects.filter(s_query)
-                dd_list = DDTable.objects.filter(dd_query)
 
-    context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
-
-    return render(request, 'main/testQuery.html', context)
+        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
+        menu_list = BurgerTable.objects.raw(query_string)
+        context = {'menu_list':menu_list}
+        return render(request, 'main/testQuery.html', context)
 
 def inputBert(text_file):
-    k = Ko_Bert()
     result = k.start(text_file)
     print(result)
     return result
 
 def inputKonlp(text_file):
-    nlp_result = toQuery(text_file)
+    nlp_result = nlp.toQuery('케찹 들어가고 불고기 안들어간 햄버거 알려줘')
     if nlp_result:
         print(nlp_result)
-        #recommendMenu(nlp_result)
+        recommendMenu(nlp_result)
     return nlp_result
-
-def bootstrap(request):
-    burger_list = []
-    side_list = []
-    dd_list = []
-    b_query = Q()
-    s_query = Q()
-    dd_query = Q()
-
-    query_list = ['menu_name 너겟킹', 'Side']
-    query_list = ['menu_name 제로', 'DnD']
-    query_list = ['menu_name 치즈']
-    query_list = ['menu_name 치즈', 'Burger']
-    query_list = []
-
-    if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
-        query_list = ['rank 1']
-    if query_list[-1] not in ['Burger', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
-        query_list.append('else')
-
-    # __contains : 해당 문자열이 포함되어 있는 것들 출력
-    # __lte : ... 이하인 것들 출력 (lt는 미만)
-    # __gte : ... 이상인 것들 출력 (gt는 초과)
-    for query in query_list[:-1]:
-        tlist = query.split()
-        if len(tlist) == 1:
-            tlist.append('1')
-        tlist[1] = tlist[1].replace('_', ' ')
-
-        if query_list[-1] == 'Burger':  # 버거 질문
-            b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query)
-            
-        elif query_list[-1] == 'Side':  # 사이드 질문
-            s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            side_list = SideTable.objects.filter(s_query)
-
-        elif query_list[-1] == 'DnD':   # 음료&디저트 질문
-            dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            dd_list = DDTable.objects.filter(dd_query)
-
-        else:   # 기타 질문
-            if tlist[0] == 'rank':
-                if tlist[1]:
-                    b_query &= Q(**{tlist[0]+'__lte':3})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('rank')
-                else:
-                    b_query &= Q(**{tlist[0]+'__gte':3})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('-rank')
-            else:
-                b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query)
-                side_list = SideTable.objects.filter(s_query)
-                dd_list = DDTable.objects.filter(dd_query)
-
-    context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
-    
-    return render(request, 'main/bootstrap.html', context)
 
 def recommendMenu(menu_list):
     # Django에서 동적으로 필드 이름을 사용하기 위해서는 Q 를 이용한다.
