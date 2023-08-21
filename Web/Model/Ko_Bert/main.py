@@ -12,7 +12,7 @@ class Ko_Bert():
         self.model_bert = BertModel.from_pretrained(CHECKPOINT_NAME).to(self.device)
         self.tokenizer = BertTokenizer.from_pretrained(CHECKPOINT_NAME)
         self.bert = CustomBertModel(CHECKPOINT_NAME).to(self.device)
-        self.bert.load_state_dict(torch.load('/Users/ho/데청캠/D_Git/ASAP_Project/Web/Model/Ko_Bert/bert-kor-base.pth',map_location=torch.device('cpu')))
+        self.bert.load_state_dict(torch.load('C:/Users/jiw41/OneDrive/문서/GitHub/ASAP_Project/Web/Model/Ko_Bert/bert-kor-base.pth',map_location=torch.device('cpu')))
         '''self.labels = labels = {
     0: '추천 입니다',
     1: '남성 입니다',
