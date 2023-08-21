@@ -9,6 +9,7 @@ word_a = ['가격','갈릭불고기와퍼','갑각류알레르기','강판치즈
 word_b = ['레드애플맛제로','레몬라임맛제로','롱치킨','롱치킨버거','마늘','마늘칩','마요','마요네즈','마요네즈소스','망고선데',
           '망고선데이','매운','매운토마토','매운토마토소스','매콤치즈시즈닝','맵기','머스타드','머스타드소스','모짜렐라치즈',
           '몬스터X', '릴리트','망고','모짜볼','몬스터엑스','몬스터와퍼','미네랄워터','미닛메이드오렌지비프알레르기','모짜','밀크',
+          
           '몇','맛','맛있는','메뉴','물','콜라','코카콜라','뭐가'#추가
      ]
 
@@ -100,13 +101,17 @@ class Leven():
 
     def start_leven(self):
         result = ''
+        
         for i in self.text:
+            i_2 = ''
             if len(i)>=2 and i[-2]+i[-1] in self.stop_words:#불용어제거
+                i_2 = i[-2]+i[-1]
                 i = i[:-2]
             elif i[-1] in self.stop_words:
+                i_2 = i[-1]
                 i = i[:-1]
             self.select_List(i)
-            result+=self.change_word(i)+' '
+            result+=self.change_word(i)+i_2+' '
         return result
     
     def chosung(self,ttt):
