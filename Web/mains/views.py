@@ -53,7 +53,7 @@ def speechRecognition(request):
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
-        
+
         text = transcription['text']
         bert = inputBert(text)
         nlp = inputKonlp(text)
@@ -62,8 +62,6 @@ def speechRecognition(request):
 
         print("---test1---")
         transcription = transcriber('C:/Users/joung/Visual_Studio_Code_Workspace/repos/ASAP_Project/test_record_data.wav')
-
-        data = {"message": transcription}
 
         print("---test2---")
         return JsonResponse(context)
