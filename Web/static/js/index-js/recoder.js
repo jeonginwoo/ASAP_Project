@@ -38,7 +38,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     });
                 };
 
-                    mediaRecorder.start(1000);
+                    mediaRecorder.start(500);
                     isRecording = true;
 
                     record.style.background = "red";
@@ -51,7 +51,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                             record.style.background = "";
                             record.style.color = "";
                         };
-
                     isRecording = false;
                 }, 3000)
             }
