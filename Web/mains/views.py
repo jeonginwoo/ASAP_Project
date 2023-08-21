@@ -9,6 +9,7 @@ from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
 from Model.konlpy.main import *
+from django.db.models import Q,F
 import json
 
 
@@ -16,7 +17,15 @@ import json
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
     menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-    context = {'menu_list': menu_list}
+    side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+
+    context = {
+        'menu_list': menu_list,
+        'side_list': side_list,
+        'drink_list': drink_list,
+               }
+    
     return render(request, 'main/index.html',context)
 
 # class MenuDetailView(APIView):
@@ -89,37 +98,37 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def testQuery(request):
-    d = {}
-    a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
+# def testQuery(request):
+#     d = {}
+#     a = ['I_sliced_cheese 1', 'I_shredded_cheese 1']
 
-    for i in a:
-        j = i.split()
-        j[1] = j[1].replace('_', ' ')
-        d[j[0]] = j[1]
+#     for i in a:
+#         j = i.split()
+#         j[1] = j[1].replace('_', ' ')
+#         d[j[0]] = j[1]
 
-    # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
-    # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
+#     # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
+#     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
 
-    # 특정 메뉴 찾기
-    if 'M_menu_list' in d:
-        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'S_menu_list' in d:
-        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'DD_menu_list' in d:
-        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+#     # 특정 메뉴 찾기
+#     if 'M_menu_list' in d:
+#         menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_list'])
+#         context = {'menu_list':menu_list}
+#         return render(request, 'main/testQuery.html', context)
+#     elif 'S_menu_list' in d:
+#         menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_list'])
+#         context = {'menu_list':menu_list}
+#         return render(request, 'main/testQuery.html', context)
+#     elif 'DD_menu_list' in d:
+#         menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_list'])
+#         context = {'menu_list':menu_list}
+#         return render(request, 'main/testQuery.html', context)
 
-    # 특정 메뉴가 아닌 경우 추천
-    else:
-        menu_list = BurgerTable.objects.filter()
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+#     # 특정 메뉴가 아닌 경우 추천
+#     else:
+#         menu_list = BurgerTable.objects.filter()
+#         context = {'menu_list':menu_list}
+#         return render(request, 'main/testQuery.html', context)
 
 def inputBert(text_file):
     k = Ko_Bert()
@@ -128,7 +137,33 @@ def inputBert(text_file):
     return result
 
 def inputKonlp(text_file):
-    nlp_result = toQuery(text_file)
-    print(nlp_result)
+    nlp_result = toQuery('케찹 들어가고 불고기 안들어간 햄버거 알려줘')
+    if nlp_result:
+        print(nlp_result)
+        recommendMenu(nlp_result)
     return nlp_result
+
+def recommendMenu(menu_list):
+    # Django에서 동적으로 필드 이름을 사용하기 위해서는 Q 를 이용한다.
+    key_list = []
+    value_list = []
+    for index in menu_list:
+        word_list = index.split()
+        if len(word_list) > 1 :
+            value_list.append(word_list[0])
+            key_list.append(word_list[1])
+    
+    filters = Q()
+
+    for field_name, value in zip(key_list,value_list):
+        filters &= Q(**{field_name: value})
+    
+    menu_list = BurgerTable.objects.filter(filters)
+    print(menu_list)
+    #추천메뉴는 최대 4개까지만 보여줄기위함
+    if len(menu_list) > 4:
+        pass
+    
+    # side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    # drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
 

@@ -141,8 +141,8 @@ def toQuery(a):
             elif i in sb:
                 re1.append('0') # 빼는거
             #else : print('어라' + 'g') # 혹시 오류
-    print('re1')
-    print(re1) # 첫 결과
+    #print('re1')
+    #print(re1) # 첫 결과
 
 
     #토큰 결합

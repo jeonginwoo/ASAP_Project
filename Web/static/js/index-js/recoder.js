@@ -43,7 +43,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         // audio.play();
                     };
 
-                    mediaRecorder.start(1000);
+                    mediaRecorder.start(500);
                     isRecording = true;
 
                     record.style.background = "red";
@@ -58,7 +58,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         };
 
                         isRecording = false;
-                    }, 3000)
+                    }, 600)
                 };
             };
         }).catch((err) => {
