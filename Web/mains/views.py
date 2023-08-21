@@ -101,7 +101,7 @@ def menuReco(request):
     query_list = ['menu_name 너겟킹', 'Side']
     query_list = ['menu_name 제로', 'DnD']
     query_list = ['menu_name 치즈']
-    query_list = ['menu_name 치즈', 'Burger']
+    query_list = ['A_milk 1']
 
     if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
@@ -121,7 +121,7 @@ def menuReco(request):
         if query_list[-1] == 'Burger':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             burger_list = BurgerTable.objects.filter(b_query)
-            
+        
         elif query_list[-1] == 'Side':  # 사이드 질문
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             side_list = SideTable.objects.filter(s_query)
@@ -135,9 +135,6 @@ def menuReco(request):
                 if tlist[1]:
                     b_query &= Q(**{tlist[0]+'__lte':3})
                     burger_list = BurgerTable.objects.filter(b_query).order_by('rank').values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
-                else:
-                    b_query &= Q(**{tlist[0]+'__gte':3})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('-rank').values(*['menu_name', 'price', 'image', 'rank'])
             else:
                 b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                 s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
