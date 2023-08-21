@@ -9,8 +9,7 @@ word_a = ['가격','갈릭불고기와퍼','갑각류알레르기','강판치즈
 word_b = ['레드애플맛제로','레몬라임맛제로','롱치킨','롱치킨버거','마늘','마늘칩','마요','마요네즈','마요네즈소스','망고선데',
           '망고선데이','매운','매운토마토','매운토마토소스','매콤치즈시즈닝','맵기','머스타드','머스타드소스','모짜렐라치즈',
           '몬스터X', '릴리트','망고','모짜볼','몬스터엑스','몬스터와퍼','미네랄워터','미닛메이드오렌지비프알레르기','모짜','밀크',
-          
-          '몇','맛','맛있는','메뉴','물','콜라','코카콜라',#추가
+          '몇','맛','맛있는','메뉴','물','콜라','코카콜라','뭐가'#추가
      ]
 
 
@@ -31,7 +30,7 @@ word_e = ['아메리카노','아이스아메리카노','아이스','아이스초
      '어니언링','열량','영양성분','영양소','오징어알레르기','와퍼','와퍼주니어','우유알레르기','음료수','정보', '이나리우스','우유',
      '조개알레르기','와퍼주니어','주니어','어니언','영양','오징어','여섯개','여섯','육','일곱개','일곱','여덣개','여덣','아홉개',
      '아홉','열개','열','주세요','요',
-     '얼마나','열량','정보','아침','점심','저녁','음식','워터','적은','조개',#추가
+     '얼마나','열량','정보','아침','점심','저녁','음식','워터','적은','조개','줘'#추가
      ]
 #ㅊ
 word_f = ['초코망고선데', '치즈','치킨', '치즈소스', '치즈스틱', '치즈와퍼', '치즈와퍼주니어', '치즈프라이', '치즈프라이',
@@ -102,7 +101,7 @@ class Leven():
     def start_leven(self):
         result = ''
         for i in self.text:
-            if len(i)>=2 and i[-2]+i[-1] in self.stop_words:
+            if len(i)>=2 and i[-2]+i[-1] in self.stop_words:#불용어제거
                 i = i[:-2]
             elif i[-1] in self.stop_words:
                 i = i[:-1]
@@ -115,7 +114,7 @@ class Leven():
         return ord(jamo_str[0])#초성 걸러내기
 
     def select_List(self,ttt):
-        ''' 
+
         #첫 초성 기준 단어 리스트 접근
         first_chosung = self.chosung(ttt)
         
@@ -144,21 +143,23 @@ class Leven():
             self.list = word_list[len(ttt)]
         else:
             self.list = word_10
+            ''' 
         #둘중에서 분류 기준 주석처리를 통해 선택
         
     def change_word(self,ttt):#단어 변경
         n = len(self.list)
         temp = ttt
         min_l = 1000000
-        r = ''
+        r = ttt
         #print(self.list)
         #print(ttt)
+
         for i in range(n):
-            #print(self.leven(ttt,self.list[i]), self.list[i])
-            if min_l > self.leven(temp,self.list[i]):
+            
+            if min_l > self.leven(temp,self.list[i]) and self.leven(temp, self.list[i])<5:
                 min_l = self.leven(temp,self.list[i])
                 r = self.list[i]
-        #print(r)
+
         return r
 
     def getJamoList(self,word):
