@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-#Ko Bert 경로 추가
+#Whisper 모델 경로 추가
 from pathlib import Path
 import os
 from transformers import pipeline

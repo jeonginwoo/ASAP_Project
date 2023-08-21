@@ -10,6 +10,7 @@ from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
 from Model.konlpy.main import *
+from django.db.models import Q,F
 import json
 
 
@@ -17,7 +18,15 @@ import json
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
     menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-    context = {'menu_list': menu_list}
+    side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+
+    context = {
+        'menu_list': menu_list,
+        'side_list': side_list,
+        'drink_list': drink_list,
+               }
+
     return render(request, 'main/index.html',context)
 
 # class MenuDetailView(APIView):
@@ -154,8 +163,10 @@ def inputBert(text_file):
     return result
 
 def inputKonlp(text_file):
-    nlp_result = toQuery(text_file)
-    print(nlp_result)
+    nlp_result = toQuery('케찹 들어가고 불고기 안들어간 햄버거 알려줘')
+    if nlp_result:
+        print(nlp_result)
+        recommendMenu(nlp_result)
     return nlp_result
 
 def bootstrap(request):
@@ -217,3 +228,27 @@ def bootstrap(request):
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
     
     return render(request, 'main/bootstrap.html', context)
+
+def recommendMenu(menu_list):
+    # Django에서 동적으로 필드 이름을 사용하기 위해서는 Q 를 이용한다.
+    key_list = []
+    value_list = []
+    for index in menu_list:
+        word_list = index.split()
+        if len(word_list) > 1 :
+            value_list.append(word_list[0])
+            key_list.append(word_list[1])
+
+    filters = Q()
+
+    for field_name, value in zip(key_list,value_list):
+        filters &= Q(**{field_name: value})
+
+    menu_list = BurgerTable.objects.filter(filters)
+    print(menu_list)
+    #추천메뉴는 최대 4개까지만 보여줄기위함
+    if len(menu_list) > 4:
+        pass
+
+    # side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    # drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
