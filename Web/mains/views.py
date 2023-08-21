@@ -10,6 +10,9 @@ from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
 from Model.konlpy.main import *
 from django.db.models import Q,F
+from django.db.models import QuerySet
+from django.core.serializers import serialize
+
 import json
 
 k = Ko_Bert()
@@ -42,6 +45,11 @@ def index(request):
 def purchase(request):
     return render(request, 'main/purchase.html')
 
+def test(request):
+    return render(request,'main/menuReco.html')
+
+
+
 # 프론트에서 음성 인식으로 Request를 받았을 때 처리함
 def speechRecognition(request):
     if request.method == 'POST':
@@ -50,15 +58,35 @@ def speechRecognition(request):
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
         with open('../test_record_data.mp3', 'wb') as mpeg:
             mpeg.write(recordData)
+            # 위스퍼 실행
             transcription = transcriber("../test_record_data.mp3")
-            print(transcription)
-        # i_B
-        # a = i_N
-        # M_R(a)
-        return transcription['text']
+            text = transcription['text']
 
+            result = inputKonlp(text)
+            final_result = menuReco(result)
+           
+            burger_list_json = serialize('json', final_result['burger_list'])
+            side_list_json = serialize('json', final_result['side_list'])
+            dd_list_json = serialize('json',  final_result['dd_list'])
+
+            burger_list = json.loads(burger_list_json)
+            side_list = json.loads(side_list_json)
+            dd_list = json.loads(dd_list_json)
+
+            context = {
+            'burger_list': burger_list,
+            'side_list': side_list,
+            'dd_list': dd_list,
+                        }
+                    
+            #response_data = {'message': 'Audio data received and processed successfully'}
+            # return render(request, 'main/menuReco.html',context)
+            
+            return JsonResponse(context)
+        
     # Request의 method가 POST 방식이 아닌 GET 방식임
-    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+    #return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+    #return render(request, 'main/menuReco.html')
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
@@ -96,48 +124,87 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def testQuery(request):
-    d = {}
-    a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
+def menuReco(keyword):
+    burger_list = []
+    side_list = []
+    dd_list = []
+    b_query = Q()
+    s_query = Q()
+    dd_query = Q()
 
-    # query_list = ['menu_name 너겟킹', 'Side']
     # query_list = ['menu_name 제로', 'DnD']
     # query_list = ['menu_name 치즈']
     # query_list = ['menu_name 아이스_아메리카노']
+    # query_list = ['I_tomato 1']
+    # query_list = ['menu_name 너겟킹']
 
-    text = speechRecognition(request)
-    print("text : ", text)
-    query_list = inputKonlp(text)
-    print("query_list : ", query_list)
-    #query_list = ['spicy 0', 'M']
-
-    if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
+    query_list = keyword
+    print("query_list : ", type(query_list))
+    
+    if not query_list: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
-    if query_list[-1] not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
+    a = query_list[-1]    
+    print(query_list[-1])
+    if a not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
+
+    
+
+    print("----쿼리 생성 부분----")
+    # __contains : 해당 문자열이 포함되어 있는 것들 출력
+    # __lte : ... 이하인 것들 출력 (lt는 미만)
+    # __gte : ... 이상인 것들 출력 (gt는 초과)
+    for query in query_list[:-1]:
+        tlist = query.split()
+        if len(tlist) == 1:
+            tlist.append('1')
+        tlist[1] = tlist[1].replace('_', ' ')
 
         if query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query)
+            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
 
         elif query_list[-1] == 'Side':  # 사이드 질문
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            side_list = SideTable.objects.filter(s_query)
+            side_list = SideTable.objects.filter(s_query).order_by('rank')[:4]
 
-    # 특정 메뉴가 아닌 경우 추천
-    else:
-        attribute, menu = ''
-        for q in d.keys():
-            if q == 'N':    # 햄버거가 특정 되었을 때
-                attribute = 'N_calories, N_protein, N_sodium, N_sugars, N_saturated_fat'
-            elif q == 'A':    # 햄버거가 특정 되었을 때
-                query_string += ""
+        elif query_list[-1] == 'DnD':   # 음료&디저트 질문
+            dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+            dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
 
+        else:   # 기타 질문
+            if tlist[0] == 'rank':
+                b_query &= Q(**{tlist[0]+'__lte':3})
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+            elif tlist[0] == 'N_calories':
+                b_query &= Q(**{tlist[0]:tlist[1]})
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
+            else:
+                try:
+                    print(tlist)
+                    b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+                except:
+                    burger_list = QuerySet()
+                try:
+                    s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    side_list = SideTable.objects.filter(s_query).order_by('rank')[:4]
+                except:
+                    side_list = QuerySet()
+                try:
+                    dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
+                except:
+                    dd_list = QuerySet()
 
-        query_string = f"SELECT {attribute} FROM BurgerTable WHERE {menu}"
-        menu_list = BurgerTable.objects.raw(query_string)
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+    print("----쿼리 생성----")
+    print("burger_list : ", burger_list)
+    print("side_list : ", side_list)
+    print("dd_list : ", dd_list)
+
+    context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
+    #render(request, 'main/menuReco.html', context)
+    return context
 
 def inputBert(text_file):
     result = k.start(text_file)
@@ -148,29 +215,6 @@ def inputKonlp(text_file):
     nlp_result = nlp.toQuery(text_file)
     if nlp_result:
         print(nlp_result)
-        recommendMenu(nlp_result)
     return nlp_result
 
-def recommendMenu(menu_list):
-    # Django에서 동적으로 필드 이름을 사용하기 위해서는 Q 를 이용한다.
-    key_list = []
-    value_list = []
-    for index in menu_list:
-        word_list = index.split()
-        if len(word_list) > 1 :
-            value_list.append(word_list[0])
-            key_list.append(word_list[1])
 
-    filters = Q()
-
-    for field_name, value in zip(key_list,value_list):
-        filters &= Q(**{field_name: value})
-
-    menu_list = BurgerTable.objects.filter(filters)
-    print(menu_list)
-    #추천메뉴는 최대 4개까지만 보여줄기위함
-    if len(menu_list) > 4:
-        pass
-
-    # side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-    # drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
