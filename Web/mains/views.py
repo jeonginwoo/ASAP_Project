@@ -110,7 +110,7 @@ def menuReco(request):
     query_list = ['menu_name 너겟킹', 'Side']
     query_list = ['menu_name 제로', 'DnD']
     query_list = ['menu_name 치즈']
-    query_list = ['A_milk 1']
+    query_list = ['menu_name 아이스_아메리카노']
 
     if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
@@ -163,10 +163,10 @@ def inputBert(text_file):
     return result
 
 def inputKonlp(text_file):
-    nlp_result = toQuery('케찹 들어가고 불고기 안들어간 햄버거 알려줘')
+    nlp_result = toQuery(text_file)
     if nlp_result:
         print(nlp_result)
-        recommendMenu(nlp_result)
+        #recommendMenu(nlp_result)
     return nlp_result
 
 def bootstrap(request):
