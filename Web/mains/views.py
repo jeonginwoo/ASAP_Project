@@ -49,15 +49,29 @@ def speechRecognition(request):
         recordData = request.body
 
         # 이 부분에 추후 Wisper 모델 적용 및 DB 쿼리 작성 예정
-        with open('../test_record_data.mp3', 'wb') as mpeg:
+        with open('../test_record_data.wav', 'wb') as mpeg:
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
+        
+        text = transcription['text']
+        bert = inputBert(text)
+        nlp = inputKonlp(text)
+        print(f"text : {text}, bert : {bert}, nlp : {nlp}")
+        context = menuReco(nlp)
 
-        return transcription['text']
+        print("---test1---")
+        transcription = transcriber('C:/Users/joung/Visual_Studio_Code_Workspace/repos/ASAP_Project/test_record_data.wav')
 
-    # Request의 method가 POST 방식이 아닌 GET 방식임
-    return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
+        data = {"message": transcription}
+
+        print("---test2---")
+        return JsonResponse(context)
+        # return render(request, 'main/menuReco.html', context)
+
+    else:
+        # Request의 method가 POST 방식이 아닌 GET 방식임
+        return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
 
 # 프론트에서 텍스트로 Request를 받았을 때 처리함
 def textInput(request):
@@ -110,16 +124,19 @@ def menuReco(request):
     # query_list = ['I_tomato 1']
 
     # text = speechRecognition(request)
-    text = "토마토 들어간 거죠"
+    text = "피클 없는거 줘"
     print("text : ", text)
     bert = inputBert(text)
     print("bert : ", bert)
     query_list = inputKonlp(text)
     print("query_list : ", query_list)
 
-    if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
+    print("---def menuReco---")
+    print("query_list : ", query_list)
+
+    if len(query_list) == 0: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
-    if query_list[-1] not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
+    if query_list[-1] not in ['M', 'S', 'DD']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
 
     print(query_list)
@@ -138,25 +155,25 @@ def menuReco(request):
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             burger_list = BurgerTable.objects.filter(b_query)
         
-        elif query_list[-1] == 'Side':  # 사이드 질문
+        elif query_list[-1] == 'S':  # 사이드 질문
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             side_list = SideTable.objects.filter(s_query)
 
-        elif query_list[-1] == 'DnD':   # 음료&디저트 질문
+        elif query_list[-1] == 'DD':   # 음료&디저트 질문
             dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             dd_list = DDTable.objects.filter(dd_query)
 
         else:   # 기타 질문
             if tlist[0] == 'rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
             elif tlist[0] == 'N_calories':
                 b_query &= Q(**{tlist[0]:tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0]).values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
                 try:
-                    print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+                    print("else-else-b_query : ", b_query)
                     burger_list = BurgerTable.objects.filter(b_query)
                 except:
                     burger_list = []
@@ -178,6 +195,9 @@ def menuReco(request):
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
 
+    print("---end menuReco---")
+
+    # return context
     return render(request, 'main/menuReco.html', context)
 
 def inputBert(text_file):
