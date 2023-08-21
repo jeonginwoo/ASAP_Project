@@ -52,13 +52,10 @@ def speechRecognition(request):
             mpeg.write(recordData)
             transcription = transcriber("../test_record_data.mp3")
             print(transcription)
-        inputBert(transcription['text'])
-        inputKonlp(transcription['text'])
-
-
-        data = {"message": "Response OK!"}
-
-        return JsonResponse(data)
+        # i_B
+        # a = i_N
+        # M_R(a)
+        return transcription['text']
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
@@ -103,31 +100,29 @@ def testQuery(request):
     d = {}
     a = ['S_menu_name 너겟킹', 'I_sliced_cheese 1', 'I_shredded_cheese 1']
 
-    for i in a:
-        j = i.split()
-        if len(j) == 1:
-            j.append('0')
-        j[1] = j[1].replace('_', ' ')
-        d[j[0]] = j[1]
+    # query_list = ['menu_name 너겟킹', 'Side']
+    # query_list = ['menu_name 제로', 'DnD']
+    # query_list = ['menu_name 치즈']
+    # query_list = ['menu_name 아이스_아메리카노']
 
-#     # SideTable.objects.filter(menu_name__startswith='너겟킹') # 너겟킹으로 시작하는 메뉴 찾기.
-#     # BurgerTable.objects.filter(spicy__gt=0) # 맵기가 0보다 큰 메뉴 찾기
+    text = speechRecognition(request)
+    print("text : ", text)
+    query_list = inputKonlp(text)
+    print("query_list : ", query_list)
+    #query_list = ['spicy 0', 'M']
 
-    query_string = ''
+    if not len(query_list): # 들어온 값이 없으면 인기메뉴 추천
+        query_list = ['rank 1']
+    if query_list[-1] not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
+        query_list.append('else')
 
-    # 특정 메뉴 찾기
-    if 'M_menu_name' in d:
-        menu_list = BurgerTable.objects.filter(menu_name__startswith=d['M_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'S_menu_name' in d:
-        menu_list = SideTable.objects.filter(menu_name__startswith=d['S_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
-    elif 'DD_menu_name' in d:
-        menu_list = DDTable.objects.filter(menu_name__startswith=d['DD_menu_name'])
-        context = {'menu_list':menu_list}
-        return render(request, 'main/testQuery.html', context)
+        if query_list[-1] == 'M':  # 버거 질문
+            b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+            burger_list = BurgerTable.objects.filter(b_query)
+
+        elif query_list[-1] == 'Side':  # 사이드 질문
+            s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
+            side_list = SideTable.objects.filter(s_query)
 
     # 특정 메뉴가 아닌 경우 추천
     else:
@@ -150,7 +145,7 @@ def inputBert(text_file):
     return result
 
 def inputKonlp(text_file):
-    nlp_result = nlp.toQuery('케찹 들어가고 불고기 안들어간 햄버거 알려줘')
+    nlp_result = nlp.toQuery(text_file)
     if nlp_result:
         print(nlp_result)
         recommendMenu(nlp_result)
