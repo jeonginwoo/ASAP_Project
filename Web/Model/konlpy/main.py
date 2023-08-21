@@ -3,7 +3,9 @@
 #노션-ASAP프로젝트-GPT 안에 DataSet 아래에 kkma-2.0.zip 다운 받고 압축 해제하면 kkma-2.0.jar 나옴
 #......\Lib\site-packages\konlpy\java 파일 들어가면 kkma-2.0.jar 있는데 압축 해제한거로 대체하면 단어 인식 훨씬 잘해줌
 from hanspell import spell_checker
+from konlpy.tag import Kkma
 import re
+
 
 class Konlp():
     def __init__(self):
