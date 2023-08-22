@@ -12,6 +12,7 @@ from Model.konlpy.main import *
 from django.db.models import Q,F
 from django.db.models import QuerySet
 from django.core.serializers import serialize
+from .dictStorage import col_dict
 
 import json
 
@@ -61,10 +62,36 @@ def speechRecognition(request):
             # 위스퍼 실행
             transcription = transcriber("../test_record_data.wav")
             print(transcription)
-            text = transcription['text']
+            #text = transcription['text']
+            text = '칼로리로 높은 걸로 추천해 줘'
 
-            result = inputKonlp("콰트로 릴리트")
+            i_result = inputBert(text)
+            result = inputKonlp(text)
+            print(result)
+
             final_result = menuReco(result)
+            print(final_result)
+
+            for i in range(len(result)):
+                if result[i] =='or':
+                    continue
+                if i == 0 and len(result) == 1:
+                    answer = '말씀하신'
+                    answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +'등의 키워드로 추천한 메뉴 입니다.'
+                elif i == 0:
+                    answer = '말씀하신 '
+                    answer = answer +' '+'#' + col_dict[result[i]]
+                    
+                elif i >0 and len(result) -1 > i:
+                    answer = answer +' '+ '#'  + col_dict[result[i]]
+                    
+                elif len(result)-1 == i and i_result == 0:
+                    answer = answer +'#' +col_dict[result[i]] + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
+                else:
+                    answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + '등의 키워드로 추천한 메뉴 입니다.'
+                    
+            print(answer)
+            # 제시하신 "노인","인기메뉴" 등의 키워드로 추천한 메뉴입니다.
 
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
@@ -80,10 +107,12 @@ def speechRecognition(request):
             'side_list' : side_list,
             'dd_list' : dd_list,
                         }
+            
+            # 추천해야하는 메뉴가 없는 경우
             if len(burger_list_json) == 2 and len(side_list_json) == 2 and len(dd_list_json) == 2:
                 context = {
                     'speaker' : text,
-                    'error' : '말씀하신 메뉴는 없습니다!',
+                    'error' : '죄송합니다. 말씀하신 내용과 관련된 추천 가능한 메뉴가 없습니다.',
                 }
                 return JsonResponse(context)
         #if len(burger_list) == 0 and len(side_list) == 0 and len(dd_list) == 0:
@@ -225,7 +254,6 @@ def menuReco(keyword):
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
                 try:
-
                     print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
