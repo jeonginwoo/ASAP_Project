@@ -12,7 +12,6 @@ class BurgerTable(models.Model):
     price = models.IntegerField(default=5000, verbose_name='가격')
     image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     info = models.TextField(default="맛있다.", verbose_name='정보')
-    rank = models.IntegerField(default=99, verbose_name='인기순위')
     spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
@@ -63,6 +62,19 @@ class BurgerTable(models.Model):
     P_shrimp = models.IntegerField(default=0, verbose_name='패티 : 새우')
     P_chicken = models.IntegerField(default=0, verbose_name='패티 : 치킨')
     P_steak = models.IntegerField(default=0, verbose_name='패티 : 스테이크')
+
+    # rank
+    R_rank = models.IntegerField(default=99, verbose_name='인기')
+    R_man = models.IntegerField(default=99, verbose_name='남성 인기')
+    R_women = models.IntegerField(default=99, verbose_name='여성 인기')
+    R_yman = models.IntegerField(default=99, verbose_name='젊은 남성 인기')
+    R_ywomen = models.IntegerField(default=99, verbose_name='젊은 여성 인기')
+    R_oman = models.IntegerField(default=99, verbose_name='노인 남성 인기')
+    R_owomen = models.IntegerField(default=99, verbose_name='노인 여성 인기')
+    R_young = models.IntegerField(default=99, verbose_name='젊은이 인기')
+    R_old = models.IntegerField(default=99, verbose_name='어르신 인기')
+    R_summer = models.IntegerField(default=99, verbose_name='여름 인기')
+    R_winter = models.IntegerField(default=99, verbose_name='겨울 인기')
 
     def __str__(self):
         return self.menu_name
