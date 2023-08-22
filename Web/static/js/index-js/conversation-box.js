@@ -5,8 +5,8 @@ let timeout;
 
 /**
  * 사용자의 음성을 텍스트로 보여주는 메소드
- * 
- * @param {*String} speak_text 
+ *
+ * @param {*String} speak_text
  */
 function speak(speak_text) {
     let temp_speak = "이 부분에 원하는 것을 입력하거나, 음성 인식 버튼을 눌러 원하는 것을 말해주세요.";
@@ -21,8 +21,8 @@ function speak(speak_text) {
 
 /**
  * GPT의 답변을 div에 띄워주는 메소드
- * 
- * @param {*String} answer_text 
+ *
+ * @param {*String} answer_text
  */
 function answer(answer_text) {
     let temp_answer = answer_text;

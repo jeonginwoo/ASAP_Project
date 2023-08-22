@@ -41,7 +41,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-''' 
+'''
 Ko Bert사용 예시
 kk = Ko_Bert()
 a = kk.start('버거 추천해줘')

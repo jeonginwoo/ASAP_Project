@@ -6,7 +6,7 @@ col_dict = {
     'I_tomato 1' : '토마토가 들어간',
     'I_tomato 0' : '토마토가 안들어간',
     'I_shredded_cheese 1' : '슈레드 치즈가 들어간',
-    'I_shredded_cheese 0' : '슈레드 치즈가 안들어간', 
+    'I_shredded_cheese 0' : '슈레드 치즈가 안들어간',
     'I_pickle 1' : '피클이 들어간',
     'I_pickle 0' : '피클이 안들어간',
     'I_onion 1' : '양파가 들어간',
@@ -70,6 +70,7 @@ col_dict = {
     'spicy 1' : '매운',
     'spicy 0' : '안매운'
 }
+
 
 
 

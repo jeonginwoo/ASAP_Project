@@ -53,15 +53,15 @@ def speechRecognition(request):
             transcription = transcriber("../test_record_data.wav")
             print(transcriber)
             text = transcription['text']
-            
+
 
             i_result = inputBert(text)
             result = inputKonlp(text)
 
             result = inputKonlp(text)
             final_result = menuReco(result,i_result)
-       
-            
+
+
             if len(result) == 0:
                 context = {
                     'speaker' : text,
@@ -72,10 +72,10 @@ def speechRecognition(request):
             for i in range(len(result)):
                 print(result[i])
                 if result[i] =='or':
-                    
+
                     answer = '말씀하신'
                     continue
-                    
+
                 if i == 0 and len(result) == 1:
                     answer = '말씀하신'
                     answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +' 등의 키워드로 추천한 메뉴 입니다.'
@@ -90,16 +90,16 @@ def speechRecognition(request):
                         answer = answer + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
                     else:
                         answer = answer +'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
-                    
+
                 elif i >0 and ( len(result) -1 )> i:
                     answer = answer +' '+ '#'  + col_dict[result[i]]
-                    
+
                 elif len(result)-1 == i and i_result == 0:
                     answer = answer +'#' +col_dict[result[i]] + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
-                
+
                 else:
                     answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
-                    
+
             print(answer)
             # 제시하신 "노인","인기메뉴" 등의 키워드로 추천한 메뉴입니다.
 
@@ -117,7 +117,7 @@ def speechRecognition(request):
             'side_list' : side_list,
             'dd_list' : dd_list,
                         }
-            
+
             # 추천해야하는 메뉴가 없는 경우
             if len(burger_list_json) == 2 and len(side_list_json) == 2 and len(dd_list_json) == 2:
                 context = {
@@ -180,10 +180,10 @@ def textInput(request):
             for i in range(len(result)):
                 print(result[i])
                 if result[i] =='or':
-                    
+
                     answer = '말씀하신'
                     continue
-                    
+
                 if i == 0 and len(result) == 1:
                     answer = '말씀하신'
                     answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +' 등의 키워드로 추천한 메뉴 입니다.'
@@ -198,13 +198,13 @@ def textInput(request):
                         answer = answer + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
                     else:
                         answer = answer +'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
-                    
+
                 elif i >0 and ( len(result) -1 )> i:
                     answer = answer +' '+ '#'  + col_dict[result[i]]
-                    
+
                 elif len(result)-1 == i and i_result == 0:
                     answer = answer +'#' +col_dict[result[i]] + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
-                
+
 
                 else:
                     answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
@@ -218,12 +218,12 @@ def textInput(request):
             'answer' : answer,
                         }
 
-    
+
             return JsonResponse(context)
         except: # Requset 형식이 올바른 JSON 형식이 아님
-            
+
             return JsonResponse({"message": "Invalid JSON format!", "status": 400}, status = 400)
-            
+
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
@@ -339,7 +339,7 @@ def menuReco(keyword,bert):
                     s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     side_list = SideTable.objects.filter(s_query).order_by('R_rank')[:4]
                 except:
-                    
+
                     side_list = []
                 try:
                     dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
@@ -351,7 +351,7 @@ def menuReco(keyword,bert):
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
     print(context)
-    
+
 
     return context
 
@@ -365,4 +365,3 @@ def inputKonlp(text_file):
     if nlp_result:
         print(nlp_result)
     return nlp_result
-

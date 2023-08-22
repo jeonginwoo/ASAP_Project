@@ -174,13 +174,14 @@ class Konlp():
 
         #print(re2)
 
-
+        isOrder = ''
         re3 = []
         for i in range(len(re2)):
             how = ''
             for j in re2[i].split():
-                if j in self.neu+self.cat+['A','N','asc','desc','or']:
+                if j in self.neu+self.cat+['A','N','or']:
                     re3.append(j)
+                elif j in ['asc','desc']: isOrder = j
                 elif j in self.ham+self.side+self.drink:
                     if j in self.ham: what = 'M'
                     elif j in self.side : what = 'S'
@@ -197,5 +198,5 @@ class Konlp():
                 elif j in ['0','1'] : how = j
                 else :
                     re3.append(j + ' ' + how)
-
+        if isOrder != '' : re3.append(isOrder)
         return re3

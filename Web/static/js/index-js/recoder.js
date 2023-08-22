@@ -29,14 +29,52 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {    // 기�
                     })
                     .then((response) => response.json())    //response를 json으로 파싱
                     .then((data) => {
-                        console.log(data.burger_list);
-                        console.log(data.side_list);
-                        console.log(data.dd_list);
-                        console.log(data.speaker);
-                        console.log(data.error);
+                        const menu_list = [];
+
+                        if (data.burger_list) {
+                            data.burger_list.forEach(item => {
+                                const name = item.fields.menu_name;
+                                const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                const price = item.fields.price;
+                                const etc = item.fields.info;
+    
+                                menu_list.push({name: name, img: img, price: price, etc: etc});
+                            });
+                        }
+
+                        if (data.side_list) {
+                            data.side_list.forEach(item => {
+                                const name = item.fields.menu_name;
+                                const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                const price = item.fields.price;
+                                const etc = item.fields.info;
+    
+                                menu_list.push({name: name, img: img, price: price, etc: etc});
+                            });
+                        }
+
+                        if (data.dd_list) {
+                            data.dd_list.forEach(item => {
+                                const name = item.fields.menu_name;
+                                const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                const price = item.fields.price;
+                                const etc = item.fields.info;
+    
+                                menu_list.push({name: name, img: img, price: price, etc: etc});
+                            });
+                        }
+
+                        if (menu_list.length === 0) {
+                            answer(data.error);
+                        }
+                        else {
+                            show_menu_list(menu_list);
+                        }
+
+                        speak(data.speaker);
                     })
                     .catch((err) => {
-                        location.href = err;
+                        alert(err);
                     });
                 };
 

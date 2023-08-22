@@ -26,16 +26,16 @@ class Ko_Bert():
     9 : '여름이었다',
     10 : '겨울입니다',
     11 : '기타'
-}''' 
+}'''
         self.pre = CustomPredictor(self.bert, self.tokenizer, self.device)# self.labels,self.device)
-        
+
 
 
     # 사용자 입력에 대하여 예측 후 출력을 낼 수 있는 간단한 함수를 생성합니다.
     def predict_sentence(self,pre,text):
         input_sentence = text#input('문장을 입력해 주세요: ')
         return pre.predict(input_sentence)
-    
+
     def start(self,text):
         return self.predict_sentence(self.pre, text)
 

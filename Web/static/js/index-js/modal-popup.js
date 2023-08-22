@@ -1,5 +1,5 @@
 const modal_info = document.getElementById('modal-info');
-const scribe_button = document.getElementById('scribe');
+// const scribe_button = document.getElementById('scribe');
 const modal_info_close_button_up = modal_info.querySelector('.btn-close');
 const modal_info_close_button_down = modal_info.querySelector('.btn-secondary');
 const modal_info_image = modal_info.querySelector('.image');
@@ -38,7 +38,7 @@ function info_popup (menu) {
     };
 };
 
-scribe_button.addEventListener('click', info_popup(selected_menu));
+// scribe_button.addEventListener('click', info_popup(selected_menu));
 
 modal_info_close_button_up.addEventListener("click", () => {
     if (isScribe) isScribe = false;

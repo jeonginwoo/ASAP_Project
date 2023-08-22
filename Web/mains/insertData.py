@@ -85,7 +85,7 @@ def insert_Menu():
                     menu.save()
 
 def insert_Side():
-    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/사이드_CSV.csv') as csv_file:
+    with open('../Data/사이드_CSV.csv', encoding = 'utf-8') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
@@ -122,7 +122,7 @@ def insert_Side():
                     menu.save()
 
 def insert_DD():
-    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/음료&디저트_CSV.csv') as csv_file:
+    with open('../Data/음료&디저트_CSV.csv', encoding = 'utf-8') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
