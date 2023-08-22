@@ -93,6 +93,7 @@
 
     .order-container {
       display: flex;
+      width: 80%
     }
 
     #result-price {
@@ -150,6 +151,12 @@
     #table_body td span {
       margin-left: auto;
     }
+
+    #purchase {
+      font-size: 300%;
+      width: 20%;
+      height: 100px;
+    }
   </style>
 </head>
 
@@ -160,7 +167,6 @@
   <p>
     <button type="button" class="btn btn-primary btn-sm" id="scribe">설명</button>
     <!-- <button type="button" class="btn btn-primary btn-sm" id="select-set">단품/세트</button> -->
-    <button type="button" class="btn btn-primary btn-sm" id="purchase">결제</button>
   </p>
   <hr>
 
@@ -187,24 +193,28 @@
     </div>
   </div>
 
-  <div class="order-container">
-    <table id="table" class="table table-striped table-bordered">
-
-      <thead id="table_head">
-        <tr>
-          <th scope="col">주문 메뉴</th>
-        </tr>
-      </thead>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="order-container">
+      <table id="table" class="table table-striped table-bordered">
   
-      <tbody id="table_body" class="table-group-divider">
-      </tbody>
-    </table>
-
-    <div class="order-result card mb-3">
-      <h3 class="result-header" style="display: inline; padding: 10px">주문 금액</h3>
-      <div id="result-price"></div>
+        <thead id="table_head">
+          <tr>
+            <th scope="col">주문 메뉴</th>
+          </tr>
+        </thead>
+    
+        <tbody id="table_body" class="table-group-divider">
+        </tbody>
+      </table>
+  
+      <div class="order-result card mb-3">
+        <h3 class="result-header" style="display: inline; padding: 10px">주문 금액</h3>
+        <div id="result-price"></div>
+      </div>
+  
     </div>
-
+  
+    <button type="button" class="btn btn-primary btn-sm" id="purchase">결제</button>
   </div>
   
   <div class="modal" id="modal-info">
@@ -248,30 +258,30 @@
   </div>
 
   <input type="hidden" id="csrfToken" value="{{ csrf_token }}"> <!--Django CSRF 토큰 값을 JS 파일로 보내주기 위한 부분-->
-  <script src="{% static 'js/index-js/modal-popup.js' %}?ver=7"></script>
-  <script src="{% static 'js/index-js/conversation-box.js' %}?ver=3"></script>
-  <script src="{% static 'js/index-js/adjust-table.js' %}?ver=3"></script>
-  <script src="{% static 'js/index-js/recoder.js' %}?ver=1"></script>
-  <script src="{% static 'js/index-js/menu-list.js' %}?ver=6"></script>
-  <script src="{% static 'js/index-js/order-list-to-purchase-page.js' %}?ver=6"></script>
+  <script src="{% static 'js/index-js/modal-popup.js' %}?ver=8"></script> <!--메뉴 설명을 띄워주는 팝업 부분-->
+  <script src="{% static 'js/index-js/conversation-box.js' %}?ver=3"></script>  <!--사용자 입력 TextBox와 GPT 답변 부분을 업데이트 해주는 JS 파일-->
+  <script src="{% static 'js/index-js/adjust-table.js' %}?ver=5"></script>  <!--주문 내역 테이블을 업데이트해주는 JS 파일-->
+  <script src="{% static 'js/index-js/recoder.js' %}?ver=1"></script> <!--음성 인식을 위한 JS 파일-->
+  <script src="{% static 'js/index-js/menu-list.js' %}?ver=7"></script> <!--사용자의 요청에 따라 적절한 메뉴를 보여주는 JS 파일-->
+  <script src="{% static 'js/index-js/order-list-to-purchase-page.js' %}?ver=7"></script> <!--주문 내역을 결제창으로 보내주는 JS 파일-->
   <script>
-    var m_list = []
-    {% for m in menu_list %}
-    m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
-    // console.log(m_list[0][0])
-    {% endfor %}
-    menu_burger.onclick = () => {
-      adjust_table("버거", {{ menu_list| length }}, m_list);
-      };
+    // var m_list = []
+    // {% for m in menu_list %}
+    // m_list.push(["{{ m.menu_name }}", "{{ m.price }}", "{{ m.image }}"]);
+    // // console.log(m_list[0][0])
+    // {% endfor %}
+    // menu_burger.onclick = () => {
+    //   adjust_table("버거", {{ menu_list| length }}, m_list);
+    //   };
 
-    // 사이드 메뉴 버튼 클릭시
-    menu_side.onclick = () => {
-      adjust_table("사이드", {{ side_list| length }}, s_list);
-      };
+    // // 사이드 메뉴 버튼 클릭시
+    // menu_side.onclick = () => {
+    //   adjust_table("사이드", {{ side_list| length }}, s_list);
+    //   };
 
-    menu_baverage.onclick = () => {
-      adjust_table("음료", {{ drink_list| length }}, d_list);
-      };
+    // menu_baverage.onclick = () => {
+    //   adjust_table("음료", {{ drink_list| length }}, d_list);
+    //   };
 
   </script>
 </body>

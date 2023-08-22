@@ -2,21 +2,21 @@ const record = document.getElementById('record_button');
 const csrfToken = document.getElementById('csrfToken').value;   //Django CSRF 토큰 값
 let isRecording = false;    // 녹음 중인지 판별하는 변수
 
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {    // 기기의 마이크 지원 여부 판정
     navigator.mediaDevices.getUserMedia({audio: true})  // 기기의 마이크 입력을 사용할 수 있게 설정
     .then((stream) => {
         const mediaRecorder = new MediaRecorder(stream);    // 음성 녹음을 위해 MediaRecoder에 마이크 연결
 
-            record.onclick = () => {
-                if (!isRecording) {
-                    let chunks = [];
+        record.onclick = () => {
+            if (!isRecording) {
+                let chunks = [];
 
-                    mediaRecorder.ondataavailable = async (event) => {
-                        chunks.push(event.data);
-                    };
+                mediaRecorder.ondataavailable = async (event) => {  // 음성 녹음 중 1초 단위로 chunks에 데이터를 push
+                    chunks.push(event.data);
+                };
 
-                    mediaRecorder.onstop = (event) => {
-                        const recordData = new Blob(chunks, { "type": "audio/mpeg codecs=opus" });
+                mediaRecorder.onstop = (event) => { // 음성 녹음이 종료되면 실행
+                    const recordData = new Blob(chunks, { "type": "audio/mpeg codecs=opus" });
 
                     fetch('http://127.0.0.1:8000/main/speechrecognize/', {
                         method: "POST",
@@ -38,13 +38,13 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     });
                 };
 
-                mediaRecorder.start(1000);
+                mediaRecorder.start(1000);  // 녹음 시작
                 isRecording = true;
 
                 record.style.background = "red";
                 record.style.color = "black";
 
-                setTimeout(() => {
+                setTimeout(() => {  // 3초 후 녹음 종료
                     if (mediaRecorder.state = 'recording') {
                         mediaRecorder.stop();
 

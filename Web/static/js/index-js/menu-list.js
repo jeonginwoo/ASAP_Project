@@ -22,10 +22,6 @@ function add_item_html(object) {
     menu_item.getElementById('menu-img').setAttribute('src', menu_img);
     menu_item.querySelector('#menu-price').textContent = menu_price.toLocaleString('ko-KR') + ' 원';
 
-    // if (Object.keys(menu_etc).length !== 0) {
-    //     menu_item.getElementById('menu-etc').innerText = "세트: " + menu_etc.set.toLocaleString('ko-KR') + '원' + " / 단품: " + menu_etc.mono.toLocaleString('ko-KR') + '원';
-    // }
-
     menu_item.querySelector('#' + menu_name).addEventListener("click", () => {
         add_table({name: menu_name, img: menu_img, price: menu_price});
     });
@@ -46,12 +42,13 @@ function delete_item_html(object) {
 
 /**
  * object에 해당하는 주문 item을 추가
- *
- * @param {*} object -
+ * 
  * - object.name(String): 메뉴의 이름
  * - object.img(String): 메뉴 이미지의 저장 위치
  * - object.price(Number): 메뉴 가격
- * - object.etc(String): 메뉴 세부 정보 (ex. 단품/세트, 치즈 추가, 토마토 제외 등...)
+ * - object.etc(String): 메뉴 기타 정보
+ *
+ * @param {*object} object
  */
 function add_item(object) {
     add_item_html(object);
@@ -60,12 +57,6 @@ function add_item(object) {
 
 /**
  * 모든 메뉴 item을 삭제
- *
- * @param {*} object -
- * - object.name(String): 메뉴의 이름
- * - object.img(String): 메뉴 이미지의 저장 위치
- * - object.price(Number): 메뉴 가격
- * - object.etc(String): 메뉴 세부 정보 (ex. 단품/세트, 치즈 추가, 토마토 제외 등...)
  */
 function delete_items() {
     const menu_list = document.querySelector('.ordered-list');
@@ -80,6 +71,13 @@ function delete_items() {
 
 /**
  * list에 저장된 item들을 모두 보여줌
+ * 
+ * 이때, list의 원소 item의 구성은 다음과 같음
+ * 
+ * - item.name(String): 메뉴의 이름
+ * - item.img(String): 메뉴 이미지의 저장 위치
+ * - item.price(Number): 메뉴 가격
+ * - item.etc(String): 메뉴 기타 정보
  * 
  * @param {*Array} list 
  */
@@ -117,7 +115,7 @@ show_menu_list(item_list);
 
 item_list = [];
 
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 4; i++) {
     let menu_name = '메뉴' + String(i + 1);
     let menu_img = img_list[i];
     let menu_price = Math.floor(Math.random() * 50000);
