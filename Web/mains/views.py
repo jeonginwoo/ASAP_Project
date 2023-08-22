@@ -59,7 +59,7 @@ def speechRecognition(request):
             result = inputKonlp(text)
 
             result = inputKonlp(text)
-            final_result = menuReco(result)
+            final_result = menuReco(result,i_result)
        
             
             if len(result) == 0:
@@ -148,7 +148,7 @@ def textInput(request):
 
             print(f'konlp : {result}')
 
-            final_result = menuReco(result)
+            final_result = menuReco(result,i_result)
             print('--------------------------------------')
             print(f'menu_result : {final_result}')
 
@@ -246,13 +246,18 @@ def testDD(request):
     context = {'dd_list': dd_list}
     return render(request, 'main/list/dd_list.html', context)
 
-def menuReco(keyword):
+def menuReco(keyword,bert):
     burger_list = []
     side_list = []
     dd_list = []
     b_query = Q()
     s_query = Q()
     dd_query = Q()
+    bert_list = ['R_rank','R_man','R_women','R_yman','R_ywomen','R_oman','R_owomen','R_young','R_old','R_summer','R_winter']
+    r_query = bert_list[bert]
+    if bert == 11:
+        r_query = 'R_rank'
+    print(bert)
 
 
     query_list = keyword
@@ -296,11 +301,11 @@ def menuReco(keyword):
 
         if tlist[0] == 'or':
             b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
 
         elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
+            burger_list = BurgerTable.objects.all().order_by(r_query)[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
 
@@ -327,7 +332,7 @@ def menuReco(keyword):
             else:
                 try:
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
+                    burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
                 except:
                     burger_list = []
                 try:
