@@ -21,9 +21,9 @@ nlp = Konlp()
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
-    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-    side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
-    drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('R_rank')[:6]
+    side_list = SideTable.objects.all().values('menu_name','price','image').order_by('R_rank')[:6]
+    drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('R_rank')[:6]
 
     context = {
         'menu_list': menu_list,
@@ -180,7 +180,7 @@ def menuReco(keyword):
 
 
     if not query_list: # 들어온 값이 없으면 인기메뉴 추천
-        query_list = ['rank 1']
+        query_list = ['R_rank 1']
 
     if  query_list[-1] not in ['M', 'S', 'DD','asc','desc']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
@@ -225,20 +225,20 @@ def menuReco(keyword):
 
         if tlist[0] == 'or':
             b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
 
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            side_list = SideTable.objects.filter(s_query).order_by('rank')[:4]
+            side_list = SideTable.objects.filter(s_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'DD':   # 음료&디저트 질문
             dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
+            dd_list = DDTable.objects.filter(dd_query).order_by('R_rank')[:4]
         elif query_list[-1] == 'asc':   # 칼로리 낮은순으로
             burger_list = BurgerTable.objects.all().order_by(f'{tlist[0]}')[:4]
 
@@ -247,27 +247,27 @@ def menuReco(keyword):
 
 
         else:   # 기타 질문
-            if tlist[0] == 'rank':
+            if tlist[0] == 'R_rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
             elif tlist[0] == 'N_calories':
                 b_query &= Q(**{tlist[0]:tlist[1]})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
+                burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
                 try:
                     print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+                    burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
                 except:
                     burger_list = QuerySet()
                 try:
                     s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                    side_list = SideTable.objects.filter(s_query).order_by('rank')[:4]
+                    side_list = SideTable.objects.filter(s_query).order_by('R_rank')[:4]
                 except:
                     side_list = QuerySet()
                 try:
                     dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                    dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
+                    dd_list = DDTable.objects.filter(dd_query).order_by('R_rank')[:4]
                 except:
                     dd_list = QuerySet()
 

@@ -86,7 +86,7 @@ class SideTable(models.Model):
     price = models.IntegerField(default=5000, verbose_name='가격')
     image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     info = models.TextField(default="맛있다.", verbose_name='정보')
-    rank = models.IntegerField(default=99, verbose_name='인기순위')
+    R_rank = models.IntegerField(default=99, verbose_name='인기순위')
     spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
@@ -117,7 +117,7 @@ class DDTable(models.Model):    # Drink & Dessert
     price = models.IntegerField(default=5000, verbose_name='가격')
     image = models.ImageField(verbose_name='이미지', null=True, blank=True)
     info = models.TextField(default="맛있다.", verbose_name='정보')
-    rank = models.IntegerField(default=99, verbose_name='인기순위')
+    R_rank = models.IntegerField(default=99, verbose_name='인기순위')
     spicy = models.IntegerField(default=0, verbose_name='맵기')
 
     # nutrition information
