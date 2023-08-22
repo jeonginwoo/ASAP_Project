@@ -63,7 +63,7 @@ def speechRecognition(request):
             print(transcription)
             text = transcription['text']
 
-            result = inputKonlp("콰트로 릴리트")
+            result = inputKonlp(text)
             final_result = menuReco(result)
 
             burger_list_json = serialize('json', final_result['burger_list'])
