@@ -1,6 +1,7 @@
 const menu_list = document.querySelector('.ordered-list');
 
 let item_list = [];     // 주문 리스트
+let active_item = null;
 
 /**
  * object 정보에 해당하는 주문 item을 html 문서에 추가
@@ -22,10 +23,12 @@ function add_item_html(object) {
     menu_item.getElementById('menu-img').setAttribute('src', menu_img);
     menu_item.querySelector('#menu-price').textContent = menu_price.toLocaleString('ko-KR') + ' 원';
 
-    menu_item.querySelector('#' + menu_name).addEventListener("click", () => {
-        add_table({name: menu_name, img: menu_img, price: menu_price});
+    const ordered_item = menu_item.querySelector('.ordered-item');
+
+    ordered_item.addEventListener('click', () => {
+        add_table({name: menu_name, img: menu_img, price: menu_price, etc: menu_etc});
     });
-    
+
     menu_list.append(menu_item);
 };
 
