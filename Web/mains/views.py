@@ -65,11 +65,11 @@ def speechRecognition(request):
 
             result = inputKonlp(text)
             final_result = menuReco(result)
-            
+
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
             dd_list_json = serialize('json',  final_result['dd_list'])
-            
+
             burger_list = json.loads(burger_list_json)
             side_list = json.loads(side_list_json)
             dd_list = json.loads(dd_list_json)
@@ -79,7 +79,7 @@ def speechRecognition(request):
             'burger_list': burger_list,
             'side_list' : side_list,
             'dd_list' : dd_list,
-            
+
                         }
 
             #response_data = {'message': 'Audio data received and processed successfully'}
@@ -146,7 +146,7 @@ def menuReco(keyword):
 
     if not query_list: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
-    
+
     if  query_list[-1] not in ['M', 'S', 'DD','asc','desc']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
 
@@ -206,10 +206,10 @@ def menuReco(keyword):
             dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
         elif query_list[-1] == 'asc':   # 칼로리 낮은순으로
             burger_list = BurgerTable.objects.all().order_by(f'{tlist[0]}')[:4]
-            
+
         elif query_list[-1] == 'desc':   # 칼로리 높은 순으로
             burger_list = BurgerTable.objects.all().order_by(f'-{tlist[0]}')[:4]
-            
+
 
         else:   # 기타 질문
             if tlist[0] == 'rank':
