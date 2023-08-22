@@ -254,10 +254,12 @@ def menuReco(keyword,bert):
     b_query = Q()
     s_query = Q()
     dd_query = Q()
-    bert_list = ['R_rank','R_man','R_women','R_yman','R_ywomen','R_oman','R_owomen','R_young','R_old','R_summer','R_winter']
-    r_query = bert_list[bert]
     if bert == 11:
         r_query = 'R_rank'
+    else:    
+        bert_list = ['R_rank','R_man','R_women','R_yman','R_ywomen','R_oman','R_owomen','R_young','R_old','R_summer','R_winter']
+        r_query = bert_list[bert]
+   
     print(bert)
 
 

@@ -42,7 +42,7 @@ col_dict = {
     'S_mayo 1' : '마요네즈 들어간',
     'S_mayo 0' : '마요네즈 안들어간',
     'S_bulgogi 1': '불고기 들어간',
-    'S_bulgogi 1': '불고기 안들어간',
+    'S_bulgogi 0': '불고기 안들어간',
     'S_barbecue 1' : '바비큐 들어간',
     'S_barbecue 0' : '바비큐 안들어간',
     'S_ketchup 1' : '케찹 들어간',
