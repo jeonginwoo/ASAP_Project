@@ -66,8 +66,6 @@ def speechRecognition(request):
             result = inputKonlp(text)
             final_result = menuReco(result)
 
-            print(final_result)
-
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
             dd_list_json = serialize('json',  final_result['dd_list'])
