@@ -304,4 +304,7 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+#FFMPEG 6.0  full build
+ffmpeg-6.0-full_build/
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,django

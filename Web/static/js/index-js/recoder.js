@@ -29,7 +29,11 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         })
                             .then((response) => response.json())    //response를 json으로 파싱
                             .then((data) => {
-                                console.log(data.message);
+                                console.log(data.burger_list);
+                                console.log(data.side_list);
+                                console.log(data.dd_list);
+                                console.log(data.speaker);
+                                console.log(data.error);
                             })
                             .catch((err) => {
                                 location.href = err;
@@ -43,7 +47,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         // audio.play();
                     };
 
-                    mediaRecorder.start(500);
+                    mediaRecorder.start(1000);
                     isRecording = true;
 
                     record.style.background = "red";
@@ -58,7 +62,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         };
 
                         isRecording = false;
-                    }, 600)
+                    }, 3000)
                 };
             };
         }).catch((err) => {
