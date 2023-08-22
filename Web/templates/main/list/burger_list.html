@@ -20,10 +20,6 @@
                     <td>{{ burger.info }}</td>
                 </tr>
                 <tr>
-                    <th align="right" valign="top">인기 순위</th>
-                    <td>{{ burger.rank }}</td>
-                </tr>
-                <tr>
                     <th align="right" valign="top">맵기</th>
                     <td>{{ burger.spicy }}단계</td>
                 </tr>
@@ -94,6 +90,23 @@
                         {% if burger.S_tartar %} 타르타르 소스<br /> {% endif %}
                         {% if burger.S_baconjam %} 베이컨잼<br /> {% endif %}
                         {% if burger.S_mustard %} 머스타드<br /> {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    {#---------- 순위 ----------#}
+                    <th align="right" valign="top">인기 순위</th>
+                    <td>
+                        순위 : {{ burger.R_rank }}<br />
+                        남성 순위 : {{ burger.R_man }}<br />
+                        여성 순위 : {{ burger.R_women }}<br />
+                        젊은남성 순위 : {{ burger.R_yman }}<br />
+                        젊은여성 순위 : {{ burger.R_ywomen }}<br />
+                        노인남성 순위 : {{ burger.R_oman }}<br />
+                        노인여성 순위 : {{ burger.R_owomen }}<br />
+                        젊은이 순위 : {{ burger.R_young }}<br />
+                        어르신 순위 : {{ burger.R_old }}<br />
+                        여름 순위 : {{ burger.R_summer }}<br />
+                        겨울 순위 : {{ burger.R_winter }}<br />
                     </td>
                 </tr>
             </tbody>

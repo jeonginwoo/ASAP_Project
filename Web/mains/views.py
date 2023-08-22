@@ -69,6 +69,9 @@ def speechRecognition(request):
             result = inputKonlp(text)
             print(result)
 
+
+
+            result = inputKonlp(text)
             final_result = menuReco(result)
             print(final_result)
 
@@ -291,3 +294,4 @@ def inputKonlp(text_file):
     if nlp_result:
         print(nlp_result)
     return nlp_result
+

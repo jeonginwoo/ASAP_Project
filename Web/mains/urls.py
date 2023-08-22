@@ -13,9 +13,5 @@ urlpatterns = [
     # 메뉴 리스트 확인 페이지
     path('burgerlist/', views.testBurger, name='testBurger'),
     path('sidelist/', views.testSide, name='testSide'),
-    path('ddlist/', views.testDD, name='testDD'),
-    path('menuReco/',views.test, name = 'test'),
-
-    # 추천 리스트 페이지
-    
+    path('ddlist/', views.testDD, name='testDD'),    
 ]
