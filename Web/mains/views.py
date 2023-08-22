@@ -20,7 +20,7 @@ nlp = Konlp()
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
-    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('R_rank')[:6]
     side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
     drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
 
@@ -65,6 +65,8 @@ def speechRecognition(request):
 
             result = inputKonlp(text)
             final_result = menuReco(result)
+
+            print(final_result)
 
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
@@ -195,11 +197,11 @@ def menuReco(keyword):
 
         if tlist[0] == 'or':
             b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
 
@@ -217,7 +219,7 @@ def menuReco(keyword):
 
 
         else:   # 기타 질문
-            if tlist[0] == 'rank':
+            if tlist[0] == 'R_rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
             elif tlist[0] == 'N_calories':
@@ -228,7 +230,7 @@ def menuReco(keyword):
 
                     print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-                    burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
+                    burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
                 except:
                     burger_list = QuerySet()
                 try:

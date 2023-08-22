@@ -21,14 +21,14 @@
 </head>
 
 <body>
-  <h1>초기 상태v1</h1>
+  <!-- <h1>초기 상태v1</h1>
 
   <br>
   <p>
     <button type="button" class="btn btn-primary btn-sm" id="scribe">설명</button>
-    <!-- <button type="button" class="btn btn-primary btn-sm" id="select-set">단품/세트</button> -->
+    <button type="button" class="btn btn-primary btn-sm" id="select-set">단품/세트</button>
   </p>
-  <hr>
+  <hr> -->
 
   <textarea id="speak" class="form-floating mb-3 scroll-bar-style"></textarea>
 
@@ -45,7 +45,7 @@
       <template id="temp">
         <div class="ordered-item card mb-3">
           <h3 class="menu-name card-header"></h3>
-          <img id="menu-img" style="display: block; margin: 10px auto" , width="150" , height="200">
+          <img id="menu-img" style="display: block; margin: 20px auto" , width="200" , height="150">
           <h4 id="menu-price"></h4>
           <p id="menu-etc"></p>
         </div>
@@ -118,11 +118,11 @@
   </div>
 
   <input type="hidden" id="csrfToken" value="{{ csrf_token }}"> <!--Django CSRF 토큰 값을 JS 파일로 보내주기 위한 부분-->
-  <script src="{% static 'js/index-js/modal-popup.js' %}?ver=8"></script> <!--메뉴 설명을 띄워주는 팝업 부분-->
-  <script src="{% static 'js/index-js/conversation-box.js' %}?ver=3"></script>  <!--사용자 입력 TextBox와 GPT 답변 부분을 업데이트 해주는 JS 파일-->
+  <script src="{% static 'js/index-js/modal-popup.js' %}?ver=9"></script> <!--메뉴 설명을 띄워주는 팝업 부분-->
+  <script src="{% static 'js/index-js/conversation-box.js' %}?ver=7"></script>  <!--사용자 입력 TextBox와 GPT 답변 부분을 업데이트 해주는 JS 파일-->
   <script src="{% static 'js/index-js/adjust-table.js' %}?ver=5"></script>  <!--주문 내역 테이블을 업데이트해주는 JS 파일-->
-  <script src="{% static 'js/index-js/recoder.js' %}?ver=1"></script> <!--음성 인식을 위한 JS 파일-->
-  <script src="{% static 'js/index-js/menu-list.js' %}?ver=8"></script> <!--사용자의 요청에 따라 적절한 메뉴를 보여주는 JS 파일-->
+  <script src="{% static 'js/index-js/recoder.js' %}?ver=4"></script> <!--음성 인식을 위한 JS 파일-->
+  <script src="{% static 'js/index-js/menu-list.js' %}?ver=10"></script> <!--사용자의 요청에 따라 적절한 메뉴를 보여주는 JS 파일-->
   <script src="{% static 'js/index-js/order-list-to-purchase-page.js' %}?ver=7"></script> <!--주문 내역을 결제창으로 보내주는 JS 파일-->
   <script>
     // var m_list = []

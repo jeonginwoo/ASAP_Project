@@ -1,6 +1,8 @@
 const speak_textarea = document.getElementById('speak');
 const answer_div = document.getElementById('answer');
 
+let debounceTimeout;    // timeoutID를 받을 변수
+
 /**
  * 사용자의 음성을 텍스트로 보여주는 메소드
  * 
@@ -36,30 +38,34 @@ speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부�
     if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
 
-        fetch("http://127.0.0.1:8000/main/textinput/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": csrfToken,   //CSRF 토큰 값을 같이 헤더에 추가해 403 Fobbiden 에러 방지
-            },
-            body: JSON.stringify({
-                value: event.target.value
-            }),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            speak(); 
+        clearTimeout(debounceTimeout);  // 먼저, timeoutID를 초기화
 
-            if (data.status === 400 || data.status === 405)
-                throw Error(data.message);  // 올바른 형식으로 Request를 보내지 않았다면 Error 발생
+        debounceTimeout = setTimeout(() => {
+            fetch("http://127.0.0.1:8000/main/textinput/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,   //CSRF 토큰 값을 같이 헤더에 추가해 403 Fobbiden 에러 방지
+                },
+                body: JSON.stringify({
+                    value: event.target.value
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                speak(); 
 
-            // data에 받은 메뉴 정보 혹은 리스트를 통해 해당 정보 기반으로 테이블을 업데이트하거나 팝업을 띄울 예정
+                if (data.status === 400 || data.status === 405)
+                    throw Error(data.message);  // 올바른 형식으로 Request를 보내지 않았다면 Error 발생
 
-            answer(data.message);
-        })
-        .catch((err) => {
-            alert(err);
-        });
+                // data에 받은 메뉴 정보 혹은 리스트를 통해 해당 정보 기반으로 테이블을 업데이트하거나 팝업을 띄울 예정
+
+                answer(data.message);
+            })
+            .catch((err) => {
+                alert(err);
+            });
+        }, 50); // 50ms 단위로 keydown 이벤트 리스너가 동작하도록 설정
     };
 });
 

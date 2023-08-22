@@ -1,4 +1,4 @@
-DD_meue_name,DD_price,DD_image,DD_info,DD_rank,DD_spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,N_caffeine,A_milk,A_Chicken,A_pork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp,A_peach
+meue_name,price,image,info,R_rank,spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,N_caffeine,A_milk,A_Chicken,A_pork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp,A_peach
 망고 선데,2300,Drink&Dessert/망고_선데.png,여름을 더욱 프루티하게! 망고가 버거킹 선데에 빠졌다!,1,0,179,2,61,34,2,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
 초코 망고 선데,2500,Drink&Dessert/초코_망고_선데.png,여름을 더욱 프루티하게! 망고가 버거킹 선데에 빠졌다!,2,0,246,3,92,45,2,0,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
 레드애플맛제로,2200,Drink&Dessert/레드애플맛제로.png,"괜찮아, 제로니까! 제로슈가로 즐기는 새콤달콤함~",3,0,40,0.2,77,0,0,0,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
