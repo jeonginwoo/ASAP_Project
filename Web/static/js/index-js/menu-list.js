@@ -1,6 +1,21 @@
 const menu_list = document.querySelector('.ordered-list');
 
 let item_list = [];     // 주문 리스트
+let active_item = null;
+
+/**
+ * item_list가 비어있으면 menu list를 감추고, 있으면 표시해줌
+ */
+function is_box_visible() {
+    if(item_list.length !== 0) {
+        menu_list.setAttribute('style', 'display: visible;');
+    }
+    else {
+        menu_list.setAttribute('style', 'display: none;');
+    }
+}
+
+is_box_visible();
 
 /**
  * object 정보에 해당하는 주문 item을 html 문서에 추가
@@ -22,10 +37,12 @@ function add_item_html(object) {
     menu_item.getElementById('menu-img').setAttribute('src', menu_img);
     menu_item.querySelector('#menu-price').textContent = menu_price.toLocaleString('ko-KR') + ' 원';
 
-    menu_item.querySelector('#' + menu_name).addEventListener("click", () => {
-        add_table({name: menu_name, img: menu_img, price: menu_price});
+    const ordered_item = menu_item.querySelector('.ordered-item');
+
+    ordered_item.addEventListener('click', () => {
+        add_table({name: menu_name, img: menu_img, price: menu_price, etc: menu_etc});
     });
-    
+
     menu_list.append(menu_item);
 };
 
@@ -65,6 +82,7 @@ function delete_items() {
     if (menu_list_length !== 1) {
         for(let i = 1; i < menu_list_length; i++) {
             delete_item_html(menu_list.children[1]);
+            item_list.pop();
         }
     }
 };
@@ -87,51 +105,53 @@ function show_menu_list(list) {
     list.forEach((item) => {
         add_item(item);
     });
+
+    is_box_visible();
 };
 
 
 
 //----- 테스트 -----//
 
-const img_list = ["static/img/BURGERKING_MENU/Burger/와퍼.png", "static/img/BURGERKING_MENU/Burger/갈릭불고기와퍼.png", "static/img/BURGERKING_MENU/Burger/몬스터와퍼.png", "static/img/BURGERKING_MENU/Burger/와퍼주니어.png", "static/img/BURGERKING_MENU/Burger/블랙바비큐와퍼.png", "static/img/BURGERKING_MENU/Burger/비프&슈림프버거.png", "static/img/BURGERKING_MENU/Burger/헬로_디아블로_와퍼.png", "static/img/BURGERKING_MENU/Burger/치즈와퍼.png", "static/img/BURGERKING_MENU/Burger/통새우와퍼.png", "static/img/BURGERKING_MENU/Burger/치킨킹.png"];
+// const img_list = ["static/img/BURGERKING_MENU/Burger/와퍼.png", "static/img/BURGERKING_MENU/Burger/갈릭불고기와퍼.png", "static/img/BURGERKING_MENU/Burger/몬스터와퍼.png", "static/img/BURGERKING_MENU/Burger/와퍼주니어.png", "static/img/BURGERKING_MENU/Burger/블랙바비큐와퍼.png", "static/img/BURGERKING_MENU/Burger/비프&슈림프버거.png", "static/img/BURGERKING_MENU/Burger/헬로_디아블로_와퍼.png", "static/img/BURGERKING_MENU/Burger/치즈와퍼.png", "static/img/BURGERKING_MENU/Burger/통새우와퍼.png", "static/img/BURGERKING_MENU/Burger/치킨킹.png"];
 
-for (let i = 0; i < 4; i++) {
-    let menu_name = '메뉴' + String(i + 1);
-    let menu_img = img_list[i];
-    let menu_price = Math.floor(Math.random() * 50000);
-    let menu_etc = {};
-
-    // const random_num = Math.floor(Math.random() * 2);
-    // if (random_num === 0) {
-    //     menu_etc = {set: menu_price, mono: menu_price / 2};
-    // }
-
-    let object = { name: menu_name, img: menu_img, price: menu_price};
-
-    item_list.push(object);
-};
-
-show_menu_list(item_list);
-
-item_list = [];
-
-for (let i = 0; i < 4; i++) {
-    let menu_name = '메뉴' + String(i + 1);
-    let menu_img = img_list[i];
-    let menu_price = Math.floor(Math.random() * 50000);
-    let menu_etc = {};
+// for (let i = 0; i < 4; i++) {
+//     let menu_name = '메뉴' + String(i + 1);
+//     let menu_img = img_list[i];
+//     let menu_price = Math.floor(Math.random() * 50000);
+//     let menu_etc = {};
 
     // const random_num = Math.floor(Math.random() * 2);
     // if (random_num === 0) {
     //     menu_etc = {set: menu_price, mono: menu_price / 2};
     // }
 
-    let object = { name: menu_name, img: menu_img, price: menu_price };
+//     let object = { name: menu_name, img: menu_img, price: menu_price};
 
-    item_list.push(object);
-};
+//     item_list.push(object);
+// };
 
-show_menu_list(item_list);
+// show_menu_list(item_list);
+
+// item_list = [];
+
+// for (let i = 0; i < 4; i++) {
+//     let menu_name = '메뉴' + String(i + 1);
+//     let menu_img = img_list[i];
+//     let menu_price = Math.floor(Math.random() * 50000);
+//     let menu_etc = {};
+
+//     // const random_num = Math.floor(Math.random() * 2);
+//     // if (random_num === 0) {
+//     //     menu_etc = {set: menu_price, mono: menu_price / 2};
+//     // }
+
+//     let object = { name: menu_name, img: menu_img, price: menu_price };
+
+//     item_list.push(object);
+// };
+
+// show_menu_list(item_list);
 
 // for (let i = 0; i < 6; i++) {
 //     let random_object = item_list[Math.floor(Math.random() * item_list.length)];

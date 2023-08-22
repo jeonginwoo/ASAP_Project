@@ -1,0 +1,180 @@
+body {
+background-color: #F5EBDC;
+margin-top: 30px;
+margin-left: 150px;
+margin-right: 150px;
+padding: 0;
+font-family: 'NanumSquareRound';
+}
+
+.menu-name {
+background-color: #683A2F;
+color: white;
+}
+
+.ordered-item {
+background-color: #FF8732;
+}
+
+#menu-price {
+margin: 8px auto;
+padding-left: 8px;
+padding-right: 8px;
+}
+
+#menu-etc {
+margin: 1px auto;
+padding-left: 8px;
+padding-right: 8px;
+font-size: 13px;
+font-weight: bold;
+}
+
+#answer {
+background-color: #F9F4E5;
+/* border: 1px solid #000000;  */
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+/* 그림자 추가 */
+height: 100px;
+margin: 10px;
+padding: 8px;
+overflow: auto;
+}
+
+#speak {
+background-color: #F9F4E5;
+border: none;
+outline: none;
+resize: none;
+/* 크기 조정 비활성화 */
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+/* 그림자 추가 */
+height: 100px;
+width: 99%;
+margin: 10px;
+padding: 8px;
+}
+.table {
+border: 3px solid #000000;
+border-radius: 5px;
+margin: 10px;
+width: 70%;
+height: 100%;
+float: left;
+}
+.result-header {
+background-color: #683A2F;
+color: white;
+}
+
+.order-result {
+background-color: #F5EBDC;
+display: flex;
+}
+
+.order-container {
+display: flex;
+width: 80%
+}
+
+#result-price {
+text-align: center;
+margin: auto;
+font-size: 250%;
+}
+
+#record_button {
+width: 30%;
+height: 30%;
+font-size: 250%;
+}
+
+/* 웹킷 브라우저용 스크롤 바 스타일 */
+.scroll-bar-style::-webkit-scrollbar {
+width: 10px;
+/* 스크롤 바 너비 */
+}
+
+.scroll-bar-style::-webkit-scrollbar-thumb {
+background-color: #888;
+/* 스크롤 바 썸네일 색상 */
+border-radius: 5px;
+/* 썸네일 둥글기 */
+}
+
+.scroll-bar-style::-webkit-scrollbar-thumb:hover {
+background-color: #555;
+/* 스크롤 바 썸네일 호버 시 색상 */
+}
+
+.scroll-bar-style::-webkit-scrollbar-track {
+background-color: none;
+/* 스크롤 바 트랙 색상 */
+}
+
+.btn-customize {
+background-color: #F5EBDC;
+height: 35%; 
+width: 100%; 
+margin-left: 10px; 
+margin-right: 10px;
+margin-top: 20px; 
+margin-bottom: 20px;
+}
+
+#table_body td {
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: none;
+}
+
+#table_body td span {
+margin-left: auto;
+}
+
+#purchase {
+font-size: 300%;
+width: 20%;
+height: 100px;
+}
+
+/* 주문 아이템 강조 효과 */
+.ordered-item {
+transition: transform 0.2s, border 0.2s;
+}
+
+.ordered-item:hover {
+transform: scale(1.05); /* 조절 가능한 크기 */
+}
+
+/* 주문 아이템 클릭 효과 */
+.ordered-item:active {
+transform: scale(0.95); /* 클릭 시 작아지는 크기 */
+}
+
+/* 클릭 해제 시 원래 크기로 복원 */
+.ordered-item:focus {
+transform: scale(1);
+}
+
+.cancel-button {
+background-color: transparent;
+border: 2px;
+font-weight: bold;
+color: #000000;
+cursor: pointer;
+transition: color 0.2s;
+font-size: 14px;
+padding: 0;
+}
+
+/* 취소 버튼 호버 효과 */
+.cancel-button:hover {
+color: red;
+}
+
+/* 취소 버튼 클릭 효과 */
+.cancel-button:active {
+transform: scale(0.9);
+}

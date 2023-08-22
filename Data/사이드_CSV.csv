@@ -1,4 +1,4 @@
-S_meue_name,S_price,S_image,S_info,S_rank,S_spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,A_milk,A_Chicken,Apork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp
+meue_name,price,image,info,R_rank,spicy,N_calories,N_protein,N_sodium,N_sugars,N_saturated_fat,A_milk,A_Chicken,Apork,A_beef,A_egg,A_squid,A_tomato,A_clam,A_shrimp
 해쉬브라운,1800,Side/해쉬브라운.png,촉촉한 감자에 바삭함은 더했다! 해쉬브라운,1,0,182,1.3,382,0.2,2.5,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
 너겟킹 8조각,4400,Side/너겟킹_8조각.png,바삭~ 촉촉~ 한입에 쏙 부드러운 너겟킹!,2,0,294,17,843,0.7,4,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
 너겟킹 10조각,5500,Side/너겟킹_10조각.png,바삭~ 촉촉~ 한입에 쏙 부드러운 너겟킹!,3,0,368,22,1054,0.9,5,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
