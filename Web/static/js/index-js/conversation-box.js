@@ -1,20 +1,34 @@
 const speak_textarea = document.getElementById('speak');
 const answer_div = document.getElementById('answer');
 
-function speak() {
+/**
+ * 사용자의 음성을 텍스트로 보여주는 메소드
+ * 
+ * @param {*String} speak_text 
+ */
+function speak(speak_text) {
     let temp_speak = "이 부분에 원하는 것을 입력하거나, 음성 인식 버튼을 눌러 원하는 것을 말해주세요.";
 
-    speak_textarea.value = null;
     speak_textarea.setAttribute('placeholder', temp_speak);
+
+    if (speak_text === undefined) // Default
+        speak_textarea.value = null;
+    else
+        speak_textarea.value = speak_text;
 };
 
+/**
+ * GPT의 답변을 div에 띄워주는 메소드
+ * 
+ * @param {*String} answer_text 
+ */
 function answer(answer_text) {
     let temp_answer = answer_text;
 
     answer_div.innerText = temp_answer;
 };
 
-speak(); 
+speak(undefined); 
 answer("GPT 답변");
 
 speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부분의 이벤트 리스너
