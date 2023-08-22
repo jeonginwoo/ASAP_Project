@@ -31,21 +31,19 @@ transcriber.model.config.forced_decoder_ids = (
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-print(os.path.join(Path(__file__).resolve(), "/ffmpeg-6.0-full_build/bin"))
+os.environ["PATH"] += os.pathsep + ('C:/Users/joung/Visual_Studio_Code_Workspace/repos/ASAP_Project/ffmpeg-6.0-full_build/bin')
 
-os.environ["PATH"] += os.pathsep + (os.path.join(Path(__file__).resolve().parent.parent.parent, "/ffmpeg-6.0-full_build/bin"))
+# transcriber = pipeline(
+#   "automatic-speech-recognition",
+#   model="JorangHorse/whisper-base"
+# )
 
-transcriber = pipeline(
-  "automatic-speech-recognition",
-  model="JorangHorse/whisper-base"
-)
-
-transcriber.model.config.forced_decoder_ids = (
-  transcriber.tokenizer.get_decoder_prompt_ids(
-    language="ko",
-    task="transcribe"
-  )
-)
+# transcriber.model.config.forced_decoder_ids = (
+#   transcriber.tokenizer.get_decoder_prompt_ids(
+#     language="ko",
+#     task="transcribe"
+#   )
+# )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
