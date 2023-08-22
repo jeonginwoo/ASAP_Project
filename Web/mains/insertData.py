@@ -15,12 +15,12 @@ def insert_Menu():
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
                     for i in range(10,19):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                             row[i] = True
                         else:
                             row[i] = False
                     for i in range(30,40):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                             row[i] = True
                         else:
                             row[i] = False
@@ -129,7 +129,7 @@ def insert_DD():
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
                     for i in range(12, 22):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                               row[i] = True
                         else:
                              row[i] = False

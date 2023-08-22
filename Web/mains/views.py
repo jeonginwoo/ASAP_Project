@@ -9,8 +9,7 @@ from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
 from Model.konlpy.main import *
-from django.db.models import Q,F
-from django.db.models import QuerySet
+from django.db.models import Q
 from django.core.serializers import serialize
 from .dictStorage import col_dict
 
@@ -33,15 +32,6 @@ def index(request):
 
     return render(request, 'main/index.html',context)
 
-# class MenuDetailView(APIView):
-#     def get(self,request,menu_key):
-#         try:
-#             menu = Menu.objects.get(name=menu_key)
-#             serializer = MenuSerializer(menu)
-#             return Response(serializer.data)
-#         except Menu.DoesNotExist:
-#             return Response({"error" : "Menu not found"}, status= 404)
-
 # 결제 페이지 이동
 def purchase(request):
     return render(request, 'main/purchase.html')
@@ -61,35 +51,54 @@ def speechRecognition(request):
             mpeg.write(recordData)
             # 위스퍼 실행
             transcription = transcriber("../test_record_data.wav")
-            print(transcription)
-            #text = transcription['text']
-            text = '칼로리로 높은 걸로 추천해 줘'
+            print(transcriber)
+            text = transcription['text']
+            
 
             i_result = inputBert(text)
             result = inputKonlp(text)
-            print(result)
 
             result = inputKonlp(text)
             final_result = menuReco(result)
-            print(final_result)
+       
+            
+            if len(result) == 0:
+                context = {
+                    'speaker' : text,
+                    'answer' : '인기 순위로 추천드리겠습니다.'
+                }
+                return JsonResponse(context)
 
             for i in range(len(result)):
+                print(result[i])
                 if result[i] =='or':
+                    
+                    answer = '말씀하신'
                     continue
+                    
                 if i == 0 and len(result) == 1:
                     answer = '말씀하신'
-                    answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +'등의 키워드로 추천한 메뉴 입니다.'
+                    answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +' 등의 키워드로 추천한 메뉴 입니다.'
+
                 elif i == 0:
                     answer = '말씀하신 '
                     answer = answer +' '+'#' + col_dict[result[i]]
+
+                elif result[i] == 'else':
+
+                    if i_result == 0:
+                        answer = answer + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
+                    else:
+                        answer = answer +'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
                     
-                elif i >0 and len(result) -1 > i:
+                elif i >0 and ( len(result) -1 )> i:
                     answer = answer +' '+ '#'  + col_dict[result[i]]
                     
                 elif len(result)-1 == i and i_result == 0:
                     answer = answer +'#' +col_dict[result[i]] + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
+                
                 else:
-                    answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + '등의 키워드로 추천한 메뉴 입니다.'
+                    answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
                     
             print(answer)
             # 제시하신 "노인","인기메뉴" 등의 키워드로 추천한 메뉴입니다.
@@ -132,14 +141,89 @@ def textInput(request):
         try:
             text_data = request.body
             text_data = json.loads(text_data)
+            text = text_data['value']
 
-            # 이 부분에 추후 모델 적용 및 DB 쿼리 작성
+            i_result = inputBert(text)
+            result = inputKonlp(text)
 
-            data = {"message": text_data['value']}
+            print(f'konlp : {result}')
 
-            return JsonResponse(data)
+            final_result = menuReco(result)
+            print('--------------------------------------')
+            print(f'menu_result : {final_result}')
+
+            burger_list_json = serialize('json', final_result['burger_list'])
+            side_list_json = serialize('json', final_result['side_list'])
+            dd_list_json = serialize('json',  final_result['dd_list'])
+
+
+            try:
+                burger_list = json.loads(burger_list_json)
+            except:
+                burger_list = None  # JSON 파싱에 실패한 경우에는 None을 할당하거나 다른 처리를 할 수 있습니다.
+            try:
+                side_list = json.loads(side_list_json)
+            except:
+                side_list = None
+            try:
+                dd_list = json.loads(dd_list_json)
+            except:
+                dd_list = None
+
+            if len(burger_list_json) == 2 and len(side_list_json) == 2 and len(dd_list_json) == 2:
+                context = {
+                    'speaker' : text,
+                    'error' : '죄송합니다. 말씀하신 내용과 관련된 추천 가능한 메뉴가 없습니다.',
+                }
+                return JsonResponse(context)
+
+            for i in range(len(result)):
+                print(result[i])
+                if result[i] =='or':
+                    
+                    answer = '말씀하신'
+                    continue
+                    
+                if i == 0 and len(result) == 1:
+                    answer = '말씀하신'
+                    answer = answer +' ' +"#" + col_dict[result[i]] +" #"+ col_dict[str(i_result)] +' 등의 키워드로 추천한 메뉴 입니다.'
+
+                elif i == 0:
+                    answer = '말씀하신 '
+                    answer = answer +' '+'#' + col_dict[result[i]]
+
+                elif result[i] == 'else':
+
+                    if i_result == 0:
+                        answer = answer + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
+                    else:
+                        answer = answer +'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
+                    
+                elif i >0 and ( len(result) -1 )> i:
+                    answer = answer +' '+ '#'  + col_dict[result[i]]
+                    
+                elif len(result)-1 == i and i_result == 0:
+                    answer = answer +'#' +col_dict[result[i]] + ' 등의 키워드로 '+col_dict[str(i_result)] + '한 메뉴 입니다.'
+                
+
+                else:
+                    answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
+
+
+            context = {
+            'speaker' : text,
+            'burger_list': burger_list,
+            'side_list' : side_list,
+            'dd_list' : dd_list,
+            'answer' : answer,
+                        }
+
+    
+            return JsonResponse(context)
         except: # Requset 형식이 올바른 JSON 형식이 아님
+            
             return JsonResponse({"message": "Invalid JSON format!", "status": 400}, status = 400)
+            
 
     # Request의 method가 POST 방식이 아닌 GET 방식임
     return JsonResponse({'message': 'This request is GET method', "status": 405}, status = 405)
@@ -170,11 +254,6 @@ def menuReco(keyword):
     s_query = Q()
     dd_query = Q()
 
-    # query_list = ['menu_name 제로', 'DnD']
-    # query_list = ['menu_name 치즈']
-    # query_list = ['menu_name 아이스_아메리카노']
-    # query_list = ['I_tomato 1']
-    # query_list = ['menu_name 너겟킹']
 
     query_list = keyword
 
@@ -205,11 +284,8 @@ def menuReco(keyword):
             orCount -= 1
             query = tempQuery
 
-        # print("------------------")
-        # print(f'query : {query}')
-        # print("------------------")
-
         # ['or cheese1 1 cheese2 1']
+
         tlist = query.split()
         # ['or', 'cheese1', '1', 'cheese2', '2']
         if len(tlist) == 1:
@@ -217,11 +293,6 @@ def menuReco(keyword):
         if tlist[0] != 'or':
             tlist[1] = tlist[1].replace('_', ' ')
 
-        # print()
-        # print("------------------")
-        # print("tlist : ", tlist)
-        # print("------------------")
-        # print()
 
         if tlist[0] == 'or':
             b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
@@ -255,36 +326,33 @@ def menuReco(keyword):
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
             else:
                 try:
-                    print(tlist)
                     b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     burger_list = BurgerTable.objects.filter(b_query).order_by('R_rank')[:4]
                 except:
-                    burger_list = QuerySet()
+                    burger_list = []
                 try:
                     s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     side_list = SideTable.objects.filter(s_query).order_by('R_rank')[:4]
                 except:
-                    side_list = QuerySet()
+                    
+                    side_list = []
                 try:
                     dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
                     dd_list = DDTable.objects.filter(dd_query).order_by('R_rank')[:4]
                 except:
-                    dd_list = QuerySet()
+                    dd_list = []
 
-    # print("----쿼리 생성----")
-    # print("burger_list : ", burger_list)
-    # print("side_list : ", side_list)
-    # print("dd_list : ", dd_list)
+
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
+    print(context)
     
-    #render(request, 'main/menuReco.html', context)
+
     return context
 
 
 def inputBert(text_file):
     result = k.start(text_file)
-    print(result)
     return result
 
 def inputKonlp(text_file):
