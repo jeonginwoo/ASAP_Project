@@ -14,12 +14,12 @@ def insert_Menu():
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
-                    for i in range(11,20):
+                    for i in range(10,19):
                         if row[i] == 'True' or row[i] == 'TRUE':
                             row[i] = True
                         else:
                             row[i] = False
-                    for i in range(31,41):
+                    for i in range(30,40):
                         if row[i] == 'True' or row[i] == 'TRUE':
                             row[i] = True
                         else:

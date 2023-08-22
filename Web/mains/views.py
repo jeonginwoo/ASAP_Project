@@ -263,3 +263,4 @@ def inputKonlp(text_file):
     if nlp_result:
         print(nlp_result)
     return nlp_result
+
