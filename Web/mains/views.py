@@ -59,24 +59,27 @@ def speechRecognition(request):
         with open('../test_record_data.wav', 'wb') as mpeg:
             mpeg.write(recordData)
             # 위스퍼 실행
-            transcription = transcriber("../test_record_data.mp3")
+            transcription = transcriber("../test_record_data.wav")
+            print(transcription)
             text = transcription['text']
 
             result = inputKonlp(text)
             final_result = menuReco(result)
-
+            
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
             dd_list_json = serialize('json',  final_result['dd_list'])
-
+            
             burger_list = json.loads(burger_list_json)
             side_list = json.loads(side_list_json)
             dd_list = json.loads(dd_list_json)
 
             context = {
+            'speaker' : text,
             'burger_list': burger_list,
-            'side_list': side_list,
-            'dd_list': dd_list,
+            'side_list' : side_list,
+            'dd_list' : dd_list,
+            
                         }
 
             #response_data = {'message': 'Audio data received and processed successfully'}
@@ -139,18 +142,17 @@ def menuReco(keyword):
     # query_list = ['menu_name 너겟킹']
 
     query_list = keyword
-    print("query_list : ", type(query_list))
+
 
     if not query_list: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['rank 1']
-    a = query_list[-1]
-    print(query_list[-1])
-    if a not in ['M', 'Side', 'DnD']: # 구분 없는 질문이면 else로 분류
+    
+    if  query_list[-1] not in ['M', 'S', 'DD','asc','desc']: # 구분 없는 질문이면 else로 분류
         query_list.append('else')
 
 
 
-    print("----쿼리 생성 부분----")
+    #print("----쿼리 생성 부분----")
     # __contains : 해당 문자열이 포함되어 있는 것들 출력
     # __lte : ... 이하인 것들 출력 (lt는 미만)
     # __gte : ... 이상인 것들 출력 (gt는 초과)
@@ -168,9 +170,9 @@ def menuReco(keyword):
             orCount -= 1
             query = tempQuery
 
-        print("------------------")
-        print(f'query : {query}')
-        print("------------------")
+        # print("------------------")
+        # print(f'query : {query}')
+        # print("------------------")
 
         # ['or cheese1 1 cheese2 1']
         tlist = query.split()
@@ -180,19 +182,18 @@ def menuReco(keyword):
         if tlist[0] != 'or':
             tlist[1] = tlist[1].replace('_', ' ')
 
-        print()
-        print("------------------")
-        print("tlist : ", tlist)
-        print("------------------")
-        print()
+        # print()
+        # print("------------------")
+        # print("tlist : ", tlist)
+        # print("------------------")
+        # print()
 
         if tlist[0] == 'or':
             b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-            burger_list = BurgerTable.objects.filter(b_query)
+            burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
 
         elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-
             burger_list = BurgerTable.objects.filter(b_query).order_by('rank')[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
@@ -203,6 +204,12 @@ def menuReco(keyword):
         elif query_list[-1] == 'DD':   # 음료&디저트 질문
             dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             dd_list = DDTable.objects.filter(dd_query).order_by('rank')[:4]
+        elif query_list[-1] == 'asc':   # 칼로리 낮은순으로
+            burger_list = BurgerTable.objects.all().order_by(f'{tlist[0]}')[:4]
+            
+        elif query_list[-1] == 'desc':   # 칼로리 높은 순으로
+            burger_list = BurgerTable.objects.all().order_by(f'-{tlist[0]}')[:4]
+            
 
         else:   # 기타 질문
             if tlist[0] == 'rank':
@@ -230,10 +237,10 @@ def menuReco(keyword):
                 except:
                     dd_list = QuerySet()
 
-    print("----쿼리 생성----")
-    print("burger_list : ", burger_list)
-    print("side_list : ", side_list)
-    print("dd_list : ", dd_list)
+    # print("----쿼리 생성----")
+    # print("burger_list : ", burger_list)
+    # print("side_list : ", side_list)
+    # print("dd_list : ", dd_list)
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
     #render(request, 'main/menuReco.html', context)

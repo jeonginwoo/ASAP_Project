@@ -32,6 +32,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                                 console.log(data.burger_list);
                                 console.log(data.side_list);
                                 console.log(data.dd_list);
+                                console.log(data.speaker);
                             })
                             .catch((err) => {
                                 location.href = err;
