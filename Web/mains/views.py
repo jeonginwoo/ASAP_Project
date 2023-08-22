@@ -116,6 +116,7 @@ def speechRecognition(request):
             'burger_list': burger_list,
             'side_list' : side_list,
             'dd_list' : dd_list,
+            'answer' : answer
                         }
 
             # 추천해야하는 메뉴가 없는 경우
@@ -305,7 +306,7 @@ def menuReco(keyword,bert):
 
         elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
-            burger_list = BurgerTable.objects.all().order_by(r_query)[:4]
+            burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
 

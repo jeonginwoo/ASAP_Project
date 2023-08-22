@@ -52,15 +52,60 @@ speak_textarea.addEventListener("keydown", (event) => { // 텍스트 입력 부�
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    speak();
-                    console.log(data);
-                    console.log(data.answer);
+                    // speak();
+                    // console.log(data);
+                    // console.log(data.answer);
 
                     if (data.status === 400 || data.status === 405)
                         throw Error(data.message);  // 올바른 형식으로 Request를 보내지 않았다면 Error 발생
 
                     // data에 받은 메뉴 정보 혹은 리스트를 통해 해당 정보 기반으로 테이블을 업데이트하거나 팝업을 띄울 예정
 
+                    // answer(data.answer);
+
+                    const menu_list = [];
+
+                    if (data.burger_list) {
+                        data.burger_list.forEach(item => {
+                            const name = item.fields.menu_name;
+                            const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                            const price = item.fields.price;
+                            const etc = item.fields.info;
+
+                            menu_list.push({ name: name, img: img, price: price, etc: etc });
+                        });
+                    }
+
+                    if (data.side_list) {
+                        data.side_list.forEach(item => {
+                            const name = item.fields.menu_name;
+                            const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                            const price = item.fields.price;
+                            const etc = item.fields.info;
+
+                            menu_list.push({ name: name, img: img, price: price, etc: etc });
+                        });
+                    }
+
+                    if (data.dd_list) {
+                        data.dd_list.forEach(item => {
+                            const name = item.fields.menu_name;
+                            const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                            const price = item.fields.price;
+                            const etc = item.fields.info;
+
+                            menu_list.push({ name: name, img: img, price: price, etc: etc });
+                        });
+                    }
+
+                    if (menu_list.length === 0) {
+                        answer(data.error);
+                    }
+                    else {
+                        show_menu_list(menu_list);
+                    }
+
+                    speak(data.speaker);
                     answer(data.answer);
                 })
                 .catch((err) => {
