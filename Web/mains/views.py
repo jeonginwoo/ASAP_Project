@@ -63,7 +63,7 @@ def speechRecognition(request):
             print(transcription)
             text = transcription['text']
 
-            result = inputKonlp(text)
+            result = inputKonlp("콰트로 릴리트")
             final_result = menuReco(result)
 
             burger_list_json = serialize('json', final_result['burger_list'])
@@ -79,9 +79,14 @@ def speechRecognition(request):
             'burger_list': burger_list,
             'side_list' : side_list,
             'dd_list' : dd_list,
-
                         }
-
+            if len(burger_list_json) == 2 and len(side_list_json) == 2 and len(dd_list_json) == 2:
+                context = {
+                    'speaker' : text,
+                    'error' : '말씀하신 메뉴는 없습니다!',
+                }
+                return JsonResponse(context)
+        #if len(burger_list) == 0 and len(side_list) == 0 and len(dd_list) == 0:
             #response_data = {'message': 'Audio data received and processed successfully'}
             # return render(request, 'main/menuReco.html',context)
 
@@ -243,6 +248,7 @@ def menuReco(keyword):
     # print("dd_list : ", dd_list)
 
     context = {'burger_list':burger_list, 'side_list':side_list, 'dd_list':dd_list}
+    
     #render(request, 'main/menuReco.html', context)
     return context
 
