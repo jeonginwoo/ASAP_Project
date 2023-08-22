@@ -20,7 +20,7 @@ nlp = Konlp()
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
-    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
+    menu_list = BurgerTable.objects.all().values('menu_name','price','image').order_by('R_rank')[:6]
     side_list = SideTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
     drink_list = DDTable.objects.all().values('menu_name','price','image').order_by('rank')[:6]
 
