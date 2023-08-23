@@ -266,7 +266,7 @@ def menuReco(keyword,bert):
     query_list = keyword
 
 
-    if not query_list: # 들어온 값이 없으면 인기메뉴 추천
+    if not query_list or query_list == ['M']: # 들어온 값이 없으면 인기메뉴 추천
         query_list = ['R_rank 1']
 
     if  query_list[-1] not in ['M', 'S', 'DD','asc','desc']: # 구분 없는 질문이면 else로 분류
