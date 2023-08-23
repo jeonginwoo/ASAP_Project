@@ -8,19 +8,19 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings")
 from mains.models import BurgerTable, SideTable, DDTable
 
 def insert_Menu():
-    with open('../Data/버거단품_CSV.csv', encoding = 'utf-8') as csv_file:
+    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/DB Table - BurgerTable2.csv') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
                     for i in range(10,19):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                             row[i] = True
                         else:
                             row[i] = False
                     for i in range(30,40):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                             row[i] = True
                         else:
                             row[i] = False
@@ -102,7 +102,7 @@ def insert_Side():
                         price=row[1],
                         image=row[2],
                         info=row[3],
-                        rank=row[4],
+                        R_rank=row[4],
                         spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
@@ -129,7 +129,7 @@ def insert_DD():
                   if row[0]:
                     # 각 행의 데이터를 읽어서 모델 객체 생성 및 저장
                     for i in range(12, 22):
-                        if row[i] == 'True' or row[i] == 'TRUE':
+                        if row[i] == 'True' or row[i] == 'TRUE' or row[i] == '1':
                               row[i] = True
                         else:
                              row[i] = False
@@ -139,7 +139,7 @@ def insert_DD():
                         price=row[1],
                         image=row[2],
                         info=row[3],
-                        rank=row[4],
+                        R_rank=row[4],
                         spicy=row[5],
                         N_calories=row[6],
                         N_protein=row[7],
