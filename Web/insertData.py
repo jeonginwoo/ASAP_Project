@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.settings")
 from mains.models import BurgerTable, SideTable, DDTable
 
 def insert_Menu():
-    with open('/Users/ho/데청캠/D_Git/ASAP_Project/Data/DB Table - BurgerTable2.csv') as csv_file:
+    with open('../Data/DB Table - BurgerTable2.csv', encoding = 'utf-8') as csv_file:
             data_reader = csv.reader(csv_file)
             next(data_reader,None)
             for row in data_reader:
@@ -159,3 +159,7 @@ def insert_DD():
                         A_peach=row[21],
                     )
                     menu.save()
+
+insert_Menu()
+insert_Side()
+insert_DD()
