@@ -280,6 +280,8 @@ def menuReco(keyword,bert):
     # __gte : ... 이상인 것들 출력 (gt는 초과)
     orCount = 0
     for query in query_list[:-1]:   # ['or', 'cheese1 1', 'cheese2 1', 'else']
+        if query in ['M', 'S', 'DD','asc','desc']:
+            continue
         if query == 'or':
             tempQuery = query
             orCount = 3
@@ -301,23 +303,18 @@ def menuReco(keyword,bert):
         if tlist[0] != 'or':
             tlist[1] = tlist[1].replace('_', ' ')
 
-
-        if tlist[0] == 'or':
-            b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-            burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
-
-        elif query_list[-1] == 'M':  # 버거 질문
+        if query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
 
         elif query_list[-1] == 'S':  # 사이드 질문
-
             s_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             side_list = SideTable.objects.filter(s_query).order_by('R_rank')[:4]
 
         elif query_list[-1] == 'DD':   # 음료&디저트 질문
             dd_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             dd_list = DDTable.objects.filter(dd_query).order_by('R_rank')[:4]
+
         elif query_list[-1] == 'asc':   # 칼로리 낮은순으로
             burger_list = BurgerTable.objects.all().order_by(f'{tlist[0]}')[:4]
 
@@ -329,6 +326,9 @@ def menuReco(keyword,bert):
             if tlist[0] == 'R_rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
+            elif tlist[0] == 'or':
+                b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
+                burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
             elif tlist[0] == 'N_calories':
                 b_query &= Q(**{tlist[0]:tlist[1]})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
