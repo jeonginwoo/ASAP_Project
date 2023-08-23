@@ -27,56 +27,56 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {    // 기�
                             },
                             body: recordData,   //녹음된 음성 데이터
                         })
-                            .then((response) => response.json())    //response를 json으로 파싱
-                            .then((data) => {
-                                const menu_list = [];
+                        .then((response) => response.json())    //response를 json으로 파싱
+                        .then((data) => {
+                            const menu_list = [];
 
-                                if (data.burger_list) {
-                                    data.burger_list.forEach(item => {
-                                        const name = item.fields.menu_name;
-                                        const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
-                                        const price = item.fields.price;
-                                        const etc = item.fields.info;
+                            if (data.burger_list) {
+                                data.burger_list.forEach(item => {
+                                    const name = item.fields.menu_name;
+                                    const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                    const price = item.fields.price;
+                                    const etc = item.fields.info;
 
-                                        menu_list.push({ name: name, img: img, price: price, etc: etc });
-                                    });
-                                }
+                                    menu_list.push({ name: name, img: img, price: price, etc: etc });
+                                });
+                            }
 
-                                if (data.side_list) {
-                                    data.side_list.forEach(item => {
-                                        const name = item.fields.menu_name;
-                                        const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
-                                        const price = item.fields.price;
-                                        const etc = item.fields.info;
+                            if (data.side_list) {
+                                data.side_list.forEach(item => {
+                                    const name = item.fields.menu_name;
+                                    const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                    const price = item.fields.price;
+                                    const etc = item.fields.info;
 
-                                        menu_list.push({ name: name, img: img, price: price, etc: etc });
-                                    });
-                                }
+                                    menu_list.push({ name: name, img: img, price: price, etc: etc });
+                                });
+                            }
 
-                                if (data.dd_list) {
-                                    data.dd_list.forEach(item => {
-                                        const name = item.fields.menu_name;
-                                        const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
-                                        const price = item.fields.price;
-                                        const etc = item.fields.info;
+                            if (data.dd_list) {
+                                data.dd_list.forEach(item => {
+                                    const name = item.fields.menu_name;
+                                    const img = 'static/img/BURGERKING_MENU/' + item.fields.image;
+                                    const price = item.fields.price;
+                                    const etc = item.fields.info;
 
-                                        menu_list.push({ name: name, img: img, price: price, etc: etc });
-                                    });
-                                }
+                                    menu_list.push({ name: name, img: img, price: price, etc: etc });
+                                });
+                            }
 
-                                if (menu_list.length === 0) {
-                                    answer(data.error);
-                                }
-                                else {
-                                    show_menu_list(menu_list);
-                                }
+                            speak(data.speaker);
+                            show_menu_list(menu_list);
 
-                                speak(data.speaker);
+                            if (menu_list.length === 0) {
+                                answer(data.error);
+                            }
+                            else {
                                 answer(data.answer);
-                            })
-                            .catch((err) => {
-                                alert(err);
-                            });
+                            }
+                        })
+                        .catch((err) => {
+                            alert(err);
+                        });
                     };
 
                     mediaRecorder.start(1000);  // 녹음 시작
