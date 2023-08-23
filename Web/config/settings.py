@@ -17,7 +17,7 @@ from transformers import pipeline
 #튜닝한 Whisper Model 가져오기
 transcriber = pipeline(
     "automatic-speech-recognition",
-    model="JorangHorse/whisper-base-mk5",
+    model="JorangHorse/whisper-base-mk6",
     
 )
 transcriber.model.config.forced_decoder_ids = (

@@ -8,15 +8,20 @@ from config.settings import transcriber
 from Model.Ko_Bert.main import *
 from Model.Ko_Bert.CustomBertModel import *
 from Model.Ko_Bert.CustomPredictor import *
+from Model.Leven import *
+from Model.chat_gpt import *
 from Model.konlpy.main import *
 from django.db.models import Q
 from django.core.serializers import serialize
 from .dictStorage import col_dict
+import asyncio
 
 import json
 
 k = Ko_Bert()
 nlp = Konlp()
+g = GPT()
+
 
 def index(request):
     # 첫화면에 보여질 메뉴 설정중
@@ -53,18 +58,28 @@ def speechRecognition(request):
             transcription = transcriber("../test_record_data.wav")
             print(transcriber)
             text = transcription['text']
+            print(f'위스퍼  : {text}')
+            L = Leven(text)
+            try:
+                text2 = L.start_leven()
+            except:
+                text2 = transcription['text']
+            print(f'레반슈타인  : {text2}')
 
 
-            i_result = inputBert(text)
-            result = inputKonlp(text)
+            i_result = inputBert(text2)
+            result = inputKonlp(text2)
+            print(result)
 
-            result = inputKonlp(text)
             final_result = menuReco(result,i_result)
 
+            if i_result == 11:
+                gpt_response = g.start_gpt_3_5(text)
+                print("쥐피티:", gpt_response)
 
             if len(result) == 0:
                 context = {
-                    'speaker' : text,
+                    'speaker' : text2,
                     'answer' : '인기 순위로 추천드리겠습니다.'
                 }
                 return JsonResponse(context)
@@ -110,14 +125,23 @@ def speechRecognition(request):
             burger_list = json.loads(burger_list_json)
             side_list = json.loads(side_list_json)
             dd_list = json.loads(dd_list_json)
-
-            context = {
-            'speaker' : text,
+            
+            if len(result) == 0:
+                context = {
+            'speaker' : text2,
             'burger_list': burger_list,
             'side_list' : side_list,
             'dd_list' : dd_list,
-            'answer' : answer
+            'answer' : '추천드리겠습니다.'
                         }
+            else:
+                context = {
+                'speaker' : text2,
+                'burger_list': burger_list,
+                'side_list' : side_list,
+                'dd_list' : dd_list,
+                'answer' : answer
+                            }
 
             # 추천해야하는 메뉴가 없는 경우
             if len(burger_list_json) == 2 and len(side_list_json) == 2 and len(dd_list_json) == 2:
@@ -144,14 +168,33 @@ def textInput(request):
             text_data = json.loads(text_data)
             text = text_data['value']
 
+
+            print(text)
+
             i_result = inputBert(text)
             result = inputKonlp(text)
+            print(f'분류 번호는? : {i_result}')
+
+            if i_result == 11:
+                while True:
+                    g_answer = g.start_gpt_3_5(text)
+                    if g_answer == "빨대는 카운터 좌측에 준비되어 있습니다." or g_answer == "카운터 좌측에 준비되어있습니다." or g_answer == "매장 건물 1층에 있습니다." or g_answer == "화장실은 매장 건물 1층에 있습니다." or g_answer == "와이파이 비밀번호는 : 데청캠1234" or g_answer == "버거킹에서는 음료리필이 불가능 합니다.":
+                        answer = g_answer
+                        context = {
+                            'answer' : answer
+                        }
+                        return JsonResponse(context)
+                        break
+
+                
 
             print(f'konlp : {result}')
+            
 
             final_result = menuReco(result,i_result)
             print('--------------------------------------')
             print(f'menu_result : {final_result}')
+
 
             burger_list_json = serialize('json', final_result['burger_list'])
             side_list_json = serialize('json', final_result['side_list'])
@@ -210,7 +253,9 @@ def textInput(request):
                 else:
                     answer = answer +'#' +col_dict[result[i]]+'#'+col_dict[str(i_result)] + ' 등의 키워드로 추천한 메뉴 입니다.'
 
-
+            if len(result) ==0 :
+                answer = '추천 드리겠습니다.'
+            
             context = {
             'speaker' : text,
             'burger_list': burger_list,
