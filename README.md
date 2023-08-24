@@ -33,7 +33,7 @@ pip 명령어로 필요한 모듈들을 설치한다.
 
 requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
-</br>
+</br></br>
 
 **2. bert-kor-base.pth 파일 받기**
 
@@ -43,7 +43,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 
 
-</br>
+</br></br>
 
 **3. ffmpeg 압축파일을 받기**
 
@@ -57,7 +57,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 압축파일을 푼 뒤 해당 ffmpeg\bin 폴더의 경로를 환경 변수로 등록한다.
 
-</br>
+</br></br>
 
 **4. 모델 적용**
 
@@ -86,7 +86,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 >>> 
 ~~~
 
-</br>
+</br></br>
 
 **5. 실행하기**
 
@@ -116,12 +116,12 @@ Quit the server with CTRL-BREAK.
 
 </br></br>
 
-### - KoNLPy
+### - KoNLP
 
 
 </br></br>
 
-### - kobert
+### - KoBERT
 
  
 </br></br>
