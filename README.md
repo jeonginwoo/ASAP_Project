@@ -19,12 +19,15 @@
 </br></br>
 
 # Introduction
-ASAP(AI Selection Assistant Program)은 ...
+ASAP(AI Selection Assistant Program)은 음식점 특화 대화형 서비스 모델 입니다. 현재는 버거킹에 맞게 개발되어 있으며, 향후 다양한 브랜드와 소규모 매장에서도 쉽게 적용할 수 있도록 하는 것이 목표입니다.
 
 
 </br></br>
 
-# 실행 방법
+# 개발 환경
+
+* Django
+
 
 
 </br></br>
