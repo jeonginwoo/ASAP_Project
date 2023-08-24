@@ -73,9 +73,9 @@ def speechRecognition(request):
 
             final_result = menuReco(result,i_result)
 
-            if i_result == 11:
-                gpt_response = g.start_gpt_3_5(text)
-                print("쥐피티:", gpt_response)
+            # if i_result == 11:
+            #     gpt_response = g.start_gpt_3_5(text)
+            #     print("쥐피티:", gpt_response)
 
             if len(result) == 0:
                 context = {
