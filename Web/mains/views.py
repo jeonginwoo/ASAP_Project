@@ -20,7 +20,7 @@ import json
 
 k = Ko_Bert()
 nlp = Konlp()
-# g = GPT()
+g = GPT()
 
 
 def index(request):
@@ -175,16 +175,16 @@ def textInput(request):
             result = inputKonlp(text)
             print(f'분류 번호는? : {i_result}')
 
-            # if i_result == 11:
-            #     while True:
-            #         g_answer = g.start_gpt_3_5(text)
-            #         if g_answer == "빨대는 카운터 좌측에 준비되어 있습니다." or g_answer == "카운터 좌측에 준비되어있습니다." or g_answer == "매장 건물 1층에 있습니다." or g_answer == "화장실은 매장 건물 1층에 있습니다." or g_answer == "와이파이 비밀번호는 : 데청캠1234" or g_answer == "버거킹에서는 음료리필이 불가능 합니다.":
-            #             answer = g_answer
-            #             context = {
-            #                 'answer' : answer
-            #             }
-            #             return JsonResponse(context)
-            #             break
+            if i_result == 11:
+                while True:
+                    g_answer = g.start_gpt_3_5(text)
+                    if g_answer == "빨대는 카운터 좌측에 준비되어 있습니다." or g_answer == "카운터 좌측에 준비되어있습니다." or g_answer == "매장 건물 1층에 있습니다." or g_answer == "화장실은 매장 건물 1층에 있습니다." or g_answer == "와이파이 비밀번호는 : 데청캠1234" or g_answer == "버거킹에서는 음료리필이 불가능 합니다.":
+                        answer = g_answer
+                        context = {
+                            'answer' : answer
+                        }
+                        return JsonResponse(context)
+                        break
 
                 
 
