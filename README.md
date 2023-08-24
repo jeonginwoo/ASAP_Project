@@ -24,7 +24,7 @@ ASAP(AI Selection Assistant Program)은 음식점 특화 대화형 서비스 모
 
 # 실행하기
 
-1. 모듈 설치  
+**1. 모듈 설치**
 
 ~~~
 ...(your path)\ASAP_Project\Web> pip install -r requirements.txt
@@ -35,7 +35,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 </br>
 
-2. bert-kor-base.pth 파일 받기
+**2. bert-kor-base.pth 파일 받기**
 
 [파일 받기](https://drive.google.com/file/d/1M-GYoTIh20dRwwSBajsdHrWA_IspFXT4/view?usp=sharing)
 
@@ -45,7 +45,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 </br>
 
-3. ffmpeg 압축파일을 받기
+**3. ffmpeg 압축파일을 받기**
 
 [파일 받기](https://drive.google.com/file/d/1mFAcsd0tf1K3IMPpI-E1fX29cHy71672/view?usp=sharing)
 
@@ -59,7 +59,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 </br>
 
-4. 모델 적용
+**4. 모델 적용**
 
 makemigrations와 migrate 명령어를 통해 모델을 적용한다.
 
@@ -88,7 +88,7 @@ insertData.py 파일에 적용된 함수들을 사용하면 편하게 저장할 
 
 </br>
 
-5. 실행하기
+**5. 실행하기**
 
 ~~~
 ...(your path)\ASAP_Project\Web> python manage.py runserver
@@ -124,6 +124,9 @@ runserver 명령어를 실행한 후 위와같이 출력되면 성공이다.
 ### - kobert
 
  
+</br></br>
+
+### - GPT 3.5
 
 
 </br></br>
