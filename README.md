@@ -41,6 +41,8 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 설치 경로 : `...(your path)/ASAP_Project/Web/Model/Ko_Bert`
 
+
+
 </br>
 
 3. ffmpeg 압축파일을 받기
@@ -59,6 +61,8 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 4. 모델 적용
 
+makemigrations와 migrate 명령어를 통해 모델을 적용한다.
+
 ~~~
 ...(your path)\ASAP_Project\Web> python manage.py makemigrations
 ~~~
@@ -66,6 +70,10 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 ~~~
 ...(your path)\ASAP_Project\Web> python manage.py migrate
 ~~~
+
+모델 적용 이후 데이터들을 저장한다.
+
+insertData.py 파일에 적용된 함수들을 사용하면 편하게 저장할 수 있다.
 
 ~~~
 ...(your path)\ASAP_Project\Web> python manage.py shell
@@ -84,8 +92,21 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 ~~~
 ...(your path)\ASAP_Project\Web> python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 24, 2023 - 10:09:16
+Django version 4.2.4, using settings 'config.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
 ~~~
 
+runserver 명령어를 실행한 후 위와같이 출력되면 성공이다.
+
+`Ctrl`을 누른 상태로 출력된 링크룰 클릭하면 ASAP 홈으로 들어갈 수 있다.
+
+<img src="./readme_img/ASAP_home.png" height=400>
 
 </br></br>
 
@@ -102,10 +123,7 @@ requirements.txt파일을 사용해서 한번에 설치할 수 있다.
 
 ### - kobert
 
-
-</br></br>
-
-### - kobert
+ 
 
 
 </br></br>
