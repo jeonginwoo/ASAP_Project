@@ -348,7 +348,10 @@ def menuReco(keyword,bert):
         if tlist[0] != 'or':
             tlist[1] = tlist[1].replace('_', ' ')
 
-        if query_list[-1] == 'M':  # 버거 질문
+        if tlist[0] == 'or':
+            b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
+            burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
+        elif query_list[-1] == 'M':  # 버거 질문
             b_query &= Q(**{tlist[0]+'__contains':tlist[1]})
             burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
 
@@ -371,9 +374,6 @@ def menuReco(keyword,bert):
             if tlist[0] == 'R_rank':
                 b_query &= Q(**{tlist[0]+'__lte':3})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'I_sliced_cheese', 'I_shredded_cheese','I_pickle','I_jalapeno','I_whole_shrimp','I_bacon','I_lettuce','I_onion','I_hashbrown','I_tomato','I_garlic_chip'])
-            elif tlist[0] == 'or':
-                b_query &= Q(**{tlist[1]:tlist[2]}) | Q(**{tlist[3]:tlist[4]})
-                burger_list = BurgerTable.objects.filter(b_query).order_by(r_query)[:4]
             elif tlist[0] == 'N_calories':
                 b_query &= Q(**{tlist[0]:tlist[1]})
                 burger_list = BurgerTable.objects.filter(b_query).order_by(tlist[0])#.values(*['menu_name', 'price', 'image', 'R_rank', 'N_calories', 'N_protein','N_sodium','N_sugars','N_saturated_fat'])[:3]
